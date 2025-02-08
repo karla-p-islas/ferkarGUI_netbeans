@@ -1,5 +1,7 @@
 package com.ejemplo.app_ferkar.IGU;
 
+import com.ejemplo.app_ferkar.App_ferkar;
+
 /**
  *
  * @author karla_rmz_islas
@@ -31,6 +33,7 @@ public class Principal extends javax.swing.JFrame {
         separador_password = new javax.swing.JSeparator();
         button_entrar = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 570));
@@ -92,6 +95,9 @@ public class Principal extends javax.swing.JFrame {
         passwordField.setBorder(null);
         background.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 432, 300, 30));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_400x200.jpg")); // NOI18N
+        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 420, 230));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,6 +137,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JButton button_entrar;
     private javax.swing.JTextField field_user;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label_password;
     private javax.swing.JLabel label_title;
     private javax.swing.JLabel label_user;

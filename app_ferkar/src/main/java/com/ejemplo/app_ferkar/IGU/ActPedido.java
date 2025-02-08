@@ -47,6 +47,7 @@ public class ActPedido extends javax.swing.JFrame {
         textField_Folios1 = new javax.swing.JTextField();
         label_cantidad1 = new javax.swing.JLabel();
         textF_Quantity1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
@@ -193,6 +194,9 @@ public class ActPedido extends javax.swing.JFrame {
         });
         jPanel1.add(textF_Quantity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 70, 30));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_150x90.jpg")); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 150, 90));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,6 +228,7 @@ public class ActPedido extends javax.swing.JFrame {
         textF_client.setText("");
         textF_dateDelivery.setText("");
         textF_folio.setText("");
+        
     }//GEN-LAST:event_button_CleanActionPerformed
 
     private void button_FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_FinishActionPerformed
@@ -254,6 +259,7 @@ public class ActPedido extends javax.swing.JFrame {
     private javax.swing.JButton button_Finish;
     private javax.swing.JComboBox<String> comboBox_Estado;
     private javax.swing.JComboBox<String> comboBox_transporte;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label_Cliente;
     private javax.swing.JLabel label_IDConductor;

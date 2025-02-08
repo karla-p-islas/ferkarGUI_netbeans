@@ -33,6 +33,7 @@ public class MenuPedidos extends javax.swing.JFrame {
         button_NewPedido = new javax.swing.JButton();
         button_UpdatePedido = new javax.swing.JButton();
         button_ArchivoPedidos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 570));
@@ -89,6 +90,9 @@ public class MenuPedidos extends javax.swing.JFrame {
         });
         jPanel1.add(button_ArchivoPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 260, 70));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_150x90.jpg")); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 150, 90));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,6 +138,7 @@ public class MenuPedidos extends javax.swing.JFrame {
     private javax.swing.JButton button_NewPedido;
     private javax.swing.JButton button_Salir;
     private javax.swing.JButton button_UpdatePedido;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label_title;
     // End of variables declaration//GEN-END:variables

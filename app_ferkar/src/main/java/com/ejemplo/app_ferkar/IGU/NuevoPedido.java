@@ -48,6 +48,7 @@ public class NuevoPedido extends javax.swing.JFrame {
         textField_Quantity = new javax.swing.JTextField();
         button_Clean = new javax.swing.JButton();
         button_Finish = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
@@ -193,6 +194,9 @@ public class NuevoPedido extends javax.swing.JFrame {
         });
         jPanel1.add(button_Finish, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 120, 40));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_150x90.jpg")); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,6 +268,7 @@ public class NuevoPedido extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBox_pintado;
     private javax.swing.JCheckBox checkBox_reforzar;
     private javax.swing.JCheckBox checkbox_galv;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label_Cliente;
     private javax.swing.JLabel label_cantidad;
