@@ -26,18 +26,11 @@ public class ActPedido extends javax.swing.JFrame {
         label_title = new javax.swing.JLabel();
         label_Cliente = new javax.swing.JLabel();
         label_date = new javax.swing.JLabel();
-        label_quantity2 = new javax.swing.JLabel();
-        label_clave = new javax.swing.JLabel();
         label_cantidad = new javax.swing.JLabel();
-        checkB_reforzar = new javax.swing.JCheckBox();
-        checkB_pintado = new javax.swing.JCheckBox();
-        checkB_galv = new javax.swing.JCheckBox();
         textF_client = new javax.swing.JTextField();
         textF_dateDelivery = new javax.swing.JTextField();
-        textF_quantityTipes = new javax.swing.JTextField();
         label_folio = new javax.swing.JLabel();
         textF_folio = new javax.swing.JTextField();
-        textF_claveAro = new javax.swing.JTextField();
         textF_Quantity = new javax.swing.JTextField();
         button_Clean = new javax.swing.JButton();
         button_Finish = new javax.swing.JButton();
@@ -50,6 +43,10 @@ public class ActPedido extends javax.swing.JFrame {
         textF_IDConductor = new javax.swing.JTextField();
         label_Transporte = new javax.swing.JLabel();
         comboBox_transporte = new javax.swing.JComboBox<>();
+        label_foliosEnviados1 = new javax.swing.JLabel();
+        textField_Folios1 = new javax.swing.JTextField();
+        label_cantidad1 = new javax.swing.JLabel();
+        textF_Quantity1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
@@ -59,7 +56,7 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_title.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
-        label_title.setText("Actualizar Pedido");
+        label_title.setText("Envio de Pedido");
         jPanel1.add(label_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, 37));
 
         label_Cliente.setBackground(new java.awt.Color(255, 255, 255));
@@ -72,51 +69,10 @@ public class ActPedido extends javax.swing.JFrame {
         label_date.setText("Fecha Entrega:");
         jPanel1.add(label_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 140, 30));
 
-        label_quantity2.setBackground(new java.awt.Color(255, 255, 255));
-        label_quantity2.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        label_quantity2.setText("Cantidad Tipos de Aro:");
-        label_quantity2.setToolTipText("");
-        jPanel1.add(label_quantity2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 210, 30));
-
-        label_clave.setBackground(new java.awt.Color(255, 255, 255));
-        label_clave.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        label_clave.setText("Clave:");
-        jPanel1.add(label_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 60, 30));
-
         label_cantidad.setBackground(new java.awt.Color(255, 255, 255));
         label_cantidad.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         label_cantidad.setText("Cantidad Atados:");
-        jPanel1.add(label_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 160, 30));
-
-        checkB_reforzar.setBackground(new java.awt.Color(255, 255, 255));
-        checkB_reforzar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        checkB_reforzar.setText("Reforzado");
-        checkB_reforzar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkB_reforzarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(checkB_reforzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, -1, -1));
-
-        checkB_pintado.setBackground(new java.awt.Color(255, 255, 255));
-        checkB_pintado.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        checkB_pintado.setText("Pintado");
-        checkB_pintado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkB_pintadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(checkB_pintado, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 380, -1, 20));
-
-        checkB_galv.setBackground(new java.awt.Color(255, 255, 255));
-        checkB_galv.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        checkB_galv.setText("Galvanizado");
-        checkB_galv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkB_galvActionPerformed(evt);
-            }
-        });
-        jPanel1.add(checkB_galv, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, -1, -1));
+        jPanel1.add(label_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 160, 30));
 
         textF_client.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textF_client.addActionListener(new java.awt.event.ActionListener() {
@@ -124,23 +80,15 @@ public class ActPedido extends javax.swing.JFrame {
                 textF_clientActionPerformed(evt);
             }
         });
-        jPanel1.add(textF_client, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 430, 30));
+        jPanel1.add(textF_client, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 400, 30));
 
         textF_dateDelivery.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(textF_dateDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 120, 30));
 
-        textF_quantityTipes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textF_quantityTipes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textF_quantityTipesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(textF_quantityTipes, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 70, 30));
-
         label_folio.setBackground(new java.awt.Color(255, 255, 255));
         label_folio.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         label_folio.setText("Folio Pedido:");
-        jPanel1.add(label_folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 120, 30));
+        jPanel1.add(label_folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 120, 30));
 
         textF_folio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textF_folio.addActionListener(new java.awt.event.ActionListener() {
@@ -148,10 +96,7 @@ public class ActPedido extends javax.swing.JFrame {
                 textF_folioActionPerformed(evt);
             }
         });
-        jPanel1.add(textF_folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 70, 30));
-
-        textF_claveAro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(textF_claveAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 70, 30));
+        jPanel1.add(textF_folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 110, 30));
 
         textF_Quantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textF_Quantity.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +104,7 @@ public class ActPedido extends javax.swing.JFrame {
                 textF_QuantityActionPerformed(evt);
             }
         });
-        jPanel1.add(textF_Quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 70, 30));
+        jPanel1.add(textF_Quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 70, 30));
 
         button_Clean.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_Clean.setText("Limpiar");
@@ -202,11 +147,11 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.add(comboBox_Estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 110, 30));
 
         label_foliosEnviados.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        label_foliosEnviados.setText("Folios Enviados:");
-        jPanel1.add(label_foliosEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 140, 30));
+        label_foliosEnviados.setText("Folio:");
+        jPanel1.add(label_foliosEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 50, 30));
 
         textField_Folios.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jPanel1.add(textField_Folios, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 160, 30));
+        jPanel1.add(textField_Folios, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 80, 30));
 
         label_IDConductor.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         label_IDConductor.setText("ID Conductor:");
@@ -228,6 +173,26 @@ public class ActPedido extends javax.swing.JFrame {
         });
         jPanel1.add(comboBox_transporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 190, 30));
 
+        label_foliosEnviados1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        label_foliosEnviados1.setText("Folio:");
+        jPanel1.add(label_foliosEnviados1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 50, 30));
+
+        textField_Folios1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jPanel1.add(textField_Folios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 80, 30));
+
+        label_cantidad1.setBackground(new java.awt.Color(255, 255, 255));
+        label_cantidad1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        label_cantidad1.setText("Cantidad Atados:");
+        jPanel1.add(label_cantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 160, 30));
+
+        textF_Quantity1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textF_Quantity1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textF_Quantity1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(textF_Quantity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 70, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,25 +207,9 @@ public class ActPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void checkB_reforzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkB_reforzarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkB_reforzarActionPerformed
-
-    private void checkB_pintadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkB_pintadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkB_pintadoActionPerformed
-
-    private void checkB_galvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkB_galvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkB_galvActionPerformed
-
     private void textF_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textF_clientActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textF_clientActionPerformed
-
-    private void textF_quantityTipesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textF_quantityTipesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textF_quantityTipesActionPerformed
 
     private void textF_folioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textF_folioActionPerformed
         // TODO add your handling code here:
@@ -272,14 +221,9 @@ public class ActPedido extends javax.swing.JFrame {
 
     private void button_CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CleanActionPerformed
         textF_Quantity.setText("");
-        textF_claveAro.setText("");
         textF_client.setText("");
         textF_dateDelivery.setText("");
         textF_folio.setText("");
-        textF_quantityTipes.setText("");
-        checkB_pintado.setSelected(false);
-        checkB_reforzar.setSelected(false);
-        checkB_galv.setSelected(false);
     }//GEN-LAST:event_button_CleanActionPerformed
 
     private void button_FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_FinishActionPerformed
@@ -298,15 +242,16 @@ public class ActPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBox_EstadoActionPerformed
 
+    private void textF_Quantity1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textF_Quantity1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textF_Quantity1ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_Atras;
     private javax.swing.JButton button_Clean;
     private javax.swing.JButton button_Finish;
-    private javax.swing.JCheckBox checkB_galv;
-    private javax.swing.JCheckBox checkB_pintado;
-    private javax.swing.JCheckBox checkB_reforzar;
     private javax.swing.JComboBox<String> comboBox_Estado;
     private javax.swing.JComboBox<String> comboBox_transporte;
     private javax.swing.JPanel jPanel1;
@@ -314,20 +259,20 @@ public class ActPedido extends javax.swing.JFrame {
     private javax.swing.JLabel label_IDConductor;
     private javax.swing.JLabel label_Transporte;
     private javax.swing.JLabel label_cantidad;
-    private javax.swing.JLabel label_clave;
+    private javax.swing.JLabel label_cantidad1;
     private javax.swing.JLabel label_date;
     private javax.swing.JLabel label_folio;
     private javax.swing.JLabel label_foliosEnviados;
+    private javax.swing.JLabel label_foliosEnviados1;
     private javax.swing.JLabel label_pedido;
-    private javax.swing.JLabel label_quantity2;
     private javax.swing.JLabel label_title;
     private javax.swing.JTextField textF_IDConductor;
     private javax.swing.JTextField textF_Quantity;
-    private javax.swing.JTextField textF_claveAro;
+    private javax.swing.JTextField textF_Quantity1;
     private javax.swing.JTextField textF_client;
     private javax.swing.JTextField textF_dateDelivery;
     private javax.swing.JTextField textF_folio;
-    private javax.swing.JTextField textF_quantityTipes;
     private javax.swing.JTextField textField_Folios;
+    private javax.swing.JTextField textField_Folios1;
     // End of variables declaration//GEN-END:variables
 }
