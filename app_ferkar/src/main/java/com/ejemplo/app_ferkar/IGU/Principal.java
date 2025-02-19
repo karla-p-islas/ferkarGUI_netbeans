@@ -118,7 +118,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void button_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_entrarActionPerformed
         
-        /* Uso de contraseña
+        /*
         if(new String(passwordField.getPassword()).equals("abc")){
         
             MenuPrincipal pantalla = new MenuPrincipal();
