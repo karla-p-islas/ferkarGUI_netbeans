@@ -54,7 +54,6 @@ public class Principal extends javax.swing.JFrame {
 
         field_user.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         field_user.setForeground(new java.awt.Color(204, 204, 204));
-        field_user.setText("Ingresar Usuario");
         field_user.setToolTipText("");
         field_user.setBorder(null);
         field_user.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -91,7 +90,6 @@ public class Principal extends javax.swing.JFrame {
 
         passwordField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         passwordField.setForeground(new java.awt.Color(204, 204, 204));
-        passwordField.setText("Contraseña");
         passwordField.setBorder(null);
         background.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 432, 300, 30));
 
@@ -106,7 +104,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
 
         pack();
@@ -118,17 +116,18 @@ public class Principal extends javax.swing.JFrame {
 
     private void button_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_entrarActionPerformed
         
-        /*
+        
         if(new String(passwordField.getPassword()).equals("abc")){
         
             MenuPrincipal pantalla = new MenuPrincipal();
             pantalla.setVisible(true);
             pantalla.setLocationRelativeTo(null);
         }
-        */
+        /*
         MenuPrincipal pantalla = new MenuPrincipal();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
+        */
     }//GEN-LAST:event_button_entrarActionPerformed
 
 
