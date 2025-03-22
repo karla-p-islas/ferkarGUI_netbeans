@@ -188,6 +188,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         button_IngresoInventario.setText("Ingreso de Inventario");
         button_IngresoInventario.setContentAreaFilled(false);
 
+        Pane.setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel_PedidosActivos.setBackground(new java.awt.Color(255, 255, 255));
 
         Tabla_PedidosActivos.setModel(new javax.swing.table.DefaultTableModel(
@@ -1287,6 +1289,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton_NP_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NP_LimpiarActionPerformed
         // TODO add your handling code here:
+        textField_NP_Cliente.setText("");
+        
     }//GEN-LAST:event_jButton_NP_LimpiarActionPerformed
 
     private void button_UpdateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_UpdateOrderActionPerformed
