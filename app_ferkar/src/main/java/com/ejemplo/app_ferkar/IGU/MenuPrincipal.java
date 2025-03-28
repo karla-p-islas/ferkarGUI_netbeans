@@ -111,7 +111,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Button_II_Limpiar = new javax.swing.JButton();
         Button_II_Terminar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTextArea_II_comentarios = new javax.swing.JTextArea();
         jLabel24 = new javax.swing.JLabel();
         jPanel_Inventario = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -837,6 +837,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Button_II_Limpiar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         Button_II_Limpiar.setText("Limpiar");
         Button_II_Limpiar.setContentAreaFilled(false);
+        Button_II_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_II_LimpiarActionPerformed(evt);
+            }
+        });
 
         Button_II_Terminar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         Button_II_Terminar.setText("Terminar");
@@ -847,9 +852,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane5.setViewportView(jTextArea2);
+        jTextArea_II_comentarios.setColumns(20);
+        jTextArea_II_comentarios.setRows(5);
+        jScrollPane5.setViewportView(jTextArea_II_comentarios);
 
         jLabel24.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel24.setText("Comentarios:");
@@ -1054,6 +1059,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Button_Inv_Limpiar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         Button_Inv_Limpiar.setText("Limpiar");
         Button_Inv_Limpiar.setContentAreaFilled(false);
+        Button_Inv_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Inv_LimpiarActionPerformed(evt);
+            }
+        });
 
         Button_Inv_Regresar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         Button_Inv_Regresar.setText("Regresar");
@@ -1260,7 +1270,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_P_RegresarActionPerformed
 
     private void jButton_P_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_LimpiarActionPerformed
-        // TODO add your handling code here:
+        jFormattedTextField_FechaInicial.setText("");
+        jFormattedTextField_FechaFinal.setText("");
     }//GEN-LAST:event_jButton_P_LimpiarActionPerformed
 
     private void jButton_P_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_BuscarActionPerformed
@@ -1290,6 +1301,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jButton_NP_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NP_LimpiarActionPerformed
         // TODO add your handling code here:
         textField_NP_Cliente.setText("");
+        TextField_NP_ClaveAro.setText("");
+        jTextArea_NP_TipoAro.setText("");
+        jTextField_NP_CantidadAros.setText("");
+        jTextField_NP_FechaEntrega.setText("");
+        jCheckBox_Reforzado.setSelected(false);
+        jCheckBox_Pintado.setSelected(false);
+        jCheckBox_Galvanizado.setSelected(false);
         
     }//GEN-LAST:event_jButton_NP_LimpiarActionPerformed
 
@@ -1304,6 +1322,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void Button_II_TerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_II_TerminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Button_II_TerminarActionPerformed
+
+    private void Button_II_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_II_LimpiarActionPerformed
+        CheckBox_II_Galvanizado.setSelected(false);
+        CheckBox_II_Pintado.setSelected(false);
+        CheckBox_II_Reforzado.setSelected(false);
+        jFormText_II_Fecha.setText("");
+        jFormattedText_II_HoraFin.setText("");
+        jFormattedText_II_HoraInicio.setText("");
+        jText_II_Cantidad.setText("");
+        jText_II_ClaveAro.setText("");
+        jText_II_IDSoldador.setText("");
+        jText_II_NombreSoldador.setText("");
+        jText_II_NumCaseta.setText("");
+        jText_II_TipoAro.setText("");
+        jTextArea_II_comentarios.setText("");
+    }//GEN-LAST:event_Button_II_LimpiarActionPerformed
+
+    private void Button_Inv_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Inv_LimpiarActionPerformed
+        TextField_Inv_Ancho.setText("");
+        TextField_Inv_Calibre.setText("");
+        TextField_Inv_ClaveAro.setText("");
+        TextField_Inv_Medida.setText("");
+    }//GEN-LAST:event_Button_Inv_LimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1399,7 +1440,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea_II_comentarios;
     private javax.swing.JTextArea jTextArea_NP_TipoAro;
     private javax.swing.JTextField jTextField_NP_CantidadAros;
     private javax.swing.JTextField jTextField_NP_FechaEntrega;
