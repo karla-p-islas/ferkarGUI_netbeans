@@ -116,6 +116,7 @@ public class ActPedido extends javax.swing.JFrame {
 
         button_Clean.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_Clean.setText("Limpiar");
+        button_Clean.setContentAreaFilled(false);
         button_Clean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_CleanActionPerformed(evt);
@@ -125,6 +126,7 @@ public class ActPedido extends javax.swing.JFrame {
 
         button_Finish.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_Finish.setText("Terminar");
+        button_Finish.setContentAreaFilled(false);
         button_Finish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_FinishActionPerformed(evt);
@@ -134,6 +136,7 @@ public class ActPedido extends javax.swing.JFrame {
 
         button_Atras.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_Atras.setText("Atrás");
+        button_Atras.setContentAreaFilled(false);
         button_Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_AtrasActionPerformed(evt);
@@ -209,10 +212,7 @@ public class ActPedido extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Clave", "Detalle", "Folio Enviado", "Cantidad Atados"
@@ -230,6 +230,7 @@ public class ActPedido extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton1.setText("Agregar");
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -239,6 +240,7 @@ public class ActPedido extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton2.setText("Eliminar");
+        jButton2.setContentAreaFilled(false);
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto Medium", 0, 20)); // NOI18N
@@ -259,10 +261,7 @@ public class ActPedido extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
         );
 
         pack();

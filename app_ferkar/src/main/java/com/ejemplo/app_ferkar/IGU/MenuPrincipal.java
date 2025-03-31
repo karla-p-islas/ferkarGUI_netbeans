@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.ejemplo.app_ferkar.IGU;
+import com.ejemplo.app_ferkar.IGU.ActPedido;
 
 /**
  *
@@ -1312,7 +1313,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_NP_LimpiarActionPerformed
 
     private void button_UpdateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_UpdateOrderActionPerformed
-        // TODO add your handling code here:
+        ActPedido update = new ActPedido();
+        update.setVisible(true);
+        update.setLocationRelativeTo(null);
     }//GEN-LAST:event_button_UpdateOrderActionPerformed
 
     private void jText_II_TipoAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_II_TipoAroActionPerformed
