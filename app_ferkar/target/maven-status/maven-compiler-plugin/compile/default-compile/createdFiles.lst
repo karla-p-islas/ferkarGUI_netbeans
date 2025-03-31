@@ -4,10 +4,13 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$8.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal.class
 com\ejemplo\app_ferkar\App_ferkar.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$1.class
+com\ejemplo\app_ferkar\persistencia\loginDAO.class
 com\ejemplo\app_ferkar\IGU\ActPedido$1.class
+com\ejemplo\app_ferkar\persistencia\login.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$5.class
 com\ejemplo\app_ferkar\IGU\ActPedido$11.class
 com\ejemplo\app_ferkar\IGU\ActPedido$10.class
+com\ejemplo\app_ferkar\persistencia\Conexion.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$19.class
 com\ejemplo\app_ferkar\IGU\Principal$1.class
 com\ejemplo\app_ferkar\IGU\ActPedido$8.class

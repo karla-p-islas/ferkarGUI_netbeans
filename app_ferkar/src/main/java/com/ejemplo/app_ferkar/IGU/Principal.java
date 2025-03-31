@@ -1,7 +1,5 @@
 package com.ejemplo.app_ferkar.IGU;
 
-import com.ejemplo.app_ferkar.App_ferkar;
-
 /**
  *
  * @author karla_rmz_islas
@@ -13,6 +11,13 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+    
+    public void validar(){
+        String correo = field_user.getText();
+        String pass = field_pass.getText();
+        
     }
 
     /**
@@ -32,12 +37,11 @@ public class Principal extends javax.swing.JFrame {
         label_password = new javax.swing.JLabel();
         separador_password = new javax.swing.JSeparator();
         button_entrar = new javax.swing.JButton();
-        passwordField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
+        field_pass = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 570));
-        setPreferredSize(new java.awt.Dimension(800, 570));
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setMinimumSize(new java.awt.Dimension(800, 500));
@@ -88,13 +92,20 @@ public class Principal extends javax.swing.JFrame {
         });
         background.add(button_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 140, 50));
 
-        passwordField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(204, 204, 204));
-        passwordField.setBorder(null);
-        background.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 432, 300, 30));
-
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_400x200.jpg")); // NOI18N
         background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 420, 230));
+
+        field_pass.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        field_pass.setForeground(new java.awt.Color(204, 204, 204));
+        field_pass.setToolTipText("");
+        field_pass.setBorder(null);
+        field_pass.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        field_pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_passActionPerformed(evt);
+            }
+        });
+        background.add(field_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 320, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,14 +126,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_field_userActionPerformed
 
     private void button_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_entrarActionPerformed
-        
-        
-        if(new String(passwordField.getPassword()).equals("abc")){
-        
-            MenuPrincipal pantalla = new MenuPrincipal();
-            pantalla.setVisible(true);
-            pantalla.setLocationRelativeTo(null);
-        }
+
         /*
         MenuPrincipal pantalla = new MenuPrincipal();
         pantalla.setVisible(true);
@@ -130,17 +134,21 @@ public class Principal extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_button_entrarActionPerformed
 
+    private void field_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_field_passActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton button_entrar;
+    private javax.swing.JTextField field_pass;
     private javax.swing.JTextField field_user;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label_password;
     private javax.swing.JLabel label_title;
     private javax.swing.JLabel label_user;
-    private javax.swing.JPasswordField passwordField;
     private javax.swing.JSeparator separador_password;
     private javax.swing.JSeparator separador_user;
     // End of variables declaration//GEN-END:variables

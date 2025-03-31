@@ -3,6 +3,7 @@ package com.ejemplo.app_ferkar.persistencia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -30,8 +31,9 @@ public class loginDAO {
                 l.setCorreo(rs.getString("correo"));
                 l.setPass(rs.getString("pass"));
             }
-        } catch (Exception e){
-            
+        } catch (SQLException e){
+            System.out.println(e.toString());
         }
+        return l;
     }
 }
