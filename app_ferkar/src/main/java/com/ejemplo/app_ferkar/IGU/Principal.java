@@ -1,4 +1,8 @@
 package com.ejemplo.app_ferkar.IGU;
+import com.ejemplo.app_ferkar.persistencia.login;
+import com.ejemplo.app_ferkar.persistencia.loginDAO;
+import com.ejemplo.app_ferkar.IGU.MenuPrincipal;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -6,6 +10,8 @@ package com.ejemplo.app_ferkar.IGU;
  */
 public class Principal extends javax.swing.JFrame {
 
+    login lg =new login();
+    loginDAO login = new loginDAO();
     /**
      * Creates new form Principal
      */
@@ -16,8 +22,18 @@ public class Principal extends javax.swing.JFrame {
     
     public void validar(){
         String correo = field_user.getText();
-        String pass = field_pass.getText();
-        
+        String pass = String.valueOf(field_pass.getPassword());
+        if(!"".equals(correo) || !"".equals(pass)){
+            
+            lg = login.log(correo, pass);
+            if (lg.getCorreo()!=null && lg.getPass()!=null){
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.setVisible(true);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+            }
+        }
     }
 
     /**
@@ -38,7 +54,7 @@ public class Principal extends javax.swing.JFrame {
         separador_password = new javax.swing.JSeparator();
         button_entrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        field_pass = new javax.swing.JTextField();
+        field_pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 570));
@@ -95,17 +111,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_400x200.jpg")); // NOI18N
         background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 420, 230));
 
-        field_pass.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        field_pass.setForeground(new java.awt.Color(204, 204, 204));
-        field_pass.setToolTipText("");
         field_pass.setBorder(null);
-        field_pass.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         field_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 field_passActionPerformed(evt);
             }
         });
-        background.add(field_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 320, 20));
+        background.add(field_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 432, 300, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,12 +138,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_field_userActionPerformed
 
     private void button_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_entrarActionPerformed
-
-        /*
-        MenuPrincipal pantalla = new MenuPrincipal();
-        pantalla.setVisible(true);
-        pantalla.setLocationRelativeTo(null);
-        */
+        validar();
     }//GEN-LAST:event_button_entrarActionPerformed
 
     private void field_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_passActionPerformed
@@ -143,7 +150,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton button_entrar;
-    private javax.swing.JTextField field_pass;
+    private javax.swing.JPasswordField field_pass;
     private javax.swing.JTextField field_user;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label_password;
