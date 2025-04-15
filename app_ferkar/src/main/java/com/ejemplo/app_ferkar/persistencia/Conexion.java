@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 /**
- *
  * @author kpaor
+ * Objetivo: Generar la conexión con la base de datos en postgres 
  */
 public class Conexion {
     Connection con;

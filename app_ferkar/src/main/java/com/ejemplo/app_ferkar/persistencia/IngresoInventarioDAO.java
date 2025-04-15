@@ -2,10 +2,12 @@ package com.ejemplo.app_ferkar.persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
- *
  * @author kpaor
+ * Objetivo: crear el query con la información correspondiente para ser enviada a sql
  */
 public class IngresoInventarioDAO {
     Connection con;
@@ -31,9 +33,15 @@ public class IngresoInventarioDAO {
             ps.setInt(10, pro.getCantidad_atados());
             ps.execute();
             return true;
-        }catch (Exception e){
-            System.out.println(e.toString());
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
             return false;
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
         }
     }
 }

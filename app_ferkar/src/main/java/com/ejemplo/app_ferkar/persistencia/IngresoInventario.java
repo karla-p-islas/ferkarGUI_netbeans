@@ -1,9 +1,7 @@
 package com.ejemplo.app_ferkar.persistencia;
-
-
 /**
- *
  * @author kpaor
+ * Objetivo: obtener la información que provenga del statement creado como "ingreso inventario" y dejarlo listo para el query
  */
 public class IngresoInventario {
     private String folio;
@@ -20,7 +18,8 @@ public class IngresoInventario {
     public IngresoInventario(){ 
     }
 
-    public IngresoInventario(String folio, String fecha, int id_soldador, int caseta, String hora_inicio, String hora_fin, int codigo_aro, String tratamiento_adicional, int cantidad, int cantidad_atados) {
+    public IngresoInventario(String folio, String fecha, int id_soldador, int caseta, String hora_inicio, String hora_fin, 
+            int codigo_aro, String tratamiento_adicional, int cantidad, int cantidad_atados) {
         this.folio = folio;
         this.fecha = fecha;
         this.id_soldador = id_soldador;
