@@ -6,6 +6,8 @@ package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.IGU.ActPedido;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventario;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventarioDAO;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -105,7 +107,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jText_II_NumCaseta = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jFormattedText_II_HoraInicio = new javax.swing.JFormattedTextField();
         jLabel23 = new javax.swing.JLabel();
         jFormattedText_II_HoraFin = new javax.swing.JFormattedTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -120,6 +121,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jText_II_Folio = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
+        jFormattedText_II_HoraInicio = new javax.swing.JFormattedTextField();
         jPanel_Inventario = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
@@ -757,6 +759,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
         jLabel16.setText("Ingreso de Inventario");
 
+        jText_II_ClaveAro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jText_II_ClaveAroActionPerformed(evt);
+            }
+        });
+        jText_II_ClaveAro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jText_II_ClaveAroKeyPressed(evt);
+            }
+        });
+
         jLabel17.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel17.setText("Tipo de Aro:");
 
@@ -784,9 +797,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel22.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel22.setText("Hora de Inicio:");
-
-        jFormattedText_II_HoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        jFormattedText_II_HoraInicio.setPreferredSize(new java.awt.Dimension(64, 34));
 
         jLabel23.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel23.setText("Hora de Fin:");
@@ -833,7 +843,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CheckBox_II_Reforzado, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CheckBox_II_Pintado, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -843,14 +853,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(CheckBox_II_Reforzado)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(CheckBox_II_Galvanizado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CheckBox_II_Pintado)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(CheckBox_II_Pintado))
         );
 
         Button_II_Limpiar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
@@ -877,6 +887,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel33.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\OneDrive\\Escritorio\\RASTREABILIDAD\\Formato folio.png")); // NOI18N
 
+        jFormattedText_II_HoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        jFormattedText_II_HoraInicio.setPreferredSize(new java.awt.Dimension(64, 34));
+        jFormattedText_II_HoraInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedText_II_HoraInicioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -898,10 +916,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)))
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jText_II_ClaveAro, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                            .addComponent(jText_II_IDSoldador, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                            .addComponent(jFormattedText_II_HoraInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jText_II_ClaveAro, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                                .addComponent(jText_II_IDSoldador, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                            .addComponent(jText_II_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(83, 83, 83)))
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
@@ -939,20 +958,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(Button_II_Terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(156, 156, 156))))
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(94, 94, 94)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jText_II_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
+                        .addComponent(jFormattedText_II_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
                         .addComponent(jLabel23)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedText_II_HoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jFormattedText_II_HoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(589, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -991,18 +1008,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedText_II_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel21)
-                            .addComponent(jText_II_NumCaseta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jText_II_NumCaseta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jText_II_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jText_II_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedText_II_HoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedText_II_HoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedText_II_HoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_IngresoInventarioLayout = new javax.swing.GroupLayout(jPanel_IngresoInventario);
@@ -1269,6 +1288,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static int CantidadAtados(int clave, int cantidad){
+        int ultimoNum = clave %10;
+        int divisor;
+        
+        switch(ultimoNum){
+            case 4:
+                divisor = 25;
+                break;
+            case 8:
+                divisor = 20;
+                break;
+            case 5:
+                divisor = 10;
+                break;
+            default:
+                return -1;
+        }
+         if(cantidad % divisor == 0){
+             return cantidad/divisor;
+         }else{
+             JOptionPane.showMessageDialog(null, "Error en clave o atado incompleto");
+             return -1;
+         }
+    }
+    
     private void button_PedidosActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_PedidosActivosActionPerformed
         // 
     }//GEN-LAST:event_button_PedidosActivosActionPerformed
@@ -1353,7 +1397,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             TratamientoA += "R";
         }
         
-        if(!"".equals(jText_II_ClaveAro.getText()) || !"".equals(jText_II_NombreSoldador.getText()) || !"".equals(jText_II_Cantidad.getText())){
+        if(!"".equals(jText_II_ClaveAro.getText()) || !"".equals(jText_II_NombreSoldador.getText()) || !"".equals(jText_II_Cantidad.getText()) || !"".equals(jText_II_Folio.getText())){
             ii.setFolio(jText_II_Folio.getText());
             ii.setFecha(jFormText_II_Fecha.getText());
             ii.setId_soldador(Integer.parseInt(jText_II_IDSoldador.getText()));
@@ -1363,7 +1407,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ii.setCodigo_aro(Integer.parseInt(jText_II_ClaveAro.getText()));
             ii.setTratamiento_adicional(TratamientoA);
             ii.setCantidad(Integer.parseInt(jText_II_Cantidad.getText()));
-            
+            int clave = Integer.parseInt(jText_II_ClaveAro.getText());
+            int cantidad = Integer.parseInt(jText_II_Cantidad.getText());
+            int resultado = CantidadAtados(clave,cantidad);
+            if(resultado == -1){
+                JOptionPane.showMessageDialog(null, "No se puede registrar: cantidad atados inválida");
+            }else{
+                ii.setCantidad_atados(resultado);
+            }
+            iid.RegistrarInventario(ii);
+            JOptionPane.showMessageDialog(null, "Folio Registrado");
+        }else{
+            JOptionPane.showMessageDialog(null, "Datos incorrectos o incompletos");
         }
     }//GEN-LAST:event_Button_II_TerminarActionPerformed
 
@@ -1380,6 +1435,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jText_II_NombreSoldador.setText("");
         jText_II_NumCaseta.setText("");
         jText_II_TipoAro.setText("");
+        jText_II_Folio.setText("");
     }//GEN-LAST:event_Button_II_LimpiarActionPerformed
 
     private void Button_Inv_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Inv_LimpiarActionPerformed
@@ -1396,6 +1452,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jFormattedText_II_HoraFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedText_II_HoraFinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedText_II_HoraFinActionPerformed
+
+    private void jFormattedText_II_HoraInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedText_II_HoraInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedText_II_HoraInicioActionPerformed
+
+    private void jText_II_ClaveAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_II_ClaveAroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jText_II_ClaveAroActionPerformed
+
+    private void jText_II_ClaveAroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_II_ClaveAroKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+            
+        }
+    }//GEN-LAST:event_jText_II_ClaveAroKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
