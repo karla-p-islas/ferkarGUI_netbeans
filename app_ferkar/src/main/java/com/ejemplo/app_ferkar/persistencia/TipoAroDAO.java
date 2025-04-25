@@ -16,13 +16,13 @@ public class TipoAroDAO {
     PreparedStatement ps;
     ResultSet rs;
     
-    public TipoAro BuscarPro (int clave) throws SQLException{
+    public TipoAro BuscarPro (String clave) throws SQLException{
         TipoAro aro = new TipoAro();
         String sql = "SELECT * FROM db_aros WHERE codigo = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, clave);
+            ps.setString(1, clave);
             rs = ps.executeQuery();
             if (rs.next()){
                 aro.setCodigo_aro(rs.getInt("codigo"));

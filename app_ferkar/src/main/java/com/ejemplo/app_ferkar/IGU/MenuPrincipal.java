@@ -6,8 +6,16 @@ package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.IGU.ActPedido;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventario;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventarioDAO;
+import com.ejemplo.app_ferkar.persistencia.Soldador;
+import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
+import com.ejemplo.app_ferkar.persistencia.TipoAro;
+import com.ejemplo.app_ferkar.persistencia.TipoAroDAO;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,10 +25,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     IngresoInventario ii = new IngresoInventario();
     IngresoInventarioDAO iid = new IngresoInventarioDAO();
-    /**
-     * Creates new form MenuPrincipal
-     */
-    
+    TipoAro tipoA = new TipoAro();
+    TipoAroDAO tipoAd = new TipoAroDAO();
+    Soldador id = new Soldador();
+    SoldadorDAO idd = new SoldadorDAO();
     
     public MenuPrincipal() {
         initComponents();
@@ -782,6 +790,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel18.setText("ID Soldador:");
 
+        jText_II_IDSoldador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jText_II_IDSoldadorActionPerformed(evt);
+            }
+        });
+        jText_II_IDSoldador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jText_II_IDSoldadorKeyPressed(evt);
+            }
+        });
+
         jLabel19.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel19.setText("Soldador:");
 
@@ -1463,9 +1482,53 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jText_II_ClaveAroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_II_ClaveAroKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
-            
+            if (!"".equals(jText_II_ClaveAro.getText())){
+                String clave = jText_II_ClaveAro.getText();
+                try {
+                    tipoA = tipoAd.BuscarPro(clave);
+                    if (tipoA.getCodigo_aro() != 0){
+                        jText_II_TipoAro.setText(""+tipoA.getDescripcion_esp());
+                        jText_II_IDSoldador.requestFocus();
+                    }else{
+                        jText_II_TipoAro.setText("");
+                        jText_II_ClaveAro.setText("");
+                        jText_II_ClaveAro.requestFocus();
+                        JOptionPane.showMessageDialog(null, "Ingrese una clave valida");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Favor de ingresar una clave");
+                jText_II_ClaveAro.requestFocus();
+            }
         }
     }//GEN-LAST:event_jText_II_ClaveAroKeyPressed
+
+    private void jText_II_IDSoldadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_II_IDSoldadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jText_II_IDSoldadorActionPerformed
+
+    private void jText_II_IDSoldadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_II_IDSoldadorKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if (!"".equals(jText_II_IDSoldador.getText())){
+                String id_s = jText_II_IDSoldador.getText();
+                id = idd.BuscarPro(id_s);
+                if (id.getId_soldador() != 0){
+                    jText_II_NombreSoldador.setText(""+id.getNombre_completo());
+                    jText_II_Cantidad.requestFocus();
+                }else{
+                    jText_II_IDSoldador.setText("");
+                    jText_II_NombreSoldador.setText("");
+                    jText_II_IDSoldador.requestFocus();
+                    JOptionPane.showMessageDialog(null, "Favor de revisar el id");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingresar un id (1-11)");
+                jText_II_IDSoldador.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_jText_II_IDSoldadorKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
