@@ -4,6 +4,8 @@
  */
 package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.IGU.ActPedido;
+import com.ejemplo.app_ferkar.persistencia.Cliente;
+import com.ejemplo.app_ferkar.persistencia.ClienteDAO;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventario;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventarioDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
@@ -12,9 +14,11 @@ import com.ejemplo.app_ferkar.persistencia.TipoAro;
 import com.ejemplo.app_ferkar.persistencia.TipoAroDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -29,9 +33,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     TipoAroDAO tipoAd = new TipoAroDAO();
     Soldador id = new Soldador();
     SoldadorDAO idd = new SoldadorDAO();
+    Cliente cl = new Cliente();
+    ClienteDAO cld = new ClienteDAO();
+    DefaultTableModel modelo = new DefaultTableModel();
+    int item;
     
     public MenuPrincipal() {
         initComponents();
+        cld.ConsultarCliente(jCBox_NP_cliente);
+        
     }
 
     /**
@@ -70,9 +80,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        textField_NP_Cliente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField_NP_FechaEntrega = new javax.swing.JTextField();
         jTextField_NP_CantidadAros = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         TextField_NP_ClaveAro = new javax.swing.JTextField();
@@ -83,6 +91,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jCheckBox_Reforzado = new javax.swing.JCheckBox();
         jCheckBox_Galvanizado = new javax.swing.JCheckBox();
         jCheckBox_Pintado = new javax.swing.JCheckBox();
+        jCBox_NP_cliente = new javax.swing.JComboBox<>();
+        jFormattedText_NP_FechaEntrega = new javax.swing.JFormattedTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField_NumPedido = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jPanel_HistorialPedidos = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -309,15 +321,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tipo de Aro", "Clave de Aro", "Cantidad", "Tratamiento Adicional"
+                "Clave de Aro", "Tipo de Aro", "Cantidad", "Tratamiento Adicional"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(Tabla_ResumenOrden);
         if (Tabla_ResumenOrden.getColumnModel().getColumnCount() > 0) {
             Tabla_ResumenOrden.getColumnModel().getColumn(0).setResizable(false);
-            Tabla_ResumenOrden.getColumnModel().getColumn(0).setPreferredWidth(150);
+            Tabla_ResumenOrden.getColumnModel().getColumn(0).setPreferredWidth(50);
             Tabla_ResumenOrden.getColumnModel().getColumn(1).setResizable(false);
-            Tabla_ResumenOrden.getColumnModel().getColumn(1).setPreferredWidth(50);
+            Tabla_ResumenOrden.getColumnModel().getColumn(1).setPreferredWidth(200);
             Tabla_ResumenOrden.getColumnModel().getColumn(2).setResizable(false);
             Tabla_ResumenOrden.getColumnModel().getColumn(2).setPreferredWidth(50);
             Tabla_ResumenOrden.getColumnModel().getColumn(3).setResizable(false);
@@ -327,16 +347,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton_NP_EliminarLinea.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton_NP_EliminarLinea.setText("Eliminar Línea");
         jButton_NP_EliminarLinea.setContentAreaFilled(false);
+        jButton_NP_EliminarLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_NP_EliminarLineaActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         jButton6.setText("Terminar Orden");
         jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Nirmala Text", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Resumen de la Orden");
         jLabel7.setToolTipText("");
-        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -344,18 +373,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Cliente:");
 
-        textField_NP_Cliente.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        textField_NP_Cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField_NP_ClienteActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Fecha de Entrega:");
-
-        jTextField_NP_FechaEntrega.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLabel3.setText("Fecha de Pedido:");
 
         jTextField_NP_CantidadAros.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
@@ -364,6 +384,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel5.setText("Clave de Aro:");
 
         TextField_NP_ClaveAro.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_NP_ClaveAro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TextField_NP_ClaveAroKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -430,69 +455,82 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jCBox_NP_cliente.setToolTipText("");
+
+        jFormattedText_NP_FechaEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
+        jLabel24.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("# de Pedido:");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField_NP_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField_NP_FechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TextField_NP_ClaveAro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCBox_NP_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addContainerGap()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextField_NP_ClaveAro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(221, 221, 221)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(120, 120, 120))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jFormattedText_NP_FechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel24)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField_NumPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(textField_NP_Cliente)
-                    .addComponent(jTextField_NP_FechaEntrega))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jCBox_NP_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jFormattedText_NP_FechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24)
+                            .addComponent(jTextField_NumPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(TextField_NP_ClaveAro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                                .addGap(20, 20, 20)
+                                .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(TextField_NP_ClaveAro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel14.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
@@ -508,12 +546,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_NP_EliminarLinea, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -789,17 +828,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel18.setText("ID Soldador:");
-
-        jText_II_IDSoldador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jText_II_IDSoldadorActionPerformed(evt);
-            }
-        });
-        jText_II_IDSoldador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jText_II_IDSoldadorKeyPressed(evt);
-            }
-        });
 
         jLabel19.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel19.setText("Soldador:");
@@ -1282,7 +1310,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1312,17 +1340,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int divisor;
         
         switch(ultimoNum){
-            case 4:
-                divisor = 25;
-                break;
-            case 8:
-                divisor = 20;
-                break;
-            case 5:
-                divisor = 10;
-                break;
-            default:
+            case 4 -> divisor = 25;
+            case 8 -> divisor = 20;
+            case 5 -> divisor = 10;
+            default -> {
                 return -1;
+            }
         }
          if(cantidad % divisor == 0){
              return cantidad/divisor;
@@ -1333,7 +1356,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     
     private void button_PedidosActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_PedidosActivosActionPerformed
-        // 
+        
     }//GEN-LAST:event_button_PedidosActivosActionPerformed
 
     private void button_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SalirActionPerformed
@@ -1373,21 +1396,65 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox_ReforzadoActionPerformed
 
-    private void textField_NP_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_NP_ClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField_NP_ClienteActionPerformed
-
     private void jButton_NP_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NP_IngresarActionPerformed
-        
+        if(!"".equals(TextField_NP_ClaveAro.getText()) && !"".equals(jTextField_NP_CantidadAros.getText())){
+            String clave = TextField_NP_ClaveAro.getText();
+            String tipo = jTextArea_NP_TipoAro.getText();
+            int cantidad = Integer.parseInt(jTextField_NP_CantidadAros.getText());
+            
+            String TratamientoA = "";
+            if(!jCheckBox_Galvanizado.isSelected() && !jCheckBox_Pintado.isSelected() && !jCheckBox_Reforzado.isSelected()){
+                TratamientoA = "NADA";
+            }else{
+                if(jCheckBox_Galvanizado.isSelected()){
+                    TratamientoA += "G";
+                }
+                if(jCheckBox_Pintado.isSelected()){
+                    TratamientoA += "P";
+                }
+                if(jCheckBox_Reforzado.isSelected()){
+                    TratamientoA += "R";
+                }
+            }
+            String trato = TratamientoA;
+            // en caso de agregar db_precios, sería hacer la modificación aquí
+            item  = item +1;
+            modelo = (DefaultTableModel) Tabla_ResumenOrden.getModel();
+            ArrayList lista = new ArrayList();
+            lista.add(item);
+            lista.add(clave);
+            lista.add(tipo);
+            lista.add(cantidad);
+            lista.add(trato);
+            Object[] O = new Object[4];
+            O[0] = lista.get(1);
+            O[1] = lista.get(2);
+            O[2] = lista.get(3);
+            O[3] = lista.get(4);
+            modelo.addRow(O);
+            Tabla_ResumenOrden.setModel(modelo);
+            
+            TextField_NP_ClaveAro.setText("");
+            jTextArea_NP_TipoAro.setText("");
+            jTextField_NP_CantidadAros.setText("");
+            jFormattedText_NP_FechaEntrega.setText("");
+            jCheckBox_Reforzado.setSelected(false);
+            jCheckBox_Pintado.setSelected(false);
+            jCheckBox_Galvanizado.setSelected(false);
+            
+            TextField_NP_ClaveAro.requestFocus();
+        }else{
+            JOptionPane.showMessageDialog(null, "Información incompleta");
+        }
     }//GEN-LAST:event_jButton_NP_IngresarActionPerformed
 
     private void jButton_NP_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NP_LimpiarActionPerformed
         // TODO add your handling code here:
-        textField_NP_Cliente.setText("");
+        
         TextField_NP_ClaveAro.setText("");
         jTextArea_NP_TipoAro.setText("");
         jTextField_NP_CantidadAros.setText("");
-        jTextField_NP_FechaEntrega.setText("");
+        jFormattedText_NP_FechaEntrega.setText("");
         jCheckBox_Reforzado.setSelected(false);
         jCheckBox_Pintado.setSelected(false);
         jCheckBox_Galvanizado.setSelected(false);
@@ -1406,14 +1473,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void Button_II_TerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_II_TerminarActionPerformed
         String TratamientoA = "";
-        if(CheckBox_II_Galvanizado.isSelected()){
-            TratamientoA += "G";
-        }
-        if(CheckBox_II_Pintado.isSelected()){
-            TratamientoA += "P";
-        }
-        if(CheckBox_II_Reforzado.isSelected()){
-            TratamientoA += "R";
+        if(!CheckBox_II_Galvanizado.isSelected() && !CheckBox_II_Pintado.isSelected() && !CheckBox_II_Reforzado.isSelected()){
+            TratamientoA = "NADA";
+        }else{
+            if(CheckBox_II_Galvanizado.isSelected()){
+                TratamientoA += "G";
+            }
+            if(CheckBox_II_Pintado.isSelected()){
+                TratamientoA += "P";
+            }
+            if(CheckBox_II_Reforzado.isSelected()){
+                TratamientoA += "R";
+            }
         }
         
         if(!"".equals(jText_II_ClaveAro.getText()) || !"".equals(jText_II_NombreSoldador.getText()) || !"".equals(jText_II_Cantidad.getText()) || !"".equals(jText_II_Folio.getText())){
@@ -1436,6 +1507,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
             iid.RegistrarInventario(ii);
             JOptionPane.showMessageDialog(null, "Folio Registrado");
+            
+            //limpiar
+            CheckBox_II_Galvanizado.setSelected(false);
+            CheckBox_II_Pintado.setSelected(false);
+            CheckBox_II_Reforzado.setSelected(false);
+            jFormText_II_Fecha.setText("");
+            jFormattedText_II_HoraFin.setText("");
+            jFormattedText_II_HoraInicio.setText("");
+            jText_II_Cantidad.setText("");
+            jText_II_ClaveAro.setText("");
+            jText_II_IDSoldador.setText("");
+            jText_II_NombreSoldador.setText("");
+            jText_II_NumCaseta.setText("");
+            jText_II_TipoAro.setText("");
+            jText_II_Folio.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Datos incorrectos o incompletos");
         }
@@ -1505,30 +1591,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jText_II_ClaveAroKeyPressed
 
-    private void jText_II_IDSoldadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_II_IDSoldadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jText_II_IDSoldadorActionPerformed
-
-    private void jText_II_IDSoldadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_II_IDSoldadorKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if (!"".equals(jText_II_IDSoldador.getText())){
-                String id_s = jText_II_IDSoldador.getText();
-                id = idd.BuscarPro(id_s);
-                if (id.getId_soldador() != 0){
-                    jText_II_NombreSoldador.setText(""+id.getNombre_completo());
-                    jText_II_Cantidad.requestFocus();
-                }else{
-                    jText_II_IDSoldador.setText("");
-                    jText_II_NombreSoldador.setText("");
-                    jText_II_IDSoldador.requestFocus();
-                    JOptionPane.showMessageDialog(null, "Favor de revisar el id");
+    private void TextField_NP_ClaveAroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextField_NP_ClaveAroKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+            if (!"".equals(TextField_NP_ClaveAro.getText())){
+                String clave = TextField_NP_ClaveAro.getText();
+                try {
+                    tipoA = tipoAd.BuscarPro(clave);
+                    if (tipoA.getCodigo_aro() != 0){
+                        jTextArea_NP_TipoAro.setText(""+tipoA.getDescripcion_esp());
+                        jTextField_NP_CantidadAros.requestFocus();
+                    }else{
+                        TextField_NP_ClaveAro.setText("");
+                        jTextArea_NP_TipoAro.setText("");
+                        TextField_NP_ClaveAro.requestFocus();
+                        JOptionPane.showMessageDialog(null, "Ingrese una clave valida");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Ingresar un id (1-11)");
-                jText_II_IDSoldador.requestFocus();
+                JOptionPane.showMessageDialog(null, "Favor de ingresar una clave");
+                TextField_NP_ClaveAro.requestFocus();
             }
         }
-    }//GEN-LAST:event_jText_II_IDSoldadorKeyPressed
+    }//GEN-LAST:event_TextField_NP_ClaveAroKeyPressed
+
+    private void jButton_NP_EliminarLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NP_EliminarLineaActionPerformed
+        modelo = (DefaultTableModel) Tabla_ResumenOrden.getModel();
+        modelo.removeRow(Tabla_ResumenOrden.getSelectedRow());
+        TextField_NP_ClaveAro.requestFocus();
+    }//GEN-LAST:event_jButton_NP_EliminarLineaActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1565,6 +1661,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_P_Buscar;
     private javax.swing.JButton jButton_P_Limpiar;
     private javax.swing.JButton jButton_P_Regresar;
+    private javax.swing.JComboBox<String> jCBox_NP_cliente;
     private javax.swing.JCheckBox jCheckBox_Galvanizado;
     private javax.swing.JCheckBox jCheckBox_Pintado;
     private javax.swing.JCheckBox jCheckBox_Reforzado;
@@ -1573,6 +1670,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField_FechaInicial;
     private javax.swing.JFormattedTextField jFormattedText_II_HoraFin;
     private javax.swing.JFormattedTextField jFormattedText_II_HoraInicio;
+    private javax.swing.JFormattedTextField jFormattedText_NP_FechaEntrega;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1589,6 +1687,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -1626,7 +1725,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea_NP_TipoAro;
     private javax.swing.JTextField jTextField_NP_CantidadAros;
-    private javax.swing.JTextField jTextField_NP_FechaEntrega;
+    private javax.swing.JTextField jTextField_NumPedido;
     private javax.swing.JTextField jText_II_Cantidad;
     private javax.swing.JTextField jText_II_ClaveAro;
     private javax.swing.JTextField jText_II_Folio;
@@ -1636,6 +1735,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jText_II_TipoAro;
     private javax.swing.JLabel label_PedidosActivos;
     private javax.swing.JLabel label_title;
-    private javax.swing.JTextField textField_NP_Cliente;
     // End of variables declaration//GEN-END:variables
 }

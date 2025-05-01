@@ -26,6 +26,7 @@ com\ejemplo\app_ferkar\persistencia\NuevoPedidoDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$10.class
 com\ejemplo\app_ferkar\IGU\ActPedido$7.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$25.class
+com\ejemplo\app_ferkar\persistencia\ClienteDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$24.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$14.class
 com\ejemplo\app_ferkar\persistencia\TipoAroDAO.class
@@ -36,6 +37,7 @@ com\ejemplo\app_ferkar\persistencia\login.class
 com\ejemplo\app_ferkar\IGU\Principal$1.class
 com\ejemplo\app_ferkar\IGU\ActPedido$8.class
 com\ejemplo\app_ferkar\persistencia\TipoAro.class
+com\ejemplo\app_ferkar\persistencia\Cliente.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$11.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$21.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$7.class
