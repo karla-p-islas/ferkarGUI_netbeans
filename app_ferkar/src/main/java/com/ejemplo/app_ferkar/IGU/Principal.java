@@ -2,6 +2,7 @@ package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.persistencia.login;
 import com.ejemplo.app_ferkar.persistencia.loginDAO;
 import com.ejemplo.app_ferkar.IGU.MenuPrincipal;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,12 +50,12 @@ public class Principal extends javax.swing.JFrame {
         label_title = new javax.swing.JLabel();
         label_user = new javax.swing.JLabel();
         field_user = new javax.swing.JTextField();
-        separador_user = new javax.swing.JSeparator();
         label_password = new javax.swing.JLabel();
         separador_password = new javax.swing.JSeparator();
         button_entrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         field_pass = new javax.swing.JPasswordField();
+        separador_password1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 570));
@@ -73,7 +74,6 @@ public class Principal extends javax.swing.JFrame {
         background.add(label_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 80, 20));
 
         field_user.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        field_user.setForeground(new java.awt.Color(204, 204, 204));
         field_user.setToolTipText("");
         field_user.setBorder(null);
         field_user.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -84,18 +84,14 @@ public class Principal extends javax.swing.JFrame {
         });
         background.add(field_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 320, -1));
 
-        separador_user.setForeground(new java.awt.Color(51, 51, 51));
-        separador_user.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        background.add(separador_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 300, 20));
-
         label_password.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         label_password.setText("Contraseña:");
         label_password.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         background.add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 110, 20));
 
-        separador_password.setForeground(new java.awt.Color(51, 51, 51));
+        separador_password.setForeground(new java.awt.Color(0, 0, 0));
         separador_password.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        background.add(separador_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, 300, 20));
+        background.add(separador_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 300, 20));
 
         button_entrar.setBackground(new java.awt.Color(204, 204, 204));
         button_entrar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -104,6 +100,11 @@ public class Principal extends javax.swing.JFrame {
         button_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_entrarActionPerformed(evt);
+            }
+        });
+        button_entrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                button_entrarKeyPressed(evt);
             }
         });
         background.add(button_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 140, 50));
@@ -118,6 +119,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         background.add(field_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 432, 300, 30));
+
+        separador_password1.setForeground(new java.awt.Color(51, 51, 51));
+        separador_password1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        background.add(separador_password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, 300, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,6 +150,12 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_field_passActionPerformed
 
+    private void button_entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_button_entrarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            validar();
+        }
+    }//GEN-LAST:event_button_entrarKeyPressed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -157,6 +168,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel label_title;
     private javax.swing.JLabel label_user;
     private javax.swing.JSeparator separador_password;
-    private javax.swing.JSeparator separador_user;
+    private javax.swing.JSeparator separador_password1;
     // End of variables declaration//GEN-END:variables
 }

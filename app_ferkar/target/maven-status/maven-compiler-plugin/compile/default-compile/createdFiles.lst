@@ -1,4 +1,5 @@
 com\ejemplo\app_ferkar\IGU\ActPedido$6.class
+com\ejemplo\app_ferkar\persistencia\Pedido.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$8.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$1.class
 com\ejemplo\app_ferkar\persistencia\loginDAO.class
@@ -8,6 +9,7 @@ com\ejemplo\app_ferkar\IGU\ActPedido$11.class
 com\ejemplo\app_ferkar\IGU\ActPedido$10.class
 com\ejemplo\app_ferkar\persistencia\Conexion.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$19.class
+com\ejemplo\app_ferkar\persistencia\DetallePedido.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$16.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$26.class
 com\ejemplo\app_ferkar\IGU\ActPedido$3.class
@@ -22,7 +24,6 @@ com\ejemplo\app_ferkar\IGU\ActPedido$4.class
 com\ejemplo\app_ferkar\IGU\ActPedido.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$22.class
 com\ejemplo\app_ferkar\IGU\Principal$2.class
-com\ejemplo\app_ferkar\persistencia\NuevoPedidoDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$10.class
 com\ejemplo\app_ferkar\IGU\ActPedido$7.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$25.class
@@ -42,13 +43,15 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$11.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$21.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$7.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$15.class
+com\ejemplo\app_ferkar\IGU\Principal$4.class
 com\ejemplo\app_ferkar\IGU\Principal.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$9.class
 com\ejemplo\app_ferkar\IGU\ActPedido$5.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$18.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$23.class
-com\ejemplo\app_ferkar\persistencia\NuevoPedido.class
 com\ejemplo\app_ferkar\IGU\ActPedido$9.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$27.class
+com\ejemplo\app_ferkar\persistencia\PedidoDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$12.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$6.class
 com\ejemplo\app_ferkar\IGU\ActPedido$2.class

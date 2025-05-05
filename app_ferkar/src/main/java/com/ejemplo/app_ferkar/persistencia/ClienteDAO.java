@@ -25,10 +25,29 @@ public class ClienteDAO {
            rs = ps.executeQuery();
            while(rs.next()){
                cliente.addItem(rs.getString("nombre_completo"));
-               
            }
         }catch(SQLException e){
            System.out.println(e.toString());
         }
     }
+    
+    public int ConsultarID(String cliente) {
+        int id = 0;
+        String sql = "SELECT id_cliente FROM db_clientes WHERE nombre_completo = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cliente);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                id = rs.getInt("id_cliente");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return id;
+    }
+
 }

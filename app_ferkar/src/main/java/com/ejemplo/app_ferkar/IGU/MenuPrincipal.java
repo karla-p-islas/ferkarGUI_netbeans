@@ -6,15 +6,20 @@ package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.IGU.ActPedido;
 import com.ejemplo.app_ferkar.persistencia.Cliente;
 import com.ejemplo.app_ferkar.persistencia.ClienteDAO;
+import com.ejemplo.app_ferkar.persistencia.DetallePedido;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventario;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventarioDAO;
+import com.ejemplo.app_ferkar.persistencia.Pedido;
+import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
 import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
 import com.ejemplo.app_ferkar.persistencia.TipoAro;
 import com.ejemplo.app_ferkar.persistencia.TipoAroDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -35,6 +40,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     SoldadorDAO idd = new SoldadorDAO();
     Cliente cl = new Cliente();
     ClienteDAO cld = new ClienteDAO();
+    Pedido pedido = new Pedido();
+    PedidoDAO pedidod = new PedidoDAO();
+    DetallePedido dv = new DetallePedido();
     DefaultTableModel modelo = new DefaultTableModel();
     int item;
     
@@ -69,6 +77,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         button_UpdateOrder = new javax.swing.JButton();
         jButton_EraseOrder = new javax.swing.JButton();
         label_PedidosActivos = new javax.swing.JLabel();
+        jButton_Detalles = new javax.swing.JButton();
         jPanel_NuevoPedido = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton_NP_Limpiar = new javax.swing.JButton();
@@ -76,7 +85,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_ResumenOrden = new javax.swing.JTable();
         jButton_NP_EliminarLinea = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jButton_TerminarOrden = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -226,17 +235,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Folio Pedido", "Cliente", "Pedido", "Cantidad", "Fecha Entrega", "Estado"
+                "Folio Pedido", "Cliente", "Cantidad", "Fecha Entrega", "Estado"
             }
         ));
         jScrollPane1.setViewportView(Tabla_PedidosActivos);
         if (Tabla_PedidosActivos.getColumnModel().getColumnCount() > 0) {
             Tabla_PedidosActivos.getColumnModel().getColumn(0).setPreferredWidth(30);
-            Tabla_PedidosActivos.getColumnModel().getColumn(1).setPreferredWidth(80);
-            Tabla_PedidosActivos.getColumnModel().getColumn(2).setPreferredWidth(150);
-            Tabla_PedidosActivos.getColumnModel().getColumn(3).setPreferredWidth(75);
+            Tabla_PedidosActivos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            Tabla_PedidosActivos.getColumnModel().getColumn(2).setPreferredWidth(75);
+            Tabla_PedidosActivos.getColumnModel().getColumn(3).setPreferredWidth(50);
             Tabla_PedidosActivos.getColumnModel().getColumn(4).setPreferredWidth(50);
-            Tabla_PedidosActivos.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         button_UpdateOrder.setFont(new java.awt.Font("Roboto Light", 1, 16)); // NOI18N
@@ -257,6 +265,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         label_PedidosActivos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_PedidosActivos.setText("Pedidos Activos");
 
+        jButton_Detalles.setFont(new java.awt.Font("Roboto Light", 1, 16)); // NOI18N
+        jButton_Detalles.setText("Detalles Orden");
+        jButton_Detalles.setContentAreaFilled(false);
+
         javax.swing.GroupLayout jPanel_PedidosActivosLayout = new javax.swing.GroupLayout(jPanel_PedidosActivos);
         jPanel_PedidosActivos.setLayout(jPanel_PedidosActivosLayout);
         jPanel_PedidosActivosLayout.setHorizontalGroup(
@@ -269,7 +281,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel_PedidosActivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(button_UpdateOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton_EraseOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButton_EraseOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton_Detalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel_PedidosActivosLayout.createSequentialGroup()
                         .addGap(325, 325, 325)
                         .addComponent(label_PedidosActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -284,8 +297,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel_PedidosActivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_PedidosActivosLayout.createSequentialGroup()
+                        .addComponent(jButton_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(button_UpdateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton_EraseOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -353,12 +368,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
-        jButton6.setText("Terminar Orden");
-        jButton6.setContentAreaFilled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton_TerminarOrden.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jButton_TerminarOrden.setText("Terminar Orden");
+        jButton_TerminarOrden.setContentAreaFilled(false);
+        jButton_TerminarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton_TerminarOrdenActionPerformed(evt);
             }
         });
 
@@ -518,10 +533,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jTextField_NumPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(31, 31, 31)
+                                .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -551,11 +566,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_NP_EliminarLinea, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_TerminarOrden, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_NP_Ingresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_NP_Limpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49))
@@ -588,7 +603,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton_NP_EliminarLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_TerminarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36))
         );
@@ -1437,7 +1452,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             TextField_NP_ClaveAro.setText("");
             jTextArea_NP_TipoAro.setText("");
             jTextField_NP_CantidadAros.setText("");
-            jFormattedText_NP_FechaEntrega.setText("");
             jCheckBox_Reforzado.setSelected(false);
             jCheckBox_Pintado.setSelected(false);
             jCheckBox_Galvanizado.setSelected(false);
@@ -1454,7 +1468,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextField_NP_ClaveAro.setText("");
         jTextArea_NP_TipoAro.setText("");
         jTextField_NP_CantidadAros.setText("");
-        jFormattedText_NP_FechaEntrega.setText("");
         jCheckBox_Reforzado.setSelected(false);
         jCheckBox_Pintado.setSelected(false);
         jCheckBox_Galvanizado.setSelected(false);
@@ -1622,9 +1635,48 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextField_NP_ClaveAro.requestFocus();
     }//GEN-LAST:event_jButton_NP_EliminarLineaActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jButton_TerminarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TerminarOrdenActionPerformed
+        try {
+            RegistrarVenta();
+            RegistrarDetalle();
+        } catch (ParseException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_TerminarOrdenActionPerformed
+
+    private void RegistrarVenta() throws ParseException{
+        String cliente = (String) jCBox_NP_cliente.getSelectedItem();
+        int id = cld.ConsultarID(cliente);
+        pedido.setNum_pedido(jTextField_NumPedido.getText());
+        pedido.setId_cliente(id);
+        pedido.setFecha(jFormattedText_NP_FechaEntrega.getText());
+        pedido.setEstado("Pedido");
+        pedidod.RegistrarPedido(pedido);
+    }
+    
+    private void RegistrarDetalle(){
+        if (Tabla_ResumenOrden.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay detalles para registrar.");
+            return;
+        }
+
+        for(int i = 0; i < Tabla_ResumenOrden.getRowCount(); i++){
+            String serial = (String) jTextField_NumPedido.getText() + "-" + i;
+            int clave = Integer.parseInt(Tabla_ResumenOrden.getValueAt(i, 0).toString());
+            String descripcion = Tabla_ResumenOrden.getValueAt(i, 1).toString();
+            int cantidad = Integer.parseInt(Tabla_ResumenOrden.getValueAt(i, 2).toString());
+            String tratoAdi = (String) Tabla_ResumenOrden.getValueAt(i, 3);
+
+            DetallePedido dv = new DetallePedido(); // Nuevo objeto cada vez
+            dv.setNum_serial(serial);
+            dv.setNum_pedido(pedido.getNum_pedido());
+            dv.setCodigo_aro(clave);
+            dv.setTratamiento_adicional(tratoAdi);
+            dv.setCantidad(cantidad);
+
+            pedidod.RegistroDetalle(dv);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1653,7 +1705,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton button_PedidosActivos;
     private javax.swing.JButton button_Salir;
     private javax.swing.JButton button_UpdateOrder;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton_Detalles;
     private javax.swing.JButton jButton_EraseOrder;
     private javax.swing.JButton jButton_NP_EliminarLinea;
     private javax.swing.JButton jButton_NP_Ingresar;
@@ -1661,6 +1713,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_P_Buscar;
     private javax.swing.JButton jButton_P_Limpiar;
     private javax.swing.JButton jButton_P_Regresar;
+    private javax.swing.JButton jButton_TerminarOrden;
     private javax.swing.JComboBox<String> jCBox_NP_cliente;
     private javax.swing.JCheckBox jCheckBox_Galvanizado;
     private javax.swing.JCheckBox jCheckBox_Pintado;
