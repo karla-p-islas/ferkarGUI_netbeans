@@ -1,5 +1,6 @@
 com\ejemplo\app_ferkar\IGU\ActPedido$6.class
 com\ejemplo\app_ferkar\persistencia\Pedido.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$29.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$8.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$1.class
 com\ejemplo\app_ferkar\persistencia\loginDAO.class
@@ -18,6 +19,7 @@ com\ejemplo\app_ferkar\persistencia\IngresoInventario.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$13.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$4.class
 com\ejemplo\app_ferkar\persistencia\IngresoInventarioDAO.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$28.class
 com\ejemplo\app_ferkar\persistencia\SoldadorDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$17.class
 com\ejemplo\app_ferkar\IGU\ActPedido$4.class

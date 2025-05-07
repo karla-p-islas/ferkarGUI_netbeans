@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -221,10 +221,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         button_HistPedidos.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_HistPedidos.setText("Historial Pedidos");
         button_HistPedidos.setContentAreaFilled(false);
+        button_HistPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_HistPedidosActionPerformed(evt);
+            }
+        });
 
         button_IngresoInventario.setFont(new java.awt.Font("Roboto Medium", 0, 15)); // NOI18N
         button_IngresoInventario.setText("Ingreso de Inventario");
         button_IngresoInventario.setContentAreaFilled(false);
+        button_IngresoInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_IngresoInventarioActionPerformed(evt);
+            }
+        });
 
         Pane.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -235,16 +245,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Folio Pedido", "Cliente", "Cantidad", "Fecha Entrega", "Estado"
+                "Folio Pedido", "Cliente", "Fecha Entrega", "Estado"
             }
         ));
+        Tabla_PedidosActivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla_PedidosActivosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabla_PedidosActivos);
         if (Tabla_PedidosActivos.getColumnModel().getColumnCount() > 0) {
             Tabla_PedidosActivos.getColumnModel().getColumn(0).setPreferredWidth(30);
             Tabla_PedidosActivos.getColumnModel().getColumn(1).setPreferredWidth(100);
-            Tabla_PedidosActivos.getColumnModel().getColumn(2).setPreferredWidth(75);
+            Tabla_PedidosActivos.getColumnModel().getColumn(2).setPreferredWidth(50);
             Tabla_PedidosActivos.getColumnModel().getColumn(3).setPreferredWidth(50);
-            Tabla_PedidosActivos.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
         button_UpdateOrder.setFont(new java.awt.Font("Roboto Light", 1, 16)); // NOI18N
@@ -268,6 +282,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton_Detalles.setFont(new java.awt.Font("Roboto Light", 1, 16)); // NOI18N
         jButton_Detalles.setText("Detalles Orden");
         jButton_Detalles.setContentAreaFilled(false);
+        jButton_Detalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_DetallesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_PedidosActivosLayout = new javax.swing.GroupLayout(jPanel_PedidosActivos);
         jPanel_PedidosActivos.setLayout(jPanel_PedidosActivosLayout);
@@ -390,7 +409,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Fecha de Pedido:");
+        jLabel3.setText("Fecha de Entrega:");
 
         jTextField_NP_CantidadAros.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
@@ -470,6 +489,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jCBox_NP_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
         jCBox_NP_cliente.setToolTipText("");
 
         jFormattedText_NP_FechaEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
@@ -1371,7 +1391,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     
     private void button_PedidosActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_PedidosActivosActionPerformed
-        
+        Pane.setSelectedIndex(0);
+        modelo.setRowCount(0); //limpieza de tabla
+        ListarPedidos();
     }//GEN-LAST:event_button_PedidosActivosActionPerformed
 
     private void button_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SalirActionPerformed
@@ -1380,10 +1402,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void button_InventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_InventarioActionPerformed
         // TODO add your handling code here:
+        Pane.setSelectedIndex(4);
     }//GEN-LAST:event_button_InventarioActionPerformed
 
     private void button_NuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_NuevoPedidoActionPerformed
         // TODO add your handling code here:
+        Pane.setSelectedIndex(1);
     }//GEN-LAST:event_button_NuevoPedidoActionPerformed
 
     private void jButton_P_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_RegresarActionPerformed
@@ -1639,16 +1663,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
         try {
             RegistrarVenta();
             RegistrarDetalle();
+            DefaultTableModel modelo = (DefaultTableModel) Tabla_ResumenOrden.getModel();
+            modelo.setRowCount(0);
+            jFormattedText_NP_FechaEntrega.setText("");
+            jTextField_NumPedido.setText("");
+            jCBox_NP_cliente.setSelectedIndex(0);
         } catch (ParseException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_TerminarOrdenActionPerformed
 
+    private void button_HistPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_HistPedidosActionPerformed
+         // TODO add your handling code here:
+        Pane.setSelectedIndex(2);
+    }//GEN-LAST:event_button_HistPedidosActionPerformed
+
+    private void button_IngresoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_IngresoInventarioActionPerformed
+        // TODO add your handling code here:
+        Pane.setSelectedIndex(3);
+    }//GEN-LAST:event_button_IngresoInventarioActionPerformed
+
+    private void jButton_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DetallesActionPerformed
+        
+        
+    }//GEN-LAST:event_jButton_DetallesActionPerformed
+
+    private void Tabla_PedidosActivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_PedidosActivosMouseClicked
+        int fila = Tabla_PedidosActivos.rowAtPoint(evt.getPoint());
+        String num_pedido  = Tabla_PedidosActivos.getValueAt(fila, 0).toString();
+    }//GEN-LAST:event_Tabla_PedidosActivosMouseClicked
+
     private void RegistrarVenta() throws ParseException{
         String cliente = (String) jCBox_NP_cliente.getSelectedItem();
-        int id = cld.ConsultarID(cliente);
         pedido.setNum_pedido(jTextField_NumPedido.getText());
-        pedido.setId_cliente(id);
+        pedido.setCliente(cliente);
         pedido.setFecha(jFormattedText_NP_FechaEntrega.getText());
         pedido.setEstado("Pedido");
         pedidod.RegistrarPedido(pedido);
@@ -1676,6 +1724,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             pedidod.RegistroDetalle(dv);
         }
+    }
+    
+    private void ListarPedidos(){
+        List<Pedido> ListarPedido  = pedidod.ListarPedidos();
+        modelo = (DefaultTableModel) Tabla_PedidosActivos.getModel();
+        Object[] ob = new Object[4];
+        for (int i = 0; i < ListarPedido.size(); i++){
+            ob[0] = ListarPedido.get(i).getNum_pedido();
+            ob[1] = ListarPedido.get(i).getCliente();
+            ob[2] = ListarPedido.get(i).getFecha();
+            ob[3] = ListarPedido.get(i).getEstado();
+            modelo.addRow(ob);
+        }
+        Tabla_PedidosActivos.setModel(modelo);
     }
 
 

@@ -1,13 +1,16 @@
 
 package com.ejemplo.app_ferkar.persistencia;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  *
@@ -17,9 +20,10 @@ public class PedidoDAO {
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
+    ResultSet rs;
     
     public boolean RegistrarPedido(Pedido pro) throws ParseException{
-        String sql = "INSERT INTO pedido(num_pedido, fecha, id_cliente, estado) VALUES(?,?,?,?) ";
+        String sql = "INSERT INTO pedido(num_pedido, fecha, cliente, estado) VALUES(?,?,?,?) ";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -31,7 +35,7 @@ public class PedidoDAO {
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             ps.setDate(2, sqlDate);
             
-            ps.setInt(3, pro.getId_cliente());
+            ps.setString(3, pro.getCliente());
             ps.setString(4, "Pedido");
             
             ResultSet executeQuery = ps.executeQuery();
@@ -71,6 +75,27 @@ public class PedidoDAO {
             }
         }
         return rowsAffected;
+    }
+    
+    public List ListarPedidos(){
+        List<Pedido> ListaPed = new ArrayList();
+        String sql = "SELECT * FROM pedido";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Pedido ped = new Pedido();
+                ped.setNum_pedido(rs.getString("num_pedido"));
+                ped.setCliente(rs.getString("cliente"));
+                ped.setFecha(rs.getString("fecha"));
+                ped.setEstado(rs.getString("estado"));
+                ListaPed.add(ped);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        return ListaPed;
     }
     
 }

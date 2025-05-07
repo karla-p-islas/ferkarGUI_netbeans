@@ -49,5 +49,24 @@ public class ClienteDAO {
         }
         return id;
     }
+    
+    public String ConsultarNombre(int id){
+        String nombre = "";
+        String sql = "SELECT nombre_completo FROM db_clientes WHERE id_cliente = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                nombre = rs.getString("nombre_completo");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return nombre;
+    }
 
 }
