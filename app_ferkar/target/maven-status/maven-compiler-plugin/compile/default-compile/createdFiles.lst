@@ -1,6 +1,7 @@
 com\ejemplo\app_ferkar\IGU\ActPedido$6.class
 com\ejemplo\app_ferkar\persistencia\Pedido.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$29.class
+com\ejemplo\app_ferkar\IGU\Nuevos.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$8.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$1.class
 com\ejemplo\app_ferkar\persistencia\loginDAO.class
@@ -13,6 +14,7 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$19.class
 com\ejemplo\app_ferkar\persistencia\DetallePedido.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$16.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$26.class
+com\ejemplo\app_ferkar\IGU\Nuevos$1.class
 com\ejemplo\app_ferkar\IGU\ActPedido$3.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$2.class
 com\ejemplo\app_ferkar\persistencia\IngresoInventario.class
@@ -20,11 +22,14 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$13.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$4.class
 com\ejemplo\app_ferkar\persistencia\IngresoInventarioDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$28.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$33.class
 com\ejemplo\app_ferkar\persistencia\SoldadorDAO.class
+com\ejemplo\app_ferkar\IGU\Nuevos$2.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$17.class
 com\ejemplo\app_ferkar\IGU\ActPedido$4.class
 com\ejemplo\app_ferkar\IGU\ActPedido.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$22.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$30.class
 com\ejemplo\app_ferkar\IGU\Principal$2.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$10.class
 com\ejemplo\app_ferkar\IGU\ActPedido$7.class
@@ -35,6 +40,7 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$14.class
 com\ejemplo\app_ferkar\persistencia\TipoAroDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal.class
 com\ejemplo\app_ferkar\App_ferkar.class
+com\ejemplo\app_ferkar\IGU\Nuevos$3.class
 com\ejemplo\app_ferkar\IGU\ActPedido$1.class
 com\ejemplo\app_ferkar\persistencia\login.class
 com\ejemplo\app_ferkar\IGU\Principal$1.class
@@ -43,6 +49,7 @@ com\ejemplo\app_ferkar\persistencia\TipoAro.class
 com\ejemplo\app_ferkar\persistencia\Cliente.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$11.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$21.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$31.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$7.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$15.class
 com\ejemplo\app_ferkar\IGU\Principal$4.class
@@ -58,5 +65,7 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$12.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$6.class
 com\ejemplo\app_ferkar\IGU\ActPedido$2.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$20.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$32.class
+com\ejemplo\app_ferkar\IGU\ActPedido$12.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$3.class
 com\ejemplo\app_ferkar\persistencia\Soldador.class

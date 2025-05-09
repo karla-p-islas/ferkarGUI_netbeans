@@ -23,7 +23,7 @@ public class PedidoDAO {
     ResultSet rs;
     
     public boolean RegistrarPedido(Pedido pro) throws ParseException{
-        String sql = "INSERT INTO pedido(num_pedido, fecha, cliente, estado) VALUES(?,?,?,?) ";
+        String sql = "INSERT INTO pedido(num_pedido, fecha, cliente, estado,solicitante) VALUES(?,?,?,?,?) ";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -37,6 +37,7 @@ public class PedidoDAO {
             
             ps.setString(3, pro.getCliente());
             ps.setString(4, "Pedido");
+            ps.setString(5, pro.getSolicitante());
             
             ResultSet executeQuery = ps.executeQuery();
             
@@ -60,10 +61,10 @@ public class PedidoDAO {
             ps = con.prepareStatement(sql);
             ps.setString(1, DP.getNum_serial());
             ps.setString(2, DP.getNum_pedido());
-            ps.setInt(3, DP.getCodigo_aro());
+            ps.setString(3, DP.getCodigo_aro());
             ps.setString(4, DP.getTratamiento_adicional());
             ps.setInt(5, DP.getCantidad());
-            
+                
             rowsAffected = ps.executeUpdate();
         } catch(SQLException e){
             System.out.println(e.toString());
@@ -79,7 +80,7 @@ public class PedidoDAO {
     
     public List ListarPedidos(){
         List<Pedido> ListaPed = new ArrayList();
-        String sql = "SELECT * FROM pedido";
+        String sql = "SELECT * FROM pedido WHERE estado != 'Entregado'";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -97,5 +98,9 @@ public class PedidoDAO {
         }
         return ListaPed;
     }
+    
+    /*public boolean ModificarPedido(Pedido pro){
+        String sql = "UPDATE pedido ";
+    }*/
     
 }

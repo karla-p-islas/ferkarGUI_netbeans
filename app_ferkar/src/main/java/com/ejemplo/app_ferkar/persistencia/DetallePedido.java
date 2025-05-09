@@ -8,14 +8,14 @@ package com.ejemplo.app_ferkar.persistencia;
 public class DetallePedido {
     private String num_serial;
     private String num_pedido;
-    private int codigo_aro;
+    private String codigo_aro;
     private String tratamiento_adicional;
     private int cantidad;
 
     public DetallePedido() {
     }
 
-    public DetallePedido(String num_serial, String num_pedido, int codigo_aro, String tratamiento_adicional, int cantidad) {
+    public DetallePedido(String num_serial, String num_pedido, String codigo_aro, String tratamiento_adicional, int cantidad) {
         this.num_serial = num_serial;
         this.num_pedido = num_pedido;
         this.codigo_aro = codigo_aro;
@@ -39,11 +39,11 @@ public class DetallePedido {
         this.num_pedido = num_pedido;
     }
 
-    public int getCodigo_aro() {
+    public String getCodigo_aro() {
         return codigo_aro;
     }
 
-    public void setCodigo_aro(int codigo_aro) {
+    public void setCodigo_aro(String codigo_aro) {
         this.codigo_aro = codigo_aro;
     }
 

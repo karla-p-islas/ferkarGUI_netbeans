@@ -1,14 +1,19 @@
 package com.ejemplo.app_ferkar.IGU;
 
+import com.ejemplo.app_ferkar.persistencia.Soldador;
+import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kpaor
  */
 public class ActPedido extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ActPedido
-     */
+    Soldador id = new Soldador();
+    SoldadorDAO idd = new SoldadorDAO();
+    
     public ActPedido() {
         initComponents();
     }
@@ -58,8 +63,9 @@ public class ActPedido extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField_Factura = new javax.swing.JTextField();
         label_IDConductor1 = new javax.swing.JLabel();
+        jTextField_nombreConductor = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
         setPreferredSize(new java.awt.Dimension(1050, 800));
 
@@ -67,7 +73,7 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_title.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
-        label_title.setText("Actualización de Pedido");
+        label_title.setText("Orden de Carga");
         jPanel1.add(label_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, -1, 37));
 
         label_Cliente.setBackground(new java.awt.Color(255, 255, 255));
@@ -177,6 +183,11 @@ public class ActPedido extends javax.swing.JFrame {
                 textF_IDConductorActionPerformed(evt);
             }
         });
+        textF_IDConductor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textF_IDConductorKeyPressed(evt);
+            }
+        });
         jPanel1.add(textF_IDConductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 60, 30));
 
         label_Transporte.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -184,7 +195,7 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.add(label_Transporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 240, 140, 30));
 
         comboBox_transporte.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        comboBox_transporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Camioneta Grande", "Camioneta Pequeña", "Prius", "Yaris" }));
+        comboBox_transporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "F-2015", "F-2020", "FK-001", "Autos", "Externos" }));
         comboBox_transporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox_transporteActionPerformed(evt);
@@ -268,6 +279,10 @@ public class ActPedido extends javax.swing.JFrame {
         label_IDConductor1.setText("ID Conductor:");
         jPanel1.add(label_IDConductor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, 30));
 
+        jTextField_nombreConductor.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jTextField_nombreConductor.setBorder(null);
+        jPanel1.add(jTextField_nombreConductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 260, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,6 +322,7 @@ public class ActPedido extends javax.swing.JFrame {
 
     private void button_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AtrasActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_button_AtrasActionPerformed
 
     private void comboBox_transporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_transporteActionPerformed
@@ -328,6 +344,29 @@ public class ActPedido extends javax.swing.JFrame {
     private void textF_IDConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textF_IDConductorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textF_IDConductorActionPerformed
+
+    private void textF_IDConductorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textF_IDConductorKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+             if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if (!"".equals(textF_IDConductor.getText())){
+                String id_s = textF_IDConductor.getText();
+                id = idd.BuscarPro(id_s);
+                if (id.getId_soldador() != 0){
+                    jTextField_nombreConductor.setText(""+id.getNombre_completo());
+                    
+                }else{
+                    textF_IDConductor.setText("");
+                    jTextField_nombreConductor.setText("");
+                    textF_IDConductor.requestFocus();
+                    JOptionPane.showMessageDialog(null, "Favor de revisar el id");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingresar un id (1-11)");
+                textF_IDConductor.requestFocus();
+            }
+        }
+        }
+    }//GEN-LAST:event_textF_IDConductorKeyPressed
 
 
 
@@ -351,6 +390,7 @@ public class ActPedido extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField_Factura;
     private javax.swing.JTextField jTextField_Folio;
+    private javax.swing.JTextField jTextField_nombreConductor;
     private javax.swing.JLabel label_Cliente;
     private javax.swing.JLabel label_IDConductor;
     private javax.swing.JLabel label_IDConductor1;

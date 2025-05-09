@@ -18,13 +18,13 @@ public class ClienteDAO {
     ResultSet rs;
     
     public void ConsultarCliente(JComboBox cliente){
-        String sql = "SELECT nombre_completo FROM db_clientes";
+        String sql = "SELECT nombre FROM db_clientes";
         try{
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
            while(rs.next()){
-               cliente.addItem(rs.getString("nombre_completo"));
+               cliente.addItem(rs.getString("nombre"));
            }
         }catch(SQLException e){
            System.out.println(e.toString());

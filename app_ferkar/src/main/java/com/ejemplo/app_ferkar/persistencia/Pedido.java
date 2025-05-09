@@ -10,15 +10,17 @@ public class Pedido {
     private String fecha ;
     private String cliente ;
     private String estado;
+    private String solicitante;
 
     public Pedido() {
     }
 
-    public Pedido(String num_pedido, String fecha, String cliente, String estado) {
+    public Pedido(String num_pedido, String fecha, String cliente, String estado, String solicitante) {
         this.num_pedido = num_pedido;
         this.fecha = fecha;
         this.cliente = cliente;
         this.estado = estado;
+        this.solicitante = solicitante;
     }
 
     public String getNum_pedido() {
@@ -51,6 +53,14 @@ public class Pedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getSolicitante() {
+        return solicitante;
+    }
+
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
     }
     
 }
