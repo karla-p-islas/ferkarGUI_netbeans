@@ -31,6 +31,7 @@ com\ejemplo\app_ferkar\IGU\Nuevos$10.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$28.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$33.class
 com\ejemplo\app_ferkar\persistencia\SoldadorDAO.class
+com\ejemplo\app_ferkar\IGU\Nuevos$25.class
 com\ejemplo\app_ferkar\IGU\Nuevos$2.class
 com\ejemplo\app_ferkar\IGU\Nuevos$8.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$17.class
@@ -41,12 +42,15 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$30.class
 com\ejemplo\app_ferkar\IGU\Principal$2.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$10.class
 com\ejemplo\app_ferkar\IGU\Nuevos$14.class
+com\ejemplo\app_ferkar\IGU\Nuevos$22.class
 com\ejemplo\app_ferkar\IGU\ActPedido$7.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$25.class
 com\ejemplo\app_ferkar\persistencia\ClienteDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$24.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$14.class
+com\ejemplo\app_ferkar\IGU\Nuevos$26.class
 com\ejemplo\app_ferkar\persistencia\TipoAroDAO.class
+com\ejemplo\app_ferkar\IGU\MenuPrincipal$34.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal.class
 com\ejemplo\app_ferkar\IGU\Nuevos$16.class
 com\ejemplo\app_ferkar\App_ferkar.class
@@ -56,6 +60,7 @@ com\ejemplo\app_ferkar\IGU\Nuevos$7.class
 com\ejemplo\app_ferkar\persistencia\login.class
 com\ejemplo\app_ferkar\IGU\Principal$1.class
 com\ejemplo\app_ferkar\IGU\ActPedido$8.class
+com\ejemplo\app_ferkar\IGU\Nuevos$23.class
 com\ejemplo\app_ferkar\persistencia\TipoAro.class
 com\ejemplo\app_ferkar\IGU\Nuevos$13.class
 com\ejemplo\app_ferkar\persistencia\Cliente.class
@@ -63,6 +68,7 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$11.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$21.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$31.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$7.class
+com\ejemplo\app_ferkar\IGU\Nuevos$27.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$15.class
 com\ejemplo\app_ferkar\IGU\Nuevos$20.class
 com\ejemplo\app_ferkar\IGU\Nuevos$12.class
@@ -83,6 +89,7 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$12.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$6.class
 com\ejemplo\app_ferkar\IGU\ActPedido$2.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$20.class
+com\ejemplo\app_ferkar\IGU\Nuevos$24.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$32.class
 com\ejemplo\app_ferkar\IGU\ActPedido$12.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$3.class

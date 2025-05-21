@@ -110,7 +110,7 @@ public class TipoAroDAO {
     }
     
     public boolean ModificarAro(TipoAro aro){
-        String sql = "UPDATE db_aros SET medida = ?,calibre = ?, ancho = ?, descripcion_esp = ?, descripcion_gen = ? WHERE id = ?";
+        String sql = "UPDATE db_aros SET medida = ?,calibre = ?, ancho = ?, descripcion_esp = ?, descripcion_gen = ? WHERE codigo = ?";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class TipoAroDAO {
             ps.setInt(3, aro.getAncho());
             ps.setString(4,aro.getDescripcion_esp());
             ps.setString(5, aro.getDescripcion_gen());
-            ps.setString(6, String.format("%04d", aro.getCodigo_aro()));
+            ps.setString(6, String.format("%04d",aro.getCodigo_aro()));
             ps.execute();
             return true;
         }catch(SQLException e){

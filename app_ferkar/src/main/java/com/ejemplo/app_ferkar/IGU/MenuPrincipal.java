@@ -887,6 +887,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel18.setText("ID Soldador:");
 
+        jText_II_IDSoldador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jText_II_IDSoldadorKeyPressed(evt);
+            }
+        });
+
         jLabel19.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel19.setText("Soldador:");
 
@@ -1724,6 +1730,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         news.setLocationRelativeTo(null);
         
     }//GEN-LAST:event_button_NuevosActionPerformed
+
+    private void jText_II_IDSoldadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_II_IDSoldadorKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if (!"".equals(jText_II_IDSoldador.getText())){
+                String id_s = jText_II_IDSoldador.getText();
+                id = idd.BuscarPro(id_s);
+                if (id.getId_soldador() != 0){
+                    jText_II_NombreSoldador.setText(""+id.getNombre_completo());
+                    jText_II_Cantidad.requestFocus();
+                }else{
+                    jText_II_IDSoldador.setText("");
+                    jText_II_NombreSoldador.setText("");
+                    jText_II_IDSoldador.requestFocus();
+                    JOptionPane.showMessageDialog(null, "Favor de revisar el id");
+                }
+            }
+        }
+    }//GEN-LAST:event_jText_II_IDSoldadorKeyPressed
 
     private void RegistrarVenta() throws ParseException{
         String cliente = (String) jCBox_NP_cliente.getSelectedItem();
