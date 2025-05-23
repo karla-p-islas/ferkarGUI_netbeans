@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 
 /**
  *
@@ -39,7 +38,7 @@ public class PedidoDAO {
             ps.setString(4, "Pedido");
             ps.setString(5, pro.getSolicitante());
             
-            ResultSet executeQuery = ps.executeQuery();
+            ps.executeQuery();
             
         }catch(SQLException e){
             System.out.println(e);
@@ -99,8 +98,19 @@ public class PedidoDAO {
         return ListaPed;
     }
     
-    /*public boolean ModificarPedido(Pedido pro){
-        String sql = "UPDATE pedido ";
-    }*/
+    public boolean ModificarPedido(Pedido pro){
+        String sql = "UPDATE pedido SET estado = ? WHERE num_pedido = ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, pro.getEstado());
+            ps.setString(2, pro.getNum_pedido());
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
     
 }

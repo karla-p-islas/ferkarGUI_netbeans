@@ -1,5 +1,6 @@
 package com.ejemplo.app_ferkar.IGU;
 
+import com.ejemplo.app_ferkar.persistencia.Pedido;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
 import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
 import java.awt.event.KeyEvent;
@@ -16,6 +17,31 @@ public class ActPedido extends javax.swing.JFrame {
     
     public ActPedido() {
         initComponents();
+    }
+    
+    public void cargarDatos(Pedido pd){
+        textF_client.setText(pd.getCliente());
+        textF_folio.setText(pd.getNum_pedido());
+        switch (pd.getEstado()){
+            case "Pedido":
+                comboBox_Estado.setSelectedIndex(0);
+                break;
+            case "En producción":
+                comboBox_Estado.setSelectedIndex(1);
+                break;
+            case "Cargado":
+                comboBox_Estado.setSelectedIndex(2);
+                break;
+            case "Enviado":
+                comboBox_Estado.setSelectedIndex(1);
+                break;
+            case "Envio incompleto":
+                comboBox_Estado.setSelectedIndex(1);
+                break;
+            case "Entregado":
+                comboBox_Estado.setSelectedIndex(1);
+                break;
+        }
     }
 
     /**
@@ -68,6 +94,7 @@ public class ActPedido extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
         setPreferredSize(new java.awt.Dimension(1050, 800));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -158,7 +185,7 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.add(label_pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 190, -1, 30));
 
         comboBox_Estado.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        comboBox_Estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedido", "En producción", "Cargado", "Enviado", "Envio incompleto", "Entregado" }));
+        comboBox_Estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedido", "En producción", "Cargado", "Enviado", "Envio incompleto", "Entregado", "Cancelado" }));
         comboBox_Estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox_EstadoActionPerformed(evt);

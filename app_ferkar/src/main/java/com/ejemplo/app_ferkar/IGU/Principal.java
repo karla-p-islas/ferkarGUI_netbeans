@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
  * @author karla_rmz_islas
  */
 public class Principal extends javax.swing.JFrame {
-
+    
+    int xMouse, yMouse;
     login lg =new login();
     loginDAO login = new loginDAO();
     /**
@@ -56,9 +57,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         field_pass = new javax.swing.JPasswordField();
         separador_password1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 570));
+        setUndecorated(true);
+        setResizable(false);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setMinimumSize(new java.awt.Dimension(800, 500));
@@ -66,12 +72,12 @@ public class Principal extends javax.swing.JFrame {
 
         label_title.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
         label_title.setText("Sistema de Administración ");
-        background.add(label_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, 37));
+        background.add(label_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, 37));
 
         label_user.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         label_user.setText("Usuario:");
         label_user.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        background.add(label_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 80, 20));
+        background.add(label_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 80, 20));
 
         field_user.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         field_user.setToolTipText("");
@@ -82,21 +88,22 @@ public class Principal extends javax.swing.JFrame {
                 field_userActionPerformed(evt);
             }
         });
-        background.add(field_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 320, -1));
+        background.add(field_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 320, -1));
 
         label_password.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         label_password.setText("Contraseña:");
         label_password.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        background.add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 110, 20));
+        background.add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 110, 20));
 
         separador_password.setForeground(new java.awt.Color(0, 0, 0));
         separador_password.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        background.add(separador_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 300, 20));
+        background.add(separador_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, 320, 20));
 
         button_entrar.setBackground(new java.awt.Color(204, 204, 204));
         button_entrar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         button_entrar.setText("Entrar");
         button_entrar.setToolTipText("");
+        button_entrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         button_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_entrarActionPerformed(evt);
@@ -107,22 +114,79 @@ public class Principal extends javax.swing.JFrame {
                 button_entrarKeyPressed(evt);
             }
         });
-        background.add(button_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 140, 50));
+        background.add(button_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 140, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_400x200.jpg")); // NOI18N
-        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 420, 230));
+        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 420, 230));
 
+        field_pass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         field_pass.setBorder(null);
         field_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 field_passActionPerformed(evt);
             }
         });
-        background.add(field_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 432, 300, 30));
+        background.add(field_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 300, -1));
 
-        separador_password1.setForeground(new java.awt.Color(51, 51, 51));
+        separador_password1.setForeground(new java.awt.Color(0, 0, 0));
         separador_password1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        background.add(separador_password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, 300, 20));
+        background.add(separador_password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 320, 20));
+
+        jPanel1.setBackground(new java.awt.Color(255, 0, 0));
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("X");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 50, 40));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel2MouseDragged(evt);
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel2MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        background.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -156,7 +220,23 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_entrarKeyPressed
 
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        // TODO add your handling code here:
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
 
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+        // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
@@ -164,6 +244,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPasswordField field_pass;
     private javax.swing.JTextField field_user;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel label_password;
     private javax.swing.JLabel label_title;
     private javax.swing.JLabel label_user;
