@@ -78,7 +78,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_PedidosActivos = new javax.swing.JTable();
         button_UpdateOrder = new javax.swing.JButton();
-        jButton_EraseOrder = new javax.swing.JButton();
         label_PedidosActivos = new javax.swing.JLabel();
         jButton_Detalles = new javax.swing.JButton();
         jPanel_NuevoPedido = new javax.swing.JPanel();
@@ -290,10 +289,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton_EraseOrder.setFont(new java.awt.Font("Roboto Light", 1, 16)); // NOI18N
-        jButton_EraseOrder.setText("Borrar Orden");
-        jButton_EraseOrder.setContentAreaFilled(false);
-
         label_PedidosActivos.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
         label_PedidosActivos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_PedidosActivos.setText("Pedidos Activos");
@@ -319,7 +314,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel_PedidosActivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(button_UpdateOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton_EraseOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel_PedidosActivosLayout.createSequentialGroup()
                         .addGap(373, 373, 373)
@@ -329,19 +323,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel_PedidosActivosLayout.setVerticalGroup(
             jPanel_PedidosActivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_PedidosActivosLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(label_PedidosActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel_PedidosActivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_PedidosActivosLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(label_PedidosActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_PedidosActivosLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
                         .addComponent(jButton_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(button_UpdateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_EraseOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(52, 52, 52)
+                        .addComponent(button_UpdateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -561,9 +551,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFormattedText_NP_FechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
@@ -627,9 +615,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -640,10 +628,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_NP_EliminarLinea)
                             .addComponent(jButton_TerminarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -819,15 +805,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addGap(26, 26, 26))
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_P_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_P_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jButton_P_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jButton_P_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(343, 343, 343)
@@ -1596,9 +1580,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_NP_LimpiarActionPerformed
 
     private void button_UpdateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_UpdateOrderActionPerformed
-        ActPedido update = new ActPedido();
-        update.setVisible(true);
-        update.setLocationRelativeTo(null);
+        int fila = Tabla_PedidosActivos.getSelectedRow();
+        
+        if (fila!= -1){
+            Pedido pd = new Pedido();
+            pd.setNum_pedido((String) Tabla_PedidosActivos.getValueAt(fila, 0));
+            pd.setCliente((String) Tabla_PedidosActivos.getValueAt(fila, 1));
+            pd.setFecha((String) Tabla_PedidosActivos.getValueAt(fila, 2));
+            pd.setEstado((String) Tabla_PedidosActivos.getValueAt(fila, 3));
+            
+            ActPedido update = new ActPedido(pd);
+            update.setVisible(true);
+            update.setLocationRelativeTo(null);
+        }else{
+           JOptionPane.showMessageDialog(null, "Seleccione un pedido primero");
+        }               
     }//GEN-LAST:event_button_UpdateOrderActionPerformed
 
     private void jText_II_TipoAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_II_TipoAroActionPerformed
@@ -1918,7 +1914,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton button_Salir;
     private javax.swing.JButton button_UpdateOrder;
     private javax.swing.JButton jButton_Detalles;
-    private javax.swing.JButton jButton_EraseOrder;
     private javax.swing.JButton jButton_NP_EliminarLinea;
     private javax.swing.JButton jButton_NP_Ingresar;
     private javax.swing.JButton jButton_NP_Limpiar;

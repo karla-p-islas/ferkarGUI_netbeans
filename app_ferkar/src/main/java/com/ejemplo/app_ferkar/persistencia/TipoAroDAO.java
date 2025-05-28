@@ -46,7 +46,7 @@ public class TipoAroDAO {
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1,aro.getCodigo_aro());
+            ps.setString(1,String.format("%04d",aro.getCodigo_aro()));
             ps.setString(2, aro.getMedida());
             ps.setInt(3, aro.getCalibre());
             ps.setInt(4, aro.getAncho());

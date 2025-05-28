@@ -76,9 +76,11 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$22.class
 com\ejemplo\app_ferkar\IGU\Principal$2.class
 com\ejemplo\app_ferkar\IGU\Nuevos$14.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$25.class
+com\ejemplo\app_ferkar\persistencia\CargaDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$14.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal.class
 com\ejemplo\app_ferkar\IGU\Nuevos$3.class
+com\ejemplo\app_ferkar\persistencia\Carga.class
 com\ejemplo\app_ferkar\IGU\Principal$1.class
 com\ejemplo\app_ferkar\IGU\Nuevos$23.class
 com\ejemplo\app_ferkar\IGU\Nuevos$13.class
@@ -93,6 +95,7 @@ com\ejemplo\app_ferkar\IGU\Nuevos$4.class
 com\ejemplo\app_ferkar\IGU\Principal.class
 com\ejemplo\app_ferkar\IGU\Nuevos$19.class
 com\ejemplo\app_ferkar\IGU\ActPedido$5.class
+com\ejemplo\app_ferkar\persistencia\DetalleCarga.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$27.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$6.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$20.class

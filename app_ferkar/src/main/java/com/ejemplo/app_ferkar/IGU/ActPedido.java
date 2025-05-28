@@ -1,9 +1,15 @@
 package com.ejemplo.app_ferkar.IGU;
 
+import com.ejemplo.app_ferkar.persistencia.Carga;
+import com.ejemplo.app_ferkar.persistencia.CargaDAO;
 import com.ejemplo.app_ferkar.persistencia.Pedido;
+import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
 import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,36 +20,51 @@ public class ActPedido extends javax.swing.JFrame {
 
     Soldador id = new Soldador();
     SoldadorDAO idd = new SoldadorDAO();
+    Pedido pe = new Pedido();
+    PedidoDAO ped = new PedidoDAO();
+    Carga cg = new Carga();
+    CargaDAO cgd = new CargaDAO();
     
-    public ActPedido() {
+    public ActPedido(Pedido pd) {
         initComponents();
-    }
-    
-    public void cargarDatos(Pedido pd){
         textF_client.setText(pd.getCliente());
         textF_folio.setText(pd.getNum_pedido());
         switch (pd.getEstado()){
-            case "Pedido":
-                comboBox_Estado.setSelectedIndex(0);
-                break;
-            case "En producción":
-                comboBox_Estado.setSelectedIndex(1);
-                break;
-            case "Cargado":
-                comboBox_Estado.setSelectedIndex(2);
-                break;
-            case "Enviado":
-                comboBox_Estado.setSelectedIndex(1);
-                break;
-            case "Envio incompleto":
-                comboBox_Estado.setSelectedIndex(1);
-                break;
-            case "Entregado":
-                comboBox_Estado.setSelectedIndex(1);
-                break;
+            case "Pedido" -> comboBox_Estado.setSelectedIndex(0);
+            case "En producción" -> comboBox_Estado.setSelectedIndex(1);
+            case "Cargado" -> comboBox_Estado.setSelectedIndex(2);
+            case "Enviado" -> comboBox_Estado.setSelectedIndex(3);
+            case "Envio incompleto" -> comboBox_Estado.setSelectedIndex(4);
+            case "Entregado" -> comboBox_Estado.setSelectedIndex(5);
+            case "Cancelado" -> comboBox_Estado.setSelectedIndex(6);
         }
     }
-
+    
+    private void ActEstado(String folio, String estado){
+        pe.setNum_pedido(folio);
+        pe.setEstado(estado);
+        ped.ModificarPedido(pe);
+    }
+    
+    private void InfoCarga() throws ParseException{
+        String folio_orden = textField_OrdenCarga.getText();
+        String num_pedido = textF_folio.getText();
+        String fecha = textF_dateDelivery.getText();
+        String modo_p = (String) jComboBox_ModoPago.getSelectedItem();
+        String num_fact = jTextField_Factura.getText();
+        int id_cond = Integer.parseInt(textF_IDConductor.getText());
+        String transporte = (String) comboBox_transporte.getSelectedItem();
+        cg.setFolio_orden(folio_orden);
+        cg.setNum_pedido(num_pedido);
+        cg.setFecha_en(fecha);
+        cg.setModo_pago(modo_p);
+        cg.setNum_factura(num_fact);
+        cg.setId_conductor(id_cond);
+        cg.setTransporte(transporte);
+        
+        cgd.InfoCarga(cg);
+    }
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +80,6 @@ public class ActPedido extends javax.swing.JFrame {
         label_date = new javax.swing.JLabel();
         label_cantidad = new javax.swing.JLabel();
         textF_client = new javax.swing.JTextField();
-        textF_dateDelivery = new javax.swing.JTextField();
         label_folio = new javax.swing.JLabel();
         textF_folio = new javax.swing.JTextField();
         textF_Cantidad = new javax.swing.JTextField();
@@ -90,6 +110,7 @@ public class ActPedido extends javax.swing.JFrame {
         jTextField_Factura = new javax.swing.JTextField();
         label_IDConductor1 = new javax.swing.JLabel();
         jTextField_nombreConductor = new javax.swing.JTextField();
+        textF_dateDelivery = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
@@ -125,9 +146,6 @@ public class ActPedido extends javax.swing.JFrame {
             }
         });
         jPanel1.add(textF_client, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 260, 30));
-
-        textF_dateDelivery.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(textF_dateDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, 30));
 
         label_folio.setBackground(new java.awt.Color(255, 255, 255));
         label_folio.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -184,7 +202,7 @@ public class ActPedido extends javax.swing.JFrame {
         label_pedido.setText("Estado: ");
         jPanel1.add(label_pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 190, -1, 30));
 
-        comboBox_Estado.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        comboBox_Estado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         comboBox_Estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedido", "En producción", "Cargado", "Enviado", "Envio incompleto", "Entregado", "Cancelado" }));
         comboBox_Estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,9 +324,12 @@ public class ActPedido extends javax.swing.JFrame {
         label_IDConductor1.setText("ID Conductor:");
         jPanel1.add(label_IDConductor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, 30));
 
-        jTextField_nombreConductor.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jTextField_nombreConductor.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTextField_nombreConductor.setBorder(null);
         jPanel1.add(jTextField_nombreConductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 260, 30));
+
+        textF_dateDelivery.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        jPanel1.add(textF_dateDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -345,6 +366,62 @@ public class ActPedido extends javax.swing.JFrame {
 
     private void button_FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_FinishActionPerformed
         // TODO add your handling code here:
+        String folio = textF_folio.getText();
+        boolean fin = false;
+        
+        String estado = (String) comboBox_Estado.getSelectedItem();
+        switch (estado){
+            case "Pedido":
+                JOptionPane.showMessageDialog(null, "Favor de Actualizar el estado del pedido");
+                break;
+            case "En producción":
+                ActEstado(folio,estado);
+                fin = true;
+                break;
+            case "Cargado":
+                ActEstado(folio,estado);
+            {
+                try {
+                    //agregar ArosCargados
+                    InfoCarga();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                fin = true;
+                break;
+
+            case "Enviado":
+                ActEstado(folio,estado);
+                fin = true;
+                break;
+            case "Envio incompleto":
+                ActEstado(folio,estado);
+                //agregar ArosCargados
+                {
+                try {
+                    //agregar ArosCargados
+                    InfoCarga();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+                fin = true;
+                break;
+            case "Entregado":
+                ActEstado(folio,estado);
+                fin = true;
+                break;
+            case "Cancelado":
+                ActEstado(folio,estado);
+                fin = true;
+                break;
+        }
+        
+        if (fin = true){
+            JOptionPane.showMessageDialog(null, "Pedido actualizado");
+            dispose();
+        }
     }//GEN-LAST:event_button_FinishActionPerformed
 
     private void button_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AtrasActionPerformed
@@ -431,7 +508,7 @@ public class ActPedido extends javax.swing.JFrame {
     private javax.swing.JTextField textF_Cantidad;
     private javax.swing.JTextField textF_IDConductor;
     private javax.swing.JTextField textF_client;
-    private javax.swing.JTextField textF_dateDelivery;
+    private javax.swing.JFormattedTextField textF_dateDelivery;
     private javax.swing.JTextField textF_folio;
     private javax.swing.JTextField textField_Clave;
     private javax.swing.JTextField textField_OrdenCarga;
