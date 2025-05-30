@@ -45,4 +45,31 @@ public class CargaDAO {
             return false;
         }
     }
+    
+    public int ArosCargados(DetalleCarga dc){
+        String sql ="INSERT INTO detalle_carga (num_serial, folio_orden, folio_aro, clave, tratamiento_adicional, cantidad) VALUES (?,?,?,?,?,?)";
+        int rowsAffected = 0;
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dc.getNum_serial());
+            ps.setString(2, dc.getFolio_orden());
+            ps.setString(3, dc.getFolio_aro());
+            ps.setString(4,String.format("%04d",dc.getClave()));
+            ps.setString(5, dc.getTratamiento_adicional());
+            ps.setInt(6, dc.getCantidad());
+                
+            rowsAffected = ps.executeUpdate();
+        } catch(SQLException e){
+            System.out.println(e.toString());
+        }finally{
+            try{
+             con.close();   
+            } catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+        return rowsAffected;
+    }
+    
 }

@@ -6,11 +6,16 @@ import com.ejemplo.app_ferkar.persistencia.Pedido;
 import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
 import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
+import com.ejemplo.app_ferkar.persistencia.TipoAro;
+import com.ejemplo.app_ferkar.persistencia.TipoAroDAO;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +29,11 @@ public class ActPedido extends javax.swing.JFrame {
     PedidoDAO ped = new PedidoDAO();
     Carga cg = new Carga();
     CargaDAO cgd = new CargaDAO();
+    TipoAro tipoA = new TipoAro();
+    TipoAroDAO tipoAd = new TipoAroDAO();
+    DefaultTableModel modelo = new DefaultTableModel();
+    
+    int item;
     
     public ActPedido(Pedido pd) {
         initComponents();
@@ -45,7 +55,7 @@ public class ActPedido extends javax.swing.JFrame {
         pe.setEstado(estado);
         ped.ModificarPedido(pe);
     }
-    
+       
     private void InfoCarga() throws ParseException{
         String folio_orden = textField_OrdenCarga.getText();
         String num_pedido = textF_folio.getText();
@@ -63,6 +73,17 @@ public class ActPedido extends javax.swing.JFrame {
         cg.setTransporte(transporte);
         
         cgd.InfoCarga(cg);
+    }
+    
+    private void ArosCargados(){
+        if (Tabla_Cargas.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "No hay aros cargados");
+        }else{
+            for(int i = 0; i<Tabla_Cargas.getRowCount(); i++){
+                String serial = textField_OrdenCarga.getText() + "-" + i;
+                
+            }
+        }
     }
        
     /**
@@ -101,8 +122,8 @@ public class ActPedido extends javax.swing.JFrame {
         jTextField_Folio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_Cargas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton_Agregar = new javax.swing.JButton();
+        jButton_Eliminar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         textField_OrdenCarga = new javax.swing.JTextField();
@@ -111,6 +132,12 @@ public class ActPedido extends javax.swing.JFrame {
         label_IDConductor1 = new javax.swing.JLabel();
         jTextField_nombreConductor = new javax.swing.JTextField();
         textF_dateDelivery = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        OC_Reforzado = new javax.swing.JCheckBox();
+        OC_Galvanizado = new javax.swing.JCheckBox();
+        OC_Pintado = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
@@ -135,9 +162,9 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.add(label_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, 30));
 
         label_cantidad.setBackground(new java.awt.Color(255, 255, 255));
-        label_cantidad.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        label_cantidad.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         label_cantidad.setText("Cantidad Atados:");
-        jPanel1.add(label_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 160, 30));
+        jPanel1.add(label_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 130, 30));
 
         textF_client.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textF_client.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +193,7 @@ public class ActPedido extends javax.swing.JFrame {
                 textF_CantidadActionPerformed(evt);
             }
         });
-        jPanel1.add(textF_Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 350, 70, 30));
+        jPanel1.add(textF_Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 350, 70, 30));
 
         button_Clean.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_Clean.setText("Limpiar");
@@ -264,10 +291,17 @@ public class ActPedido extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBox_ModoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 120, 30));
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Folio Enviado:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, 30));
-        jPanel1.add(jTextField_Folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 120, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 110, 30));
+
+        jTextField_Folio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_FolioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField_Folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 110, 30));
 
         Tabla_Cargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -288,20 +322,20 @@ public class ActPedido extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 820, 330));
 
-        jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Agregar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        jButton_Agregar.setText("Agregar");
+        jButton_Agregar.setContentAreaFilled(false);
+        jButton_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_AgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 360, 110, 30));
+        jPanel1.add(jButton_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 360, 110, 30));
 
-        jButton2.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        jButton2.setText("Eliminar");
-        jButton2.setContentAreaFilled(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 110, 30));
+        jButton_Eliminar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        jButton_Eliminar.setText("Eliminar");
+        jButton_Eliminar.setContentAreaFilled(false);
+        jPanel1.add(jButton_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto Medium", 0, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -330,6 +364,70 @@ public class ActPedido extends javax.swing.JFrame {
 
         textF_dateDelivery.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         jPanel1.add(textF_dateDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, 30));
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Adicional :");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 90, 20));
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Tratamiento ");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 90, 30));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        OC_Reforzado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        OC_Reforzado.setText("Reforzado");
+        OC_Reforzado.setContentAreaFilled(false);
+        OC_Reforzado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OC_ReforzadoActionPerformed(evt);
+            }
+        });
+
+        OC_Galvanizado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        OC_Galvanizado.setText("Galvanizado");
+        OC_Galvanizado.setContentAreaFilled(false);
+        OC_Galvanizado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OC_GalvanizadoActionPerformed(evt);
+            }
+        });
+
+        OC_Pintado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        OC_Pintado.setText("Pintado");
+        OC_Pintado.setContentAreaFilled(false);
+        OC_Pintado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OC_PintadoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(OC_Reforzado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OC_Galvanizado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OC_Pintado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(OC_Reforzado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OC_Galvanizado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OC_Pintado)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -441,9 +539,79 @@ public class ActPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_ModoPagoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (!"".equals(textField_Clave.getText()) || !"".equals(jTextField_Folio.getText()) || !"".equals(textF_Cantidad.getText())){
+            
+            //Obtener descripcion de la clave de aro
+            String clave = textField_Clave.getText();
+            String detalle = "";
+            try{
+                tipoA = tipoAd.BuscarPro(clave);
+                if (tipoA.getCodigo_aro() != 0){
+                    detalle = tipoA.getDescripcion_esp();
+                }else{
+                    textField_Clave.setText("");
+                    textField_Clave.requestFocus();
+                    JOptionPane.showMessageDialog(null, "Favor de ingresar un código de aro valido");
+                }
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+            
+            //Tratamiento adicional
+            String TratamientoA = "";
+            if(!OC_Galvanizado.isSelected() && !OC_Pintado.isSelected() && !OC_Reforzado.isSelected()){
+                TratamientoA = "NADA";
+            }else{
+                if(OC_Galvanizado.isSelected()){
+                    TratamientoA += "G";
+                }
+                if(OC_Pintado.isSelected()){
+                    TratamientoA += "P";
+                }
+                if(OC_Reforzado.isSelected()){
+                    TratamientoA += "R";
+                }
+            }
+            String trato = TratamientoA;
+            
+            //folios
+            String folio = jTextField_Folio.getText();
+            //Cantidad
+            int cantidad = Integer.parseInt(textF_Cantidad.getText());
+            //serial
+            item =+1;
+            modelo = (DefaultTableModel) Tabla_Cargas.getModel();
+            
+            ArrayList lista = new ArrayList();
+            lista.add(item);
+            lista.add(clave);
+            lista.add(detalle);
+            lista.add(trato);
+            lista.add(folio);
+            lista.add(cantidad);
+            Object[] O = new Object[5];
+            O[0] = lista.get(1);
+            O[1] = lista.get(2);
+            O[2] = lista.get(3);
+            O[3] = lista.get(4);
+            O[4] = lista.get(5);
+            
+            modelo.addRow(O);
+            Tabla_Cargas.setModel(modelo);
+            
+            textField_Clave.setText("");
+            jTextField_Folio.setText("");
+            textF_Cantidad.setText("");
+            OC_Reforzado.setSelected(false);
+            OC_Galvanizado.setSelected(false);
+            OC_Pintado.setSelected(false);
+            textField_Clave.requestFocus();
+        }else{
+            JOptionPane.showMessageDialog(null, "Información Incompleta");
+        }
+    }//GEN-LAST:event_jButton_AgregarActionPerformed
 
     private void textF_IDConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textF_IDConductorActionPerformed
         // TODO add your handling code here:
@@ -472,17 +640,36 @@ public class ActPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textF_IDConductorKeyPressed
 
+    private void jTextField_FolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_FolioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_FolioActionPerformed
+
+    private void OC_ReforzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OC_ReforzadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OC_ReforzadoActionPerformed
+
+    private void OC_GalvanizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OC_GalvanizadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OC_GalvanizadoActionPerformed
+
+    private void OC_PintadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OC_PintadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OC_PintadoActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox OC_Galvanizado;
+    private javax.swing.JCheckBox OC_Pintado;
+    private javax.swing.JCheckBox OC_Reforzado;
     private javax.swing.JTable Tabla_Cargas;
     private javax.swing.JButton button_Atras;
     private javax.swing.JButton button_Clean;
     private javax.swing.JButton button_Finish;
     private javax.swing.JComboBox<String> comboBox_Estado;
     private javax.swing.JComboBox<String> comboBox_transporte;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton_Agregar;
+    private javax.swing.JButton jButton_Eliminar;
     private javax.swing.JComboBox<String> jComboBox_ModoPago;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -490,7 +677,10 @@ public class ActPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField_Factura;
     private javax.swing.JTextField jTextField_Folio;
