@@ -423,6 +423,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jTextArea_NP_TipoAro.setColumns(20);
         jTextArea_NP_TipoAro.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextArea_NP_TipoAro.setLineWrap(true);
         jTextArea_NP_TipoAro.setRows(1);
         jTextArea_NP_TipoAro.setDoubleBuffered(true);
 
@@ -549,9 +550,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedText_NP_FechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jFormattedText_NP_FechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
@@ -597,15 +598,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel35)
                                     .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(22, 22, 22)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(TextField_NP_ClaveAro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel5))
                                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
+                                    .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -1557,6 +1558,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             TextField_NP_ClaveAro.setText("");
             jTextArea_NP_TipoAro.setText("");
             jTextField_NP_CantidadAros.setText("");
+            jTextField_Solicitante.setText("");
             jCheckBox_Reforzado.setSelected(false);
             jCheckBox_Pintado.setSelected(false);
             jCheckBox_Galvanizado.setSelected(false);
@@ -1573,6 +1575,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextField_NP_ClaveAro.setText("");
         jTextArea_NP_TipoAro.setText("");
         jTextField_NP_CantidadAros.setText("");
+        jTextField_Solicitante.setText("");
         jCheckBox_Reforzado.setSelected(false);
         jCheckBox_Pintado.setSelected(false);
         jCheckBox_Galvanizado.setSelected(false);

@@ -2,6 +2,7 @@ package com.ejemplo.app_ferkar.IGU;
 
 import com.ejemplo.app_ferkar.persistencia.Carga;
 import com.ejemplo.app_ferkar.persistencia.CargaDAO;
+import com.ejemplo.app_ferkar.persistencia.DetalleCarga;
 import com.ejemplo.app_ferkar.persistencia.Pedido;
 import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
@@ -81,7 +82,21 @@ public class ActPedido extends javax.swing.JFrame {
         }else{
             for(int i = 0; i<Tabla_Cargas.getRowCount(); i++){
                 String serial = textField_OrdenCarga.getText() + "-" + i;
+                String folio_orden = textField_OrdenCarga.getText();
+                int clave = Integer.parseInt(Tabla_Cargas.getValueAt(i, 0).toString());
+                String folio_aro = Tabla_Cargas.getValueAt(i, 3).toString();
+                String trato_ad = Tabla_Cargas.getValueAt(i, 2).toString();
+                int cantidad = Integer.parseInt(Tabla_Cargas.getValueAt(i, 4).toString());
                 
+                DetalleCarga dc = new DetalleCarga();
+                dc.setNum_serial(serial);
+                dc.setFolio_orden(folio_orden);
+                dc.setFolio_aro(folio_aro);
+                dc.setClave(clave);
+                dc.setTratamiento_adicional(trato_ad);
+                dc.setCantidad(cantidad);
+                
+                cgd.ArosCargados(dc);
             }
         }
     }
@@ -480,8 +495,8 @@ public class ActPedido extends javax.swing.JFrame {
                 ActEstado(folio,estado);
             {
                 try {
-                    //agregar ArosCargados
                     InfoCarga();
+                    ArosCargados();
                 } catch (ParseException ex) {
                     Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -498,8 +513,8 @@ public class ActPedido extends javax.swing.JFrame {
                 //agregar ArosCargados
                 {
                 try {
-                    //agregar ArosCargados
                     InfoCarga();
+                    ArosCargados();
                 } catch (ParseException ex) {
                     Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
                 }
