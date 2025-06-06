@@ -10,6 +10,8 @@ import com.ejemplo.app_ferkar.persistencia.ClienteDAO;
 import com.ejemplo.app_ferkar.persistencia.DetallePedido;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventario;
 import com.ejemplo.app_ferkar.persistencia.IngresoInventarioDAO;
+import com.ejemplo.app_ferkar.persistencia.Inventario;
+import com.ejemplo.app_ferkar.persistencia.InventarioDAO;
 import com.ejemplo.app_ferkar.persistencia.Pedido;
 import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
@@ -44,6 +46,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Pedido pedido = new Pedido();
     PedidoDAO pedidod = new PedidoDAO();
     DetallePedido dv = new DetallePedido();
+    Inventario inv = new Inventario();
+    InventarioDAO invd = new InventarioDAO();
     DefaultTableModel modelo = new DefaultTableModel();
     int item;
     int xMouse, yMouse;
@@ -172,7 +176,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextField_Inv_Ancho = new javax.swing.JTextField();
         Button_Inv_Buscar = new javax.swing.JButton();
         Button_Inv_Limpiar = new javax.swing.JButton();
-        Button_Inv_Regresar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        texto_estado = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
@@ -1160,11 +1165,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Descripción Aro", "Descripción Estandar", "Tratamiento Adicional", "Cantidad Atados", "Cantiad Total"
+                "Clave", "Descripción Aro", "Descripción Estandar", "Tratamiento Adicional", "Cantidad Atados", "Cantiad Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1174,15 +1179,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane6.setViewportView(Tabla_Inventario);
         if (Tabla_Inventario.getColumnModel().getColumnCount() > 0) {
             Tabla_Inventario.getColumnModel().getColumn(0).setResizable(false);
-            Tabla_Inventario.getColumnModel().getColumn(0).setPreferredWidth(100);
+            Tabla_Inventario.getColumnModel().getColumn(0).setPreferredWidth(50);
             Tabla_Inventario.getColumnModel().getColumn(1).setResizable(false);
-            Tabla_Inventario.getColumnModel().getColumn(1).setPreferredWidth(80);
+            Tabla_Inventario.getColumnModel().getColumn(1).setPreferredWidth(150);
             Tabla_Inventario.getColumnModel().getColumn(2).setResizable(false);
-            Tabla_Inventario.getColumnModel().getColumn(2).setPreferredWidth(80);
+            Tabla_Inventario.getColumnModel().getColumn(2).setPreferredWidth(150);
             Tabla_Inventario.getColumnModel().getColumn(3).setResizable(false);
             Tabla_Inventario.getColumnModel().getColumn(3).setPreferredWidth(50);
             Tabla_Inventario.getColumnModel().getColumn(4).setResizable(false);
             Tabla_Inventario.getColumnModel().getColumn(4).setPreferredWidth(50);
+            Tabla_Inventario.getColumnModel().getColumn(5).setResizable(false);
+            Tabla_Inventario.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -1206,6 +1213,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Button_Inv_Buscar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         Button_Inv_Buscar.setText("Buscar");
         Button_Inv_Buscar.setContentAreaFilled(false);
+        Button_Inv_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Inv_BuscarActionPerformed(evt);
+            }
+        });
 
         Button_Inv_Limpiar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         Button_Inv_Limpiar.setText("Limpiar");
@@ -1216,16 +1228,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        Button_Inv_Regresar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        Button_Inv_Regresar.setText("Regresar");
-        Button_Inv_Regresar.setContentAreaFilled(false);
+        texto_estado.setEditable(false);
+        texto_estado.setColumns(20);
+        texto_estado.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        texto_estado.setRows(2);
+        texto_estado.setBorder(null);
+        texto_estado.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane3.setViewportView(texto_estado);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1245,16 +1261,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(TextField_Inv_Ancho, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addComponent(Button_Inv_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Button_Inv_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(Button_Inv_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jScrollPane3)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -1282,13 +1298,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextField_Inv_Ancho, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(107, 107, 107)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Inv_Buscar)
                     .addComponent(Button_Inv_Limpiar))
-                .addGap(18, 18, 18)
-                .addComponent(Button_Inv_Regresar)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1483,8 +1499,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_button_SalirActionPerformed
 
     private void button_InventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_InventarioActionPerformed
-        // TODO add your handling code here:
-        Pane.setSelectedIndex(4);
+        try {
+            // TODO add your handling code here:
+            Pane.setSelectedIndex(4);
+            modelo.setRowCount(0);
+            ListarExistencias();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_button_InventarioActionPerformed
 
     private void button_NuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_NuevoPedidoActionPerformed
@@ -1681,6 +1703,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextField_Inv_Calibre.setText("");
         TextField_Inv_ClaveAro.setText("");
         TextField_Inv_Medida.setText("");
+        texto_estado.setText("");
+        
+        try {
+            modelo.setRowCount(0);
+            ListarExistencias();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Button_Inv_LimpiarActionPerformed
 
     private void jText_II_CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_II_CantidadActionPerformed
@@ -1840,6 +1870,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel34MouseClicked
 
+    private void Button_Inv_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Inv_BuscarActionPerformed
+        try {
+            // TODO add your handling code here:
+            modelo.setRowCount(0);
+            if(!"".equals(TextField_Inv_ClaveAro.getText())){
+                ListarPClave(TextField_Inv_ClaveAro.getText());
+                texto_estado.setText("Mostrando coincidencias con clave de aro");
+            }else if(!"".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText())){
+                ListarPMed(TextField_Inv_Medida.getText());
+                texto_estado.setText("Mostrando coincidencias con medida de aro");
+            }else if(!"".equals(TextField_Inv_Calibre.getText()) && "".equals(TextField_Inv_ClaveAro.getText())){
+                ListarPCal(TextField_Inv_Calibre.getText());
+                texto_estado.setText("Mostrando coincidencias con calibre de aro");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Button_Inv_BuscarActionPerformed
+
     private void RegistrarVenta() throws ParseException{
         String cliente = (String) jCBox_NP_cliente.getSelectedItem();
         pedido.setNum_pedido(jTextField_NumPedido.getText());
@@ -1887,14 +1936,89 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         Tabla_PedidosActivos.setModel(modelo);
     }
-
+    
+    private void ListarExistencias() throws SQLException{
+        List<Inventario> ListarExistencia = invd.ExistenciasGen();
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i < ListarExistencia.size(); i++){
+            if(!"".equals(ListarExistencia.get(i).getCodigo_aros())){
+                String clave = ListarExistencia.get(i).getCodigo_aros();
+                tipoA = tipoAd.BuscarPro(clave);
+                ob[0] = clave;
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarExistencia.get(i).getTrato_adicional();
+                ob[4] = ListarExistencia.get(i).getAtados();
+                ob[5] = ListarExistencia.get(i).getAros();
+                modelo.addRow(ob);
+            }
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPClave(String clave) throws SQLException{
+        List<Inventario> ListarPClaves = invd.ExistenciasAroClave(clave);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i < ListarPClaves.size(); i++){
+            if(!"".equals(ListarPClaves.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(clave);
+                ob[0] = clave;
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPClaves.get(i).getTrato_adicional();
+                ob[4] = ListarPClaves.get(i).getAtados();
+                ob[5] = ListarPClaves.get(i).getAros();
+                modelo.addRow(ob);
+            }
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPMed(String medida) throws SQLException{
+        List<Inventario> ListarPM = invd.ExistenciasAroM(medida);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPM.size() ; i++){
+            if(!"".equals(ListarPM.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPM.get(i).getCodigo_aros());
+                ob[0] = ListarPM.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPM.get(i).getTrato_adicional();
+                ob[4] = ListarPM.get(i).getAtados();
+                ob[5] = ListarPM.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPCal(String calibre) throws SQLException{
+        List<Inventario> ListarPM = invd.ExistenciasAroC(calibre);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPM.size() ; i++){
+            if(!"".equals(ListarPM.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPM.get(i).getCodigo_aros());
+                ob[0] = ListarPM.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPM.get(i).getTrato_adicional();
+                ob[4] = ListarPM.get(i).getAtados();
+                ob[5] = ListarPM.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_II_Limpiar;
     private javax.swing.JButton Button_II_Terminar;
     private javax.swing.JButton Button_Inv_Buscar;
     private javax.swing.JButton Button_Inv_Limpiar;
-    private javax.swing.JButton Button_Inv_Regresar;
     private javax.swing.JCheckBox CheckBox_II_Galvanizado;
     private javax.swing.JCheckBox CheckBox_II_Pintado;
     private javax.swing.JCheckBox CheckBox_II_Reforzado;
@@ -1988,6 +2112,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_PedidosActivos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea_NP_TipoAro;
@@ -2003,5 +2128,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jText_II_TipoAro;
     private javax.swing.JLabel label_PedidosActivos;
     private javax.swing.JLabel label_title;
+    private javax.swing.JTextArea texto_estado;
     // End of variables declaration//GEN-END:variables
 }
