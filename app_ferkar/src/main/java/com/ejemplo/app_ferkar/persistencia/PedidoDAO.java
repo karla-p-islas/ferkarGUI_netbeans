@@ -113,4 +113,55 @@ public class PedidoDAO {
         }
     }
     
+    public List ListarPedidosEntregados(){
+        List<Pedido> ListaPed = new ArrayList();
+        String sql = "SELECT * FROM pedido WHERE estado = 'Entregado'";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Pedido ped = new Pedido();
+                ped.setNum_pedido(rs.getString("num_pedido"));
+                ped.setCliente(rs.getString("cliente"));
+                ped.setFecha(rs.getString("fecha"));
+                ped.setEstado(rs.getString("estado"));
+                ListaPed.add(ped);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        return ListaPed;
+    }
+    
+    public List ListarPedidosFechas(String fecha_ini, String fecha_fin) throws ParseException{
+        List<Pedido> ListaPed = new ArrayList();
+        String sql = "SELECT * FROM pedido WHERE fecha BETWEEN ? AND ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+            
+            Date inicio = sdf.parse(fecha_ini);
+            Date fin = sdf.parse(fecha_fin);
+            java.sql.Date in = new java.sql.Date(inicio.getTime());
+            java.sql.Date fn = new java.sql.Date(fin.getTime());
+            
+            ps.setDate(1, in);
+            ps.setDate(2, fn);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Pedido ped = new Pedido();
+                ped.setNum_pedido(rs.getString("num_pedido"));
+                ped.setCliente(rs.getString("cliente"));
+                ped.setFecha(rs.getString("fecha"));
+                ped.setEstado(rs.getString("estado"));
+                ListaPed.add(ped);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        return ListaPed;
+    }
 }

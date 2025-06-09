@@ -54,6 +54,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     public MenuPrincipal() {
         initComponents();
+        texto_estado.setLineWrap(true);
+        texto_estado.setWrapStyleWord(true);
         cld.ConsultarCliente(jCBox_NP_cliente);
         
     }
@@ -1232,6 +1234,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         texto_estado.setColumns(20);
         texto_estado.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         texto_estado.setRows(2);
+        texto_estado.setAutoscrolls(false);
         texto_estado.setBorder(null);
         texto_estado.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane3.setViewportView(texto_estado);
@@ -1805,6 +1808,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void button_HistPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_HistPedidosActionPerformed
          // TODO add your handling code here:
         Pane.setSelectedIndex(2);
+        modelo.setRowCount(0);
+        ListarPedidosCompletos();
     }//GEN-LAST:event_button_HistPedidosActionPerformed
 
     private void button_IngresoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_IngresoInventarioActionPerformed
@@ -1876,13 +1881,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
             modelo.setRowCount(0);
             if(!"".equals(TextField_Inv_ClaveAro.getText())){
                 ListarPClave(TextField_Inv_ClaveAro.getText());
+                TextField_Inv_Medida.setText("");
+                TextField_Inv_Calibre.setText("");
+                TextField_Inv_Ancho.setText("");
                 texto_estado.setText("Mostrando coincidencias con clave de aro");
-            }else if(!"".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText())){
+            }else if(!"".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && "".equals(TextField_Inv_Calibre.getText()) && "".equals(TextField_Inv_Ancho.getText())){
                 ListarPMed(TextField_Inv_Medida.getText());
                 texto_estado.setText("Mostrando coincidencias con medida de aro");
-            }else if(!"".equals(TextField_Inv_Calibre.getText()) && "".equals(TextField_Inv_ClaveAro.getText())){
+            }else if(!"".equals(TextField_Inv_Calibre.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && "".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_Ancho.getText())){
                 ListarPCal(TextField_Inv_Calibre.getText());
                 texto_estado.setText("Mostrando coincidencias con calibre de aro");
+            }else if(!"".equals(TextField_Inv_Ancho.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && "".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_Calibre.getText())){
+                ListarPAn(TextField_Inv_Ancho.getText());
+                texto_estado.setText("Mostrando coincidencias con ancho de aro");
+            }else if(!"".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && !"".equals(TextField_Inv_Calibre.getText()) && "".equals(TextField_Inv_Ancho.getText())){
+                ListarPMedCal(TextField_Inv_Medida.getText(),TextField_Inv_Calibre.getText());
+                texto_estado.setText("Mostrando coincidencias con medida y calibre de aro");
+            }else if("".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && !"".equals(TextField_Inv_Calibre.getText()) && !"".equals(TextField_Inv_Ancho.getText())){
+                ListarPCalAnc(TextField_Inv_Calibre.getText(),TextField_Inv_Ancho.getText());
+                texto_estado.setText("Mostrando coincidencias con calibre y ancho de aro");
+            }else if(!"".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && "".equals(TextField_Inv_Calibre.getText()) && !"".equals(TextField_Inv_Ancho.getText())){
+                ListarMedAnc(TextField_Inv_Medida.getText(),TextField_Inv_Ancho.getText());
+                texto_estado.setText("Mostrando coincidencias con medida y ancho de aro");
+            }else if(!"".equals(TextField_Inv_Medida.getText()) && "".equals(TextField_Inv_ClaveAro.getText()) && !"".equals(TextField_Inv_Calibre.getText()) && !"".equals(TextField_Inv_Ancho.getText())){
+                ListarPMedCalAnc(TextField_Inv_Medida.getText(), TextField_Inv_Calibre.getText(), TextField_Inv_Ancho.getText());
+                texto_estado.setText("Mostrando coincidencias con medida, calibre y ancho de aro");
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1932,6 +1955,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ob[1] = ListarPedido.get(i).getCliente();
             ob[2] = ListarPedido.get(i).getFecha();
             ob[3] = ListarPedido.get(i).getEstado();
+            modelo.addRow(ob);
+        }
+        Tabla_PedidosActivos.setModel(modelo);
+    }
+    
+    private void ListarPedidosCompletos(){
+        List<Pedido> ListarPedComp = pedidod.ListarPedidosEntregados();
+        modelo = (DefaultTableModel) Tabla_PedidosActivos.getModel();
+        Object[] ob = new Object[4];
+        for (int i = 0; i < ListarPedComp.size(); i++){
+            ob[0] = ListarPedComp.get(i).getNum_pedido();
+            ob[1] = ListarPedComp.get(i).getCliente();
+            ob[2] = ListarPedComp.get(i).getFecha();
+            ob[3] = ListarPedComp.get(i).getEstado();
             modelo.addRow(ob);
         }
         Tabla_PedidosActivos.setModel(modelo);
@@ -2008,6 +2045,101 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 ob[3] = ListarPM.get(i).getTrato_adicional();
                 ob[4] = ListarPM.get(i).getAtados();
                 ob[5] = ListarPM.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPAn(String ancho) throws SQLException{
+        List<Inventario> ListarPA = invd.ExistenciasAroA(ancho);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPA.size() ; i++){
+            if(!"".equals(ListarPA.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPA.get(i).getCodigo_aros());
+                ob[0] = ListarPA.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPA.get(i).getTrato_adicional();
+                ob[4] = ListarPA.get(i).getAtados();
+                ob[5] = ListarPA.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPMedCal(String medida, String calibre) throws SQLException{
+        List<Inventario> ListarPMC = invd.ExistenciasAroMC(medida, calibre);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPMC.size() ; i++){
+            if(!"".equals(ListarPMC.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPMC.get(i).getCodigo_aros());
+                ob[0] = ListarPMC.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPMC.get(i).getTrato_adicional();
+                ob[4] = ListarPMC.get(i).getAtados();
+                ob[5] = ListarPMC.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPCalAnc(String calibre, String ancho) throws SQLException{
+        List<Inventario> ListarPMC = invd.ExistenciasAroCA(calibre, ancho);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPMC.size() ; i++){
+            if(!"".equals(ListarPMC.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPMC.get(i).getCodigo_aros());
+                ob[0] = ListarPMC.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPMC.get(i).getTrato_adicional();
+                ob[4] = ListarPMC.get(i).getAtados();
+                ob[5] = ListarPMC.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarMedAnc(String medida, String ancho) throws SQLException{
+        List<Inventario> ListarPMC = invd.ExistenciasAroMA(medida, ancho);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPMC.size() ; i++){
+            if(!"".equals(ListarPMC.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPMC.get(i).getCodigo_aros());
+                ob[0] = ListarPMC.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPMC.get(i).getTrato_adicional();
+                ob[4] = ListarPMC.get(i).getAtados();
+                ob[5] = ListarPMC.get(i).getAros();
+                modelo.addRow(ob);
+            }            
+        }
+        Tabla_Inventario.setModel(modelo);
+    }
+    
+    private void ListarPMedCalAnc(String medida, String calibre,String ancho) throws SQLException{
+        List<Inventario> ListarPMC = invd.ExistenciasAroMCA(medida, calibre, ancho);
+        modelo = (DefaultTableModel) Tabla_Inventario.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i <ListarPMC.size() ; i++){
+            if(!"".equals(ListarPMC.get(i).getCodigo_aros())){
+                tipoA = tipoAd.BuscarPro(ListarPMC.get(i).getCodigo_aros());
+                ob[0] = ListarPMC.get(i).getCodigo_aros();
+                ob[1] = tipoA.getDescripcion_esp();
+                ob[2] = tipoA.getDescripcion_gen();
+                ob[3] = ListarPMC.get(i).getTrato_adicional();
+                ob[4] = ListarPMC.get(i).getAtados();
+                ob[5] = ListarPMC.get(i).getAros();
                 modelo.addRow(ob);
             }            
         }
