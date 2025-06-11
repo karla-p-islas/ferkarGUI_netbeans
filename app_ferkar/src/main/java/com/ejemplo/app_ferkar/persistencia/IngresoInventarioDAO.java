@@ -20,7 +20,7 @@ public class IngresoInventarioDAO {
     PreparedStatement ps;
     
     public boolean RegistrarInventario(IngresoInventario pro){
-        String sql = "INSERT INTO produccion_diaria (folio,fecha,id_soldador,caseta,hora_inicio,hora_fin,codigo_aro,tratamiento_adicional,cantidad,cantidad_atados) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO produccion_diaria (folio,fecha,id_soldador,caseta,hora_inicio,hora_fin,codigo_aro,tratamiento_adicional,cantidad,cantidad_atados,cantidad_disp) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -49,6 +49,7 @@ public class IngresoInventarioDAO {
             ps.setString(8,pro.getTratamiento_adicional());
             ps.setInt(9, pro.getCantidad());
             ps.setInt(10, pro.getCantidad_atados());
+            ps.setInt(11, pro.getCantidad_exs());
             ps.execute();
             return true;
         }catch (SQLException e){
@@ -66,9 +67,20 @@ public class IngresoInventarioDAO {
         return false;
     }
     
-    /*public IngresoInventario Buscar(int codigo){
-        
-    }*/
-    
+    public boolean ActualizarStock(String folio, int cantidad){
+        String sql = "UPDATE produccion_diaria SET cantidad_disp = ? WHERE folio = ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, cantidad);
+            ps.setString(2, folio);
+            
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        return false;
+    }
     
 }

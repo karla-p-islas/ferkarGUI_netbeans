@@ -14,12 +14,12 @@ public class IngresoInventario {
     private String tratamiento_adicional;
     private int cantidad;
     private int cantidad_atados;
+    private int cantidad_exs;
     
     public IngresoInventario(){ 
     }
 
-    public IngresoInventario(String folio, String fecha, int id_soldador, int caseta, String hora_inicio, String hora_fin, 
-            int codigo_aro, String tratamiento_adicional, int cantidad, int cantidad_atados) {
+    public IngresoInventario(String folio, String fecha, int id_soldador, int caseta, String hora_inicio, String hora_fin, int codigo_aro, String tratamiento_adicional, int cantidad, int cantidad_atados, int cantidad_exs) {
         this.folio = folio;
         this.fecha = fecha;
         this.id_soldador = id_soldador;
@@ -30,6 +30,7 @@ public class IngresoInventario {
         this.tratamiento_adicional = tratamiento_adicional;
         this.cantidad = cantidad;
         this.cantidad_atados = cantidad_atados;
+        this.cantidad_exs = cantidad_exs;
     }
 
     public String getFolio() {
@@ -111,6 +112,13 @@ public class IngresoInventario {
     public void setCantidad_atados(int cantidad_atados) {
         this.cantidad_atados = cantidad_atados;
     }
-    
+
+    public int getCantidad_exs() {
+        return cantidad_exs;
+    }
+
+    public void setCantidad_exs(int cantidad_exs) {
+        this.cantidad_exs = cantidad_exs;
+    }
     
 }

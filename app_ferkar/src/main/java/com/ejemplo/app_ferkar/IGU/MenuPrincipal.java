@@ -124,12 +124,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jFormattedTextField_FechaFinal = new javax.swing.JFormattedTextField();
-        jFormattedTextField_FechaInicial = new javax.swing.JFormattedTextField();
+        TextField_FechaFinal = new javax.swing.JFormattedTextField();
+        TextField_FechaInicial = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton_P_Buscar = new javax.swing.JButton();
         jButton_P_Limpiar = new javax.swing.JButton();
-        jButton_P_Regresar = new javax.swing.JButton();
         jPanel_IngresoInventario = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -723,9 +722,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel9.setText("Fecha Inicial:");
 
-        jFormattedTextField_FechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        TextField_FechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
-        jFormattedTextField_FechaInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        TextField_FechaInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         jLabel12.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -751,8 +750,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(10, 10, 10)))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField_FechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TextField_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextField_FechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21))))
         );
         jPanel9Layout.setVerticalGroup(
@@ -763,11 +762,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField_FechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextField_FechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextField_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -789,15 +788,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton_P_Regresar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        jButton_P_Regresar.setText("Regresar");
-        jButton_P_Regresar.setContentAreaFilled(false);
-        jButton_P_Regresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_P_RegresarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -807,20 +797,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(26, 26, 26))
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton_P_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_P_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
+                        .addGap(60, 60, 60))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton_P_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -843,9 +831,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_P_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_P_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton_P_Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(213, 213, 213))
+                .addGap(270, 270, 270))
         );
 
         javax.swing.GroupLayout jPanel_HistorialPedidosLayout = new javax.swing.GroupLayout(jPanel_HistorialPedidos);
@@ -1517,17 +1503,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Pane.setSelectedIndex(1);
     }//GEN-LAST:event_button_NuevoPedidoActionPerformed
 
-    private void jButton_P_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_RegresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_P_RegresarActionPerformed
-
     private void jButton_P_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_LimpiarActionPerformed
-        jFormattedTextField_FechaInicial.setText("");
-        jFormattedTextField_FechaFinal.setText("");
+        TextField_FechaInicial.setText("");
+        TextField_FechaFinal.setText("");
+        modelo.setRowCount(0);
+        ListarPedidosCompletos();
     }//GEN-LAST:event_jButton_P_LimpiarActionPerformed
 
     private void jButton_P_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_BuscarActionPerformed
         // TODO add your handling code here:
+        if(!"".equals(TextField_FechaInicial.getText()) && !"".equals(TextField_FechaFinal.getText())){
+            modelo.setRowCount(0);
+            try {
+                ListarPedidosComPFecha(TextField_FechaInicial.getText(), TextField_FechaFinal.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Favor de ravisar que ambos campos estén llenos");
+        }
     }//GEN-LAST:event_jButton_P_BuscarActionPerformed
 
     private void jCheckBox_PintadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_PintadoActionPerformed
@@ -1655,8 +1649,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ii.setCodigo_aro(Integer.parseInt(jText_II_ClaveAro.getText()));
             ii.setTratamiento_adicional(TratamientoA);
             ii.setCantidad(Integer.parseInt(jText_II_Cantidad.getText()));
+            ii.setCantidad_exs(Integer.parseInt(jText_II_Cantidad.getText()));
             int clave = Integer.parseInt(jText_II_ClaveAro.getText());
-            int cantidad = Integer.parseInt(jText_II_Cantidad.getText());
+            int cantidad = Integer.parseInt(jText_II_Cantidad.getText()); 
             int resultado = CantidadAtados(clave,cantidad);
             if(resultado == -1){
                 JOptionPane.showMessageDialog(null, "No se puede registrar: cantidad atados inválida");
@@ -1962,16 +1957,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     private void ListarPedidosCompletos(){
         List<Pedido> ListarPedComp = pedidod.ListarPedidosEntregados();
-        modelo = (DefaultTableModel) Tabla_PedidosActivos.getModel();
-        Object[] ob = new Object[4];
+        modelo = (DefaultTableModel) Tabla_HistorialPedidos.getModel();
+        Object[] ob = new Object[3];
         for (int i = 0; i < ListarPedComp.size(); i++){
+            //ob[0] = ListarPedComp.get(i).getNum_pedido();
             ob[0] = ListarPedComp.get(i).getNum_pedido();
             ob[1] = ListarPedComp.get(i).getCliente();
             ob[2] = ListarPedComp.get(i).getFecha();
-            ob[3] = ListarPedComp.get(i).getEstado();
             modelo.addRow(ob);
         }
-        Tabla_PedidosActivos.setModel(modelo);
+        Tabla_HistorialPedidos.setModel(modelo);
+    }
+    
+    private void ListarPedidosComPFecha(String fecha_in, String fecha_fin) throws ParseException{
+        List<Pedido> ListarPedComp = pedidod.ListarPedidosFechas(fecha_in, fecha_fin);
+        modelo = (DefaultTableModel) Tabla_HistorialPedidos.getModel();
+        Object[] ob = new Object[3];
+        for (int i = 0; i < ListarPedComp.size(); i++){
+            //ob[0] = ListarPedComp.get(i).getNum_pedido();
+            ob[0] = ListarPedComp.get(i).getNum_pedido();
+            ob[1] = ListarPedComp.get(i).getCliente();
+            ob[2] = ListarPedComp.get(i).getFecha();
+            modelo.addRow(ob);
+        }
+        Tabla_HistorialPedidos.setModel(modelo);
     }
     
     private void ListarExistencias() throws SQLException{
@@ -2159,6 +2168,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable Tabla_Inventario;
     private javax.swing.JTable Tabla_PedidosActivos;
     private javax.swing.JTable Tabla_ResumenOrden;
+    private javax.swing.JFormattedTextField TextField_FechaFinal;
+    private javax.swing.JFormattedTextField TextField_FechaInicial;
     private javax.swing.JTextField TextField_Inv_Ancho;
     private javax.swing.JTextField TextField_Inv_Calibre;
     private javax.swing.JTextField TextField_Inv_ClaveAro;
@@ -2178,15 +2189,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_NP_Limpiar;
     private javax.swing.JButton jButton_P_Buscar;
     private javax.swing.JButton jButton_P_Limpiar;
-    private javax.swing.JButton jButton_P_Regresar;
     private javax.swing.JButton jButton_TerminarOrden;
     private javax.swing.JComboBox<String> jCBox_NP_cliente;
     private javax.swing.JCheckBox jCheckBox_Galvanizado;
     private javax.swing.JCheckBox jCheckBox_Pintado;
     private javax.swing.JCheckBox jCheckBox_Reforzado;
     private javax.swing.JFormattedTextField jFormText_II_Fecha;
-    private javax.swing.JFormattedTextField jFormattedTextField_FechaFinal;
-    private javax.swing.JFormattedTextField jFormattedTextField_FechaInicial;
     private javax.swing.JFormattedTextField jFormattedText_II_HoraFin;
     private javax.swing.JFormattedTextField jFormattedText_II_HoraInicio;
     private javax.swing.JFormattedTextField jFormattedText_NP_FechaEntrega;

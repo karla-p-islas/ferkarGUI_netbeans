@@ -79,7 +79,7 @@ public class PedidoDAO {
     
     public List ListarPedidos(){
         List<Pedido> ListaPed = new ArrayList();
-        String sql = "SELECT * FROM pedido WHERE estado != 'Entregado'";
+        String sql = "SELECT * FROM pedido WHERE estado != 'Entregado' AND estado != 'Cancelado'";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class PedidoDAO {
     
     public List ListarPedidosEntregados(){
         List<Pedido> ListaPed = new ArrayList();
-        String sql = "SELECT * FROM pedido WHERE estado = 'Entregado'";
+        String sql = "SELECT * FROM pedido WHERE estado = 'Entregado' OR estado = 'Cancelado'";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -136,7 +136,7 @@ public class PedidoDAO {
     
     public List ListarPedidosFechas(String fecha_ini, String fecha_fin) throws ParseException{
         List<Pedido> ListaPed = new ArrayList();
-        String sql = "SELECT * FROM pedido WHERE fecha BETWEEN ? AND ?";
+        String sql = "SELECT * FROM pedido WHERE (estado = 'Entregado' OR estado = 'Cancelado') AND fecha BETWEEN ? AND ?";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
