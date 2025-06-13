@@ -66,21 +66,5 @@ public class IngresoInventarioDAO {
         }
         return false;
     }
-    
-    public boolean ActualizarStock(String folio, int cantidad){
-        String sql = "UPDATE produccion_diaria SET cantidad_disp = ? WHERE folio = ?";
-        try{
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            
-            ps.setInt(1, cantidad);
-            ps.setString(2, folio);
-            
-            return true;
-        }catch(SQLException e){
-            System.out.println(e.toString());
-        }
-        return false;
-    }
-    
+              
 }

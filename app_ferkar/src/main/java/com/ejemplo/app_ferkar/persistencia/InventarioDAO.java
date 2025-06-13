@@ -225,4 +225,58 @@ public class InventarioDAO {
         }
         return Existencias;
     }
+    
+    public int ConsultarStock(String folio){
+        String sql = "SELECT cantidad_disp FROM produccion_diaria WHERE folio = ?";
+        int cantidad = 0;
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                cantidad = rs.getInt("cantidad_disp");
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        return cantidad;
+    }
+    
+    public boolean ReducirStock(String folio, int cantidad){
+        String sql = "UPDATE cantidad_disp = ? FROM produccion_diaria WHERE folio ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cantidad);
+            ps.setString(2, folio);
+            ps.executeQuery();
+            
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+    public boolean ReducirExistencia(Inventario inv){
+        String sql = "INSERT INTO existencia_aro(codigo_aro, tratamiento_adicional, aros, atados) VALUES(?,?,?,?)"
+                + "ON CONFLICT (codigo_aro,tratamiento_adicional) DO UPDATE SET"
+                + "aros = existencia_aros.aros + EXCLUDED.aros,"
+                + "atados = existencia_aros.atados + EXCLUDED.atados";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, inv.getCodigo_aros());
+            ps.setString(2, inv.getTrato_adicional());
+            ps.setInt(3, inv.getAros());
+            ps.setInt(4, inv.getAtados());
+            
+            ps.executeQuery();
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }

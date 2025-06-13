@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -692,9 +693,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Folio Pedido", "Cliente", "Fecha Entrega"
+                "Folio Pedido", "Cliente", "Fecha Entrega", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(Tabla_HistorialPedidos);
         if (Tabla_HistorialPedidos.getColumnModel().getColumnCount() > 0) {
             Tabla_HistorialPedidos.getColumnModel().getColumn(0).setResizable(false);
@@ -703,6 +712,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             Tabla_HistorialPedidos.getColumnModel().getColumn(1).setPreferredWidth(20);
             Tabla_HistorialPedidos.getColumnModel().getColumn(2).setResizable(false);
             Tabla_HistorialPedidos.getColumnModel().getColumn(2).setPreferredWidth(15);
+            Tabla_HistorialPedidos.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabel13.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
@@ -1639,7 +1649,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
         
-        if(!"".equals(jText_II_ClaveAro.getText()) || !"".equals(jText_II_NombreSoldador.getText()) || !"".equals(jText_II_Cantidad.getText()) || !"".equals(jText_II_Folio.getText())){
+        if(!"".equals(jText_II_ClaveAro.getText()) && !"".equals(jText_II_NombreSoldador.getText()) && !"".equals(jText_II_Cantidad.getText()) && !"".equals(jText_II_Folio.getText())){
             ii.setFolio(jText_II_Folio.getText());
             ii.setFecha(jFormText_II_Fecha.getText());
             ii.setId_soldador(Integer.parseInt(jText_II_IDSoldador.getText()));
@@ -1659,6 +1669,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 ii.setCantidad_atados(resultado);
             }
             iid.RegistrarInventario(ii);
+            //agregar aqui la actualización de inventario general
             JOptionPane.showMessageDialog(null, "Folio Registrado");
             
             //limpiar
@@ -1958,12 +1969,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void ListarPedidosCompletos(){
         List<Pedido> ListarPedComp = pedidod.ListarPedidosEntregados();
         modelo = (DefaultTableModel) Tabla_HistorialPedidos.getModel();
-        Object[] ob = new Object[3];
+        Object[] ob = new Object[4];
         for (int i = 0; i < ListarPedComp.size(); i++){
             //ob[0] = ListarPedComp.get(i).getNum_pedido();
             ob[0] = ListarPedComp.get(i).getNum_pedido();
             ob[1] = ListarPedComp.get(i).getCliente();
             ob[2] = ListarPedComp.get(i).getFecha();
+            ob[3] = ListarPedComp.get(i).getEstado();
             modelo.addRow(ob);
         }
         Tabla_HistorialPedidos.setModel(modelo);
@@ -1972,12 +1984,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void ListarPedidosComPFecha(String fecha_in, String fecha_fin) throws ParseException{
         List<Pedido> ListarPedComp = pedidod.ListarPedidosFechas(fecha_in, fecha_fin);
         modelo = (DefaultTableModel) Tabla_HistorialPedidos.getModel();
-        Object[] ob = new Object[3];
+        Object[] ob = new Object[4];
         for (int i = 0; i < ListarPedComp.size(); i++){
             //ob[0] = ListarPedComp.get(i).getNum_pedido();
             ob[0] = ListarPedComp.get(i).getNum_pedido();
             ob[1] = ListarPedComp.get(i).getCliente();
             ob[2] = ListarPedComp.get(i).getFecha();
+            ob[3] = ListarPedComp.get(i).getEstado();
             modelo.addRow(ob);
         }
         Tabla_HistorialPedidos.setModel(modelo);
@@ -2154,7 +2167,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         Tabla_Inventario.setModel(modelo);
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_II_Limpiar;
     private javax.swing.JButton Button_II_Terminar;

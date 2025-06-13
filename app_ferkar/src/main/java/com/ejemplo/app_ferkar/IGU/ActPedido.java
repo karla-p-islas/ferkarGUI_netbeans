@@ -3,6 +3,8 @@ package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.persistencia.Carga;
 import com.ejemplo.app_ferkar.persistencia.CargaDAO;
 import com.ejemplo.app_ferkar.persistencia.DetalleCarga;
+import com.ejemplo.app_ferkar.persistencia.Inventario;
+import com.ejemplo.app_ferkar.persistencia.InventarioDAO;
 import com.ejemplo.app_ferkar.persistencia.Pedido;
 import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
@@ -15,6 +17,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,6 +35,8 @@ public class ActPedido extends javax.swing.JFrame {
     CargaDAO cgd = new CargaDAO();
     TipoAro tipoA = new TipoAro();
     TipoAroDAO tipoAd = new TipoAroDAO();
+    Inventario inv = new Inventario();
+    InventarioDAO invd = new InventarioDAO();
     DefaultTableModel modelo = new DefaultTableModel();
     
     int item;
@@ -100,7 +105,7 @@ public class ActPedido extends javax.swing.JFrame {
             }
         }
     }
-       
+          
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -350,6 +355,11 @@ public class ActPedido extends javax.swing.JFrame {
         jButton_Eliminar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton_Eliminar.setText("Eliminar");
         jButton_Eliminar.setContentAreaFilled(false);
+        jButton_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto Medium", 0, 20)); // NOI18N
@@ -556,7 +566,9 @@ public class ActPedido extends javax.swing.JFrame {
 
     private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
         // TODO add your handling code here:
-        if (!"".equals(textField_Clave.getText()) || !"".equals(jTextField_Folio.getText()) || !"".equals(textF_Cantidad.getText())){
+        boolean estado = false;
+        int stock_disponible = 0;
+        if (!"".equals(textField_Clave.getText()) && !"".equals(jTextField_Folio.getText()) && !"".equals(textF_Cantidad.getText())){
             
             //Obtener descripcion de la clave de aro
             String clave = textField_Clave.getText();
@@ -593,36 +605,53 @@ public class ActPedido extends javax.swing.JFrame {
             
             //folios
             String folio = jTextField_Folio.getText();
+            if(folio.length() != 8){
+                ImageIcon imagen = new ImageIcon("C:/Users/kpaor/OneDrive/Escritorio/RASTREABILIDAD/Formato folio.png");
+                JOptionPane.showMessageDialog(null, imagen);
+                jTextField_Folio.setText("");
+                jTextField_Folio.requestFocus();
+                return;
+            }else{
+                estado = true;
+                stock_disponible = invd.ConsultarStock(folio);
+            }
             //Cantidad
             int cantidad = Integer.parseInt(textF_Cantidad.getText());
             //serial
-            item =+1;
-            modelo = (DefaultTableModel) Tabla_Cargas.getModel();
             
-            ArrayList lista = new ArrayList();
-            lista.add(item);
-            lista.add(clave);
-            lista.add(detalle);
-            lista.add(trato);
-            lista.add(folio);
-            lista.add(cantidad);
-            Object[] O = new Object[5];
-            O[0] = lista.get(1);
-            O[1] = lista.get(2);
-            O[2] = lista.get(3);
-            O[3] = lista.get(4);
-            O[4] = lista.get(5);
+            if(estado==true && cantidad <= stock_disponible){
+                int cant_act = stock_disponible - cantidad;
+                item ++;
+                modelo = (DefaultTableModel) Tabla_Cargas.getModel();
+
+                ArrayList lista = new ArrayList();
+                lista.add(item);
+                lista.add(clave);
+                lista.add(detalle);
+                lista.add(trato);
+                lista.add(folio);
+                lista.add(cantidad);
+                Object[] O = new Object[5];
+                O[0] = lista.get(1);
+                O[1] = lista.get(2);
+                O[2] = lista.get(3);
+                O[3] = lista.get(4);
+                O[4] = lista.get(5);
+
+                modelo.addRow(O);
+                Tabla_Cargas.setModel(modelo);
+
+                textField_Clave.setText("");
+                jTextField_Folio.setText("");
+                textF_Cantidad.setText("");
+                OC_Reforzado.setSelected(false);
+                OC_Galvanizado.setSelected(false);
+                OC_Pintado.setSelected(false);
+                textField_Clave.requestFocus();
+            }else{
+                JOptionPane.showMessageDialog(null, "Favor de revisar el stock disponible");
+            }
             
-            modelo.addRow(O);
-            Tabla_Cargas.setModel(modelo);
-            
-            textField_Clave.setText("");
-            jTextField_Folio.setText("");
-            textF_Cantidad.setText("");
-            OC_Reforzado.setSelected(false);
-            OC_Galvanizado.setSelected(false);
-            OC_Pintado.setSelected(false);
-            textField_Clave.requestFocus();
         }else{
             JOptionPane.showMessageDialog(null, "Información Incompleta");
         }
@@ -670,6 +699,13 @@ public class ActPedido extends javax.swing.JFrame {
     private void OC_PintadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OC_PintadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_OC_PintadoActionPerformed
+
+    private void jButton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EliminarActionPerformed
+        // TODO add your handling code here:
+        modelo = (DefaultTableModel) Tabla_Cargas.getModel();
+        modelo.removeRow(Tabla_Cargas.getSelectedRow());
+        textField_Clave.requestFocus();
+    }//GEN-LAST:event_jButton_EliminarActionPerformed
 
 
 
