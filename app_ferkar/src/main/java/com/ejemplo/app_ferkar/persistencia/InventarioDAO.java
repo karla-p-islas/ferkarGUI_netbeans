@@ -259,11 +259,13 @@ public class InventarioDAO {
         }
     }
     
-    public boolean ReducirExistencia(Inventario inv){
-        String sql = "INSERT INTO existencia_aro(codigo_aro, tratamiento_adicional, aros, atados) VALUES(?,?,?,?)"
-                + "ON CONFLICT (codigo_aro,tratamiento_adicional) DO UPDATE SET"
-                + "aros = existencia_aros.aros + EXCLUDED.aros,"
-                + "atados = existencia_aros.atados + EXCLUDED.atados";
+   
+    public boolean Existencias(Inventario inv){
+        
+        String sql = "INSERT INTO existencia_aros(codigo_aro, tratamiento_adicional, aros, atados) VALUES(?,?,?,?) "
+                + "ON CONFLICT (codigo_aro,tratamiento_adicional) DO UPDATE SET "
+                + "aros = existencia_aros.aros + EXCLUDED.aros, "
+                + "atados = existencia_aros.atados + EXCLUDED.atados ";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -272,11 +274,33 @@ public class InventarioDAO {
             ps.setInt(3, inv.getAros());
             ps.setInt(4, inv.getAtados());
             
-            ps.executeQuery();
+            ps.executeUpdate();
             return true;
         }catch(SQLException e){
             System.out.println(e.toString());
             return false;
         }
     }
+    
+    public boolean ReducirExistencias(Inventario inv){
+        String sql = "UPDATE existencia_aros SET aros = existencia_aros.aros - ?, atados = existencia_aros.atados - ? WHERE codigo_aro = ? AND  tratamiento_adicional = ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, inv.getAros());
+            ps.setInt(2, inv.getAtados());
+            ps.setString(3, inv.getCodigo_aros());
+            ps.setString(4, inv.getTrato_adicional());
+            
+            ps.executeUpdate();
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+//    public boolean ReducirStock(){
+        
+    //}
 }

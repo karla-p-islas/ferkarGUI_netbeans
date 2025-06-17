@@ -1663,14 +1663,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             int clave = Integer.parseInt(jText_II_ClaveAro.getText());
             int cantidad = Integer.parseInt(jText_II_Cantidad.getText()); 
             int resultado = CantidadAtados(clave,cantidad);
+            
+            //agregar aqui la actualización de inventario general
+            inv.setCodigo_aros(jText_II_ClaveAro.getText());
+            inv.setTrato_adicional(TratamientoA);
+            inv.setAros(Integer.parseInt(jText_II_Cantidad.getText()));
+            
             if(resultado == -1){
                 JOptionPane.showMessageDialog(null, "No se puede registrar: cantidad atados inválida");
             }else{
                 ii.setCantidad_atados(resultado);
+                inv.setAtados(resultado);
+                //iid.RegistrarInventario(ii);
+                invd.Existencias(inv);
+                JOptionPane.showMessageDialog(null, "Folio Registrado");
             }
-            iid.RegistrarInventario(ii);
-            //agregar aqui la actualización de inventario general
-            JOptionPane.showMessageDialog(null, "Folio Registrado");
             
             //limpiar
             CheckBox_II_Galvanizado.setSelected(false);
