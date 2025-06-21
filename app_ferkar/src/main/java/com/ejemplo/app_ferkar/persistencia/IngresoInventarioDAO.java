@@ -2,10 +2,13 @@ package com.ejemplo.app_ferkar.persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,6 +21,7 @@ public class IngresoInventarioDAO {
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
+    ResultSet rs;
     
     public boolean RegistrarInventario(IngresoInventario pro){
         String sql = "INSERT INTO produccion_diaria (folio,fecha,id_soldador,caseta,hora_inicio,hora_fin,codigo_aro,tratamiento_adicional,cantidad,cantidad_atados,cantidad_disp) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -65,6 +69,18 @@ public class IngresoInventarioDAO {
             }
         }
         return false;
+    }
+    
+    public List InventarioActual(){
+        List<IngresoInventario> Inventario = new ArrayList();
+        String sql = "SELECT * FROM produccion_diaria ORDER BY folio DESC";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
     }
               
 }

@@ -79,7 +79,7 @@ public class PedidoDAO {
     
     public List ListarPedidos(){
         List<Pedido> ListaPed = new ArrayList();
-        String sql = "SELECT * FROM pedido WHERE estado != 'Entregado' AND estado != 'Cancelado'";
+        String sql = "SELECT * FROM pedido WHERE estado != 'Entregado' AND estado != 'Cancelado' ORDER BY num_pedido ASC";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

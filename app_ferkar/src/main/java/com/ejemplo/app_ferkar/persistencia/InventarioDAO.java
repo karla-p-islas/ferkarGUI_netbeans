@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -242,24 +243,7 @@ public class InventarioDAO {
         }
         return cantidad;
     }
-    
-    public boolean ReducirStock(String folio, int cantidad){
-        String sql = "UPDATE cantidad_disp = ? FROM produccion_diaria WHERE folio ?";
-        try{
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, cantidad);
-            ps.setString(2, folio);
-            ps.executeQuery();
-            
-            return true;
-        }catch(SQLException e){
-            System.out.println(e.toString());
-            return false;
-        }
-    }
-    
-   
+      
     public boolean Existencias(Inventario inv){
         
         String sql = "INSERT INTO existencia_aros(codigo_aro, tratamiento_adicional, aros, atados) VALUES(?,?,?,?) "
@@ -283,24 +267,80 @@ public class InventarioDAO {
     }
     
     public boolean ReducirExistencias(Inventario inv){
-        String sql = "UPDATE existencia_aros SET aros = existencia_aros.aros - ?, atados = existencia_aros.atados - ? WHERE codigo_aro = ? AND  tratamiento_adicional = ?";
+        String consultar = "SELECT aros, atados FROM existencia_aros WHERE codigo_aro = ? AND tratamiento_adicional = ?";
+        String actualizar = "UPDATE existencia_aros SET aros = ?, atados = ? WHERE codigo_aro = ? AND  tratamiento_adicional = ?";
         try{
             con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, inv.getAros());
-            ps.setInt(2, inv.getAtados());
-            ps.setString(3, inv.getCodigo_aros());
-            ps.setString(4, inv.getTrato_adicional());
+            ps = con.prepareStatement(consultar);
+
+            ps.setString(1, inv.getCodigo_aros());
+            ps.setString(2, inv.getTrato_adicional());
             
-            ps.executeUpdate();
-            return true;
+            rs  = ps.executeQuery();
+            
+            if(rs.next()){
+                int stockAros = rs.getInt("aros");
+                int stockAtados = rs.getInt("atados");
+                
+                int nuevosAros = stockAros - inv.getAros();
+                int nuevosAtados = stockAtados - inv.getAtados();
+                
+                if (nuevosAros < 0 || nuevosAtados < 0){
+                    JOptionPane.showMessageDialog(null, "No hay suficiente stock. Favor de revisar las existencias");
+                    return false;
+                }else{
+                    JOptionPane.showMessageDialog(null, "Si hay existencias");
+                    ps = con.prepareStatement(actualizar);
+                    ps.setInt(1, nuevosAros);
+                    ps.setInt(2, nuevosAtados);
+                    ps.setString(3, inv.getCodigo_aros());
+                    ps.setString(4, inv.getTrato_adicional());
+                    
+                    ps.executeUpdate();
+                    return true;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el producto en la base de datos");
+                return false;
+            }
         }catch(SQLException e){
             System.out.println(e.toString());
             return false;
         }
     }
     
-//    public boolean ReducirStock(){
-        
-    //}
+    public boolean ReducirStock(String folio, int cantidad) throws SQLException{
+        String consult = "SELECT cantidad_disp FROM produccion_diaria WHERE folio = ?";
+        String update = "UPDATE produccion_diaria SET cantidad_disp = ?, WHERE folio = ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(consult);
+            
+            ps.setString(1, folio);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                int aros_disp = rs.getInt("cantidad_disp");
+                int nueva_cant = aros_disp - cantidad;
+                
+                if(nueva_cant < 0){
+                    JOptionPane.showMessageDialog(null, "No hay atados disponibles del folio "+folio);
+                    return false;
+                }else{
+                    ps = con.prepareStatement(update);
+                    ps.setInt(1, nueva_cant);
+                    ps.setString(2, folio);
+                    
+                    ps.executeUpdate();
+                    return true;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el producto en la base de datos");
+                return false;
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }

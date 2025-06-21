@@ -68,7 +68,7 @@ public class TipoAroDAO {
     
     public List ListarAros(){
         List<TipoAro> ListaAros = new ArrayList();
-        String sql = "SELECT * FROM db_aros";
+        String sql = "SELECT * FROM db_aros ORDER BY codigo ASC";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

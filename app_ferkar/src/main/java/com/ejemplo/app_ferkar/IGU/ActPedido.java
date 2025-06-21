@@ -41,6 +41,21 @@ public class ActPedido extends javax.swing.JFrame {
     
     int item;
     
+    public static int CantidadAros(int clave, int cantidad){
+        int ultimoNum = clave %10;
+        int multi;
+        
+        switch(ultimoNum){
+            case 4 -> multi = 25;
+            case 8 -> multi = 20;
+            case 5 -> multi = 10;
+            default -> {
+                return -1;
+            }
+        }
+        return cantidad * multi;
+    }
+    
     public ActPedido(Pedido pd) {
         initComponents();
         textF_client.setText(pd.getCliente());
@@ -614,44 +629,64 @@ public class ActPedido extends javax.swing.JFrame {
             }else{
                 estado = true;
                 stock_disponible = invd.ConsultarStock(folio);
+                JOptionPane.showMessageDialog(null, "Existencia: "+stock_disponible);
             }
             //Cantidad
             int cantidad = Integer.parseInt(textF_Cantidad.getText());
-            //serial
-            
-            if(estado==true && cantidad <= stock_disponible){
-                int cant_act = stock_disponible - cantidad;
-                item ++;
-                modelo = (DefaultTableModel) Tabla_Cargas.getModel();
-
-                ArrayList lista = new ArrayList();
-                lista.add(item);
-                lista.add(clave);
-                lista.add(detalle);
-                lista.add(trato);
-                lista.add(folio);
-                lista.add(cantidad);
-                Object[] O = new Object[5];
-                O[0] = lista.get(1);
-                O[1] = lista.get(2);
-                O[2] = lista.get(3);
-                O[3] = lista.get(4);
-                O[4] = lista.get(5);
-
-                modelo.addRow(O);
-                Tabla_Cargas.setModel(modelo);
-
-                textField_Clave.setText("");
-                jTextField_Folio.setText("");
-                textF_Cantidad.setText("");
-                OC_Reforzado.setSelected(false);
-                OC_Galvanizado.setSelected(false);
-                OC_Pintado.setSelected(false);
-                textField_Clave.requestFocus();
+            int aros = CantidadAros(Integer.parseInt(clave),cantidad);
+                      
+            if(estado==true && aros <= stock_disponible){
+                try {
+                    Inventario inv = new Inventario();
+                    inv.setCodigo_aros(clave);
+                    inv.setTrato_adicional(trato);
+                    inv.setAtados(cantidad);
+                    
+                    System.out.println("Cantidad de aros: " + aros);
+                    
+                    inv.setAros(aros);
+                    invd.ReducirStock(folio, aros);
+                    
+                    boolean exito = invd.ReducirExistencias(inv);
+                    
+                    if (!exito) {
+                        // Ya incluye mensaje interno si no hay stock suficiente
+                        System.out.println("No se ha podido llevar a cabo la reducción de existencias efectivamente");
+                    }else{
+                        item ++;
+                        modelo = (DefaultTableModel) Tabla_Cargas.getModel();
+                        
+                        ArrayList lista = new ArrayList();
+                        lista.add(item);
+                        lista.add(clave);
+                        lista.add(detalle);
+                        lista.add(trato);
+                        lista.add(folio);
+                        lista.add(cantidad);
+                        Object[] O = new Object[5];
+                        O[0] = lista.get(1);
+                        O[1] = lista.get(2);
+                        O[2] = lista.get(3);
+                        O[3] = lista.get(4);
+                        O[4] = lista.get(5);
+                        
+                        modelo.addRow(O);
+                        Tabla_Cargas.setModel(modelo);
+                        
+                        textField_Clave.setText("");
+                        jTextField_Folio.setText("");
+                        textF_Cantidad.setText("");
+                        OC_Reforzado.setSelected(false);
+                        OC_Galvanizado.setSelected(false);
+                        OC_Pintado.setSelected(false);
+                        textField_Clave.requestFocus();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
+                }      
             }else{
                 JOptionPane.showMessageDialog(null, "Favor de revisar el stock disponible");
             }
-            
         }else{
             JOptionPane.showMessageDialog(null, "Información Incompleta");
         }

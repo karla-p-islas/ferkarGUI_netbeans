@@ -39,7 +39,7 @@ public class SoldadorDAO {
     
     public List ListarEmpleados(){
         List<Soldador> ListaEmpleados = new ArrayList();
-        String sql = "SELECT * FROM db_soldadores";
+        String sql = "SELECT * FROM db_soldadores ORDER BY id_soldador ASC";
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
