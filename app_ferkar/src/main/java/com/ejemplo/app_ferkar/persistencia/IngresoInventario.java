@@ -10,16 +10,17 @@ public class IngresoInventario {
     private int caseta;
     private String hora_inicio;
     private String hora_fin;
-    private int codigo_aro;
+    private String codigo_aro;
     private String tratamiento_adicional;
     private int cantidad;
     private int cantidad_atados;
     private int cantidad_exs;
+    private String ubicacion;
     
     public IngresoInventario(){ 
     }
 
-    public IngresoInventario(String folio, String fecha, int id_soldador, int caseta, String hora_inicio, String hora_fin, int codigo_aro, String tratamiento_adicional, int cantidad, int cantidad_atados, int cantidad_exs) {
+    public IngresoInventario(String folio, String fecha, int id_soldador, int caseta, String hora_inicio, String hora_fin, String codigo_aro, String tratamiento_adicional, int cantidad, int cantidad_atados, int cantidad_exs, String ubicacion) {
         this.folio = folio;
         this.fecha = fecha;
         this.id_soldador = id_soldador;
@@ -31,6 +32,7 @@ public class IngresoInventario {
         this.cantidad = cantidad;
         this.cantidad_atados = cantidad_atados;
         this.cantidad_exs = cantidad_exs;
+        this.ubicacion = ubicacion;
     }
 
     public String getFolio() {
@@ -81,11 +83,11 @@ public class IngresoInventario {
         this.hora_fin = hora_fin;
     }
 
-    public int getCodigo_aro() {
+    public String getCodigo_aro() {
         return codigo_aro;
     }
 
-    public void setCodigo_aro(int codigo_aro) {
+    public void setCodigo_aro(String codigo_aro) {
         this.codigo_aro = codigo_aro;
     }
 
@@ -119,6 +121,14 @@ public class IngresoInventario {
 
     public void setCantidad_exs(int cantidad_exs) {
         this.cantidad_exs = cantidad_exs;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
     
 }

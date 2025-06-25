@@ -19,15 +19,24 @@ public class TipoAroDAO {
     PreparedStatement ps;
     ResultSet rs;
     
-    public TipoAro BuscarPro (String clave) throws SQLException{
+    public TipoAro BuscarPro(String clave) {
         TipoAro aro = new TipoAro();
         String sql = "SELECT * FROM db_aros WHERE codigo = ?";
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
             con = cn.getConnection();
+            if (con == null) {
+                System.out.println("No se pudo obtener conexión en BuscarPro. Demasiadas conexiones abiertas.");
+                return aro;
+            }
             ps = con.prepareStatement(sql);
             ps.setString(1, clave);
             rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 aro.setCodigo_aro(rs.getInt("codigo"));
                 aro.setMedida(rs.getString("medida"));
                 aro.setCalibre(rs.getInt("calibre"));
@@ -35,11 +44,28 @@ public class TipoAroDAO {
                 aro.setDescripcion_esp(rs.getString("descripcion_esp"));
                 aro.setDescripcion_gen(rs.getString("descripcion_gen"));
             }
-        }catch(SQLException e){
-            System.out.println(e.toString());
+        } catch (SQLException e) {
+            System.out.println("Error en BuscarPro: " + e.toString());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar ResultSet: " + ex.toString());
+            }
+            try {
+                if (ps != null) ps.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar PreparedStatement: " + ex.toString());
+            }
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar Connection: " + ex.toString());
+            }
         }
         return aro;
     }
+
     
     public boolean RegistrarAro(TipoAro aro){
         String sql = "INSERT INTO db_aros (codigo,medida,calibre,ancho,descripcion_esp,descripcion_gen) VALUES (?,?,?,?,?,?)";

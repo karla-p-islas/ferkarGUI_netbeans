@@ -588,17 +588,13 @@ public class ActPedido extends javax.swing.JFrame {
             //Obtener descripcion de la clave de aro
             String clave = textField_Clave.getText();
             String detalle = "";
-            try{
-                tipoA = tipoAd.BuscarPro(clave);
-                if (tipoA.getCodigo_aro() != 0){
-                    detalle = tipoA.getDescripcion_esp();
-                }else{
-                    textField_Clave.setText("");
-                    textField_Clave.requestFocus();
-                    JOptionPane.showMessageDialog(null, "Favor de ingresar un código de aro valido");
-                }
-            }catch(SQLException e){
-                System.out.println(e.toString());
+            tipoA = tipoAd.BuscarPro(clave);
+            if (tipoA.getCodigo_aro() != 0){
+                detalle = tipoA.getDescripcion_esp();
+            }else{
+                textField_Clave.setText("");
+                textField_Clave.requestFocus();
+                JOptionPane.showMessageDialog(null, "Favor de ingresar un código de aro valido");
             }
             
             //Tratamiento adicional
