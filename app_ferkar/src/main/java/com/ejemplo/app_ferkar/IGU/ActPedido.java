@@ -176,7 +176,6 @@ public class ActPedido extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1050, 800));
-        setPreferredSize(new java.awt.Dimension(1050, 800));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -265,7 +264,7 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.add(label_pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 190, -1, 30));
 
         comboBox_Estado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        comboBox_Estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedido", "En producción", "Cargado", "Enviado", "Envio incompleto", "Entregado", "Cancelado" }));
+        comboBox_Estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedido", "Enviado", "Envio incompleto", "Entregado", "Cancelado" }));
         comboBox_Estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox_EstadoActionPerformed(evt);
@@ -311,7 +310,7 @@ public class ActPedido extends javax.swing.JFrame {
         jPanel1.add(comboBox_transporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 190, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\Downloads\\ferkar_logo_150x90.jpg")); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 90));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, 90));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel2.setText("# Factura:");

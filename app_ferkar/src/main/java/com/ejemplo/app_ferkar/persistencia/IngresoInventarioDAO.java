@@ -83,7 +83,7 @@ public class IngresoInventarioDAO {
         ResultSet rs = null;
 
         try {
-            con = cn.getConnection(); // <-- esto podría regresar null si ya hay demasiadas conexiones
+            con = cn.getConnection();
             if (con == null) {
                 System.out.println("No se pudo establecer la conexión. Posiblemente hay demasiadas conexiones abiertas.");
                 return Inv;
@@ -133,92 +133,81 @@ public class IngresoInventarioDAO {
         return Inv;
     }  
     
-    public List InventarioF(String folio){
-        List<IngresoInventario> Inv = new ArrayList();
-        String sql = "SELECT * FROM produccion_diaria WHERE folio = ?";
-        try{
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, folio);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                IngresoInventario inv = new IngresoInventario();
-                inv.setFolio(rs.getString("folio"));
-                inv.setFecha(rs.getString("fecha"));
-                inv.setId_soldador(rs.getInt("id_soldador"));
-                inv.setCaseta(rs.getInt("caseta"));
-                inv.setHora_inicio(rs.getString("hora_inicio"));
-                inv.setHora_fin(rs.getString("hora_fin"));
-                inv.setCodigo_aro(rs.getString("codigo_aro"));
-                inv.setTratamiento_adicional(rs.getString("tratamiento_adicional"));
-                inv.setCantidad(rs.getInt("cantidad"));
-                inv.setCantidad_atados(rs.getInt("cantidad_atados"));
-                inv.setCantidad_exs(rs.getInt("cantidad_disp"));
-                inv.setUbicacion(rs.getString("ubicacion"));
-                Inv.add(inv);
+    public List<IngresoInventario> InventarioConsulta(int opcion, String folio, String clave, String ubicacion, String fecha) throws ParseException {
+        List<IngresoInventario> inventario = new ArrayList<>();
+        String sql;
+
+        switch (opcion) {
+            case 1 -> sql = "SELECT * FROM produccion_diaria WHERE folio = ? ORDER BY folio DESC";
+            case 2 -> sql = "SELECT * FROM produccion_diaria WHERE fecha = ? ORDER BY folio DESC";
+            case 3 -> sql = "SELECT * FROM produccion_diaria WHERE ubicacion = ? ORDER BY folio DESC";
+            case 4 -> sql = "SELECT * FROM produccion_diaria WHERE codigo_aro = ? ORDER BY folio DESC";
+            case 5 -> sql = "SELECT * FROM produccion_diaria WHERE codigo_aro = ? AND ubicacion = ? ORDER BY folio DESC";
+            case 6 -> sql = "SELECT * FROM produccion_diaria WHERE ubicacion = ? AND fecha = ? ORDER BY folio DESC";
+            case 7 -> sql = "SELECT * FROM produccion_diaria WHERE codigo_aro = ? AND fecha = ? ORDER BY folio DESC";
+            case 8 -> sql = "SELECT * FROM produccion_diaria WHERE codigo_aro = ? AND ubicacion = ? AND fecha = ? ORDER BY folio DESC";
+            default -> {
+                System.out.println("Opción no válida");
+                return inventario;
             }
-        }catch(SQLException e){
-            System.out.println(e.toString());
         }
-        return Inv;
-    }
-    
-    public List InventarioC(int pagina, String clave){
-        List<IngresoInventario> Inv = new ArrayList<>();
-        int offset = (pagina - 1) * 28;
-
-        String sql = "SELECT * FROM produccion_diaria WHERE codigo_aro = ? ORDER BY folio DESC LIMIT 28 OFFSET ?";
-
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            con = cn.getConnection(); // <-- esto podría regresar null si ya hay demasiadas conexiones
-            if (con == null) {
-                System.out.println("No se pudo establecer la conexión. Posiblemente hay demasiadas conexiones abiertas.");
-                return Inv;
+        try (Connection con = cn.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+            java.sql.Date sqlDate = null;
+            if (fecha != null && !fecha.isEmpty() && opcion >= 2) {
+                SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yy");
+                Date utilDate = sdfFecha.parse(fecha);
+                sqlDate = new java.sql.Date(utilDate.getTime());
             }
-            ps = con.prepareStatement(sql);
-            ps.setString(1, clave);
-            ps.setInt(2, offset);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                IngresoInventario inv = new IngresoInventario();
-                inv.setFolio(rs.getString("folio"));
-                inv.setFecha(rs.getString("fecha"));
-                inv.setId_soldador(rs.getInt("id_soldador"));
-                inv.setCaseta(rs.getInt("caseta"));
-                inv.setHora_inicio(rs.getString("hora_inicio"));
-                inv.setHora_fin(rs.getString("hora_fin"));
-                inv.setCodigo_aro(rs.getString("codigo_aro"));
-                inv.setTratamiento_adicional(rs.getString("tratamiento_adicional"));
-                inv.setCantidad(rs.getInt("cantidad"));
-                inv.setCantidad_atados(rs.getInt("cantidad_atados"));
-                inv.setCantidad_exs(rs.getInt("cantidad_disp"));
-                inv.setUbicacion(rs.getString("ubicacion"));
-                Inv.add(inv);
+            switch (opcion) {
+                case 1 -> ps.setString(1, folio);
+                case 2 -> ps.setDate(1, sqlDate);
+                case 3 -> ps.setString(1, ubicacion);
+                case 4 -> ps.setString(1, clave);
+                case 5 -> {
+                    ps.setString(1, clave);
+                    ps.setString(2, ubicacion);
+                }
+                case 6 -> {
+                    ps.setString(1, ubicacion);
+                    ps.setDate(2, sqlDate);
+                }
+                case 7 -> {
+                    ps.setString(1, clave);
+                    ps.setDate(2, sqlDate);
+                }
+                case 8 -> {
+                    ps.setString(1, clave);
+                    ps.setString(2, ubicacion);
+                    ps.setDate(3, sqlDate);
+                }
             }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    IngresoInventario inv = new IngresoInventario();
+                    inv.setFolio(rs.getString("folio"));
+                    inv.setFecha(rs.getString("fecha"));
+                    inv.setId_soldador(rs.getInt("id_soldador"));
+                    inv.setCaseta(rs.getInt("caseta"));
+                    inv.setHora_inicio(rs.getString("hora_inicio"));
+                    inv.setHora_fin(rs.getString("hora_fin"));
+                    inv.setCodigo_aro(rs.getString("codigo_aro"));
+                    inv.setTratamiento_adicional(rs.getString("tratamiento_adicional"));
+                    inv.setCantidad(rs.getInt("cantidad"));
+                    inv.setCantidad_atados(rs.getInt("cantidad_atados"));
+                    inv.setCantidad_exs(rs.getInt("cantidad_disp"));
+                    inv.setUbicacion(rs.getString("ubicacion"));
+                    inventario.add(inv);
+                }
+            }
+
         } catch (SQLException e) {
-            System.out.println("Error SQL: " + e.toString());
-        } finally {
-            // Cerramos en orden inverso
-            try {
-                if (rs != null) rs.close();
-            } catch (SQLException ex) {
-                System.out.println("Error al cerrar ResultSet: " + ex.toString());
-            }
-            try {
-                if (ps != null) ps.close();
-            } catch (SQLException ex) {
-                System.out.println("Error al cerrar PreparedStatement: " + ex.toString());
-            }
-            try {
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                System.out.println("Error al cerrar Connection: " + ex.toString());
-            }
+            System.out.println("Error SQL: " + e.getMessage());
         }
-        return Inv;
+
+        return inventario;
     }
+
               
 }

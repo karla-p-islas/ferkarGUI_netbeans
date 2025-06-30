@@ -131,7 +131,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButton_P_Buscar = new javax.swing.JButton();
         jButton_P_Limpiar = new javax.swing.JButton();
-        jButton_P_Detalles = new javax.swing.JButton();
+        jButton_P_DetallePedido = new javax.swing.JButton();
+        jButton_P_DetalleCarga = new javax.swing.JButton();
         jPanel_IngresoInventario = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -199,12 +200,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Button_FP_Limpiar = new javax.swing.JButton();
         jBox_FP_ubicacion = new javax.swing.JComboBox<>();
         Button_FP_Detalles = new javax.swing.JButton();
-        Button_FP_Modificar = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
-        TextField_FP_Semana = new javax.swing.JTextField();
         jButton_despues = new javax.swing.JButton();
         jButton_antes = new javax.swing.JButton();
         texto_FP_estado = new javax.swing.JTextArea();
+        jFormat_FP_fecha = new javax.swing.JFormattedTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
@@ -435,7 +435,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Fecha de Pedido:");
+        jLabel3.setText("Fecha Entrega:");
 
         jTextField_NP_CantidadAros.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
@@ -824,12 +824,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton_P_Detalles.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        jButton_P_Detalles.setText("Detalles");
-        jButton_P_Detalles.setContentAreaFilled(false);
-        jButton_P_Detalles.addActionListener(new java.awt.event.ActionListener() {
+        jButton_P_DetallePedido.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        jButton_P_DetallePedido.setText("Detalle Pedido");
+        jButton_P_DetallePedido.setContentAreaFilled(false);
+        jButton_P_DetallePedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_P_DetallesActionPerformed(evt);
+                jButton_P_DetallePedidoActionPerformed(evt);
+            }
+        });
+
+        jButton_P_DetalleCarga.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        jButton_P_DetalleCarga.setText("Detalle O. Carga");
+        jButton_P_DetalleCarga.setContentAreaFilled(false);
+        jButton_P_DetalleCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_P_DetalleCargaActionPerformed(evt);
             }
         });
 
@@ -856,9 +865,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                         .addGap(26, 26, 26))
                                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jButton_P_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton_P_DetalleCarga, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                            .addComponent(jButton_P_DetallePedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(81, 81, 81))))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -882,8 +894,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton_P_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_P_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton_P_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(213, 213, 213))
+                .addComponent(jButton_P_DetallePedido, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_P_DetalleCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
 
         javax.swing.GroupLayout jPanel_HistorialPedidosLayout = new javax.swing.GroupLayout(jPanel_HistorialPedidos);
@@ -1509,18 +1523,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        Button_FP_Modificar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        Button_FP_Modificar.setText("Modificar Folio");
-        Button_FP_Modificar.setContentAreaFilled(false);
-        Button_FP_Modificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button_FP_ModificarActionPerformed(evt);
-            }
-        });
-
         jLabel40.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel40.setText("Semana:");
+        jLabel40.setText("Fecha:");
 
         jButton_despues.setIcon(new javax.swing.ImageIcon("C:\\Users\\kpaor\\OneDrive\\Escritorio\\RASTREABILIDAD\\flecha_der_img.png")); // NOI18N
         jButton_despues.setBorder(null);
@@ -1549,6 +1554,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         texto_FP_estado.setAutoscrolls(false);
         texto_FP_estado.setBorder(null);
         texto_FP_estado.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jFormat_FP_fecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1591,14 +1598,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                         .addGroup(jPanel14Layout.createSequentialGroup()
                                             .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(TextField_FP_Semana, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jFormat_FP_fecha))
                                         .addComponent(label_PedidosActivos2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(texto_FP_estado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Button_FP_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Button_FP_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(29, 29, 29)
+                                .addComponent(Button_FP_Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -1608,11 +1613,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(label_PedidosActivos1)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(89, 89, 89)
                         .addComponent(Button_FP_Detalles)
-                        .addGap(18, 18, 18)
-                        .addComponent(Button_FP_Modificar)
-                        .addGap(58, 58, 58)
+                        .addGap(69, 69, 69)
                         .addComponent(label_PedidosActivos2)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1628,9 +1631,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jBox_FP_ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextField_FP_Semana, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormat_FP_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel40))
-                        .addGap(23, 23, 23)
+                        .addGap(18, 18, 18)
                         .addComponent(texto_FP_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1643,7 +1646,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_antes)
                     .addComponent(jButton_despues))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_FoliosLayout = new javax.swing.GroupLayout(jPanel_Folios);
@@ -1984,7 +1987,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ii.setCodigo_aro(jText_II_ClaveAro.getText());
             ii.setTratamiento_adicional(TratamientoA);
             ii.setCantidad(Integer.parseInt(jText_II_Cantidad.getText()));
-            ii.setCantidad_exs(Integer.parseInt(jText_II_Cantidad.getText()));
             String ubi = (String) jBox_ubicacion.getSelectedItem();
             ii.setUbicacion(ubi);
             int clave = Integer.parseInt(jText_II_ClaveAro.getText());
@@ -2000,6 +2002,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se puede registrar: cantidad atados inválida");
             }else{
                 ii.setCantidad_atados(resultado);
+                ii.setCantidad_exs(resultado);
                 inv.setAtados(resultado);
                 iid.RegistrarInventario(ii);    //registra en la tabla "produccion_diaria"
                 invd.Existencias(inv);          //registra en la tabla "existencia_aros"
@@ -2246,9 +2249,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Button_Inv_BuscarActionPerformed
 
-    private void jButton_P_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_DetallesActionPerformed
+    private void jButton_P_DetallePedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_DetallePedidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_P_DetallesActionPerformed
+    }//GEN-LAST:event_jButton_P_DetallePedidoActionPerformed
 
     private void button_FoliosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_FoliosActionPerformed
         // TODO add your handling code here:
@@ -2277,22 +2280,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void Button_FP_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_FP_BuscarActionPerformed
         // TODO add your handling code here:
         modelo.setRowCount(0);
-        if(!"".equals(TextField_FP_Folio.getText())){
-            InvF();
-            TextField_FP_Clave.setText("");
-            jBox_FP_ubicacion.setSelectedIndex(0);
-            TextField_FP_Semana.setText("");
-        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText())){
+        int opcion = 0;
+        if(!"".equals(TextField_FP_Folio.getText()) && "".equals(TextField_FP_Clave.getText()) && "".equals(jFormat_FP_fecha.getText()) && jBox_FP_ubicacion.getSelectedIndex() == 0){
+            opcion = 1;
+            //TextField_FP_Clave.setText("");
+            //jBox_FP_ubicacion.setSelectedIndex(0);
+            //jFormat_FP_fecha.setText("");
+            texto_FP_estado.setText("Mostrando solo folio coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && "".equals(jFormat_FP_fecha.getText()) && jBox_FP_ubicacion.getSelectedIndex() == 0){
             //caso: clave
-        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && !"".equals(TextField_FP_Semana.getText())){
-            //caso: clave y semana
-        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0){
+            opcion = 4;
+            texto_FP_estado.setText("Mostrando solo clave coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && !"".equals(jFormat_FP_fecha.getText()) && jBox_FP_ubicacion.getSelectedIndex() == 0){
+            //caso: clave y fecha
+            opcion = 7;
+            texto_FP_estado.setText("Mostrando clave y fecha coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0 && !"".equals(jFormat_FP_fecha.getText())){
             //caso: clave y ubicacion
-        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0 && !"".equals(TextField_FP_Semana.getText())){
-            //caso: clave, semana y ubicacion
-        }else if("".equals(TextField_FP_Folio.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0 && !"".equals(TextField_FP_Semana.getText())){
+            opcion = 5;
+            texto_FP_estado.setText("Mostrando clave y ubicacion coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && !"".equals(TextField_FP_Clave.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0 && !"".equals(jFormat_FP_fecha.getText())){
+            //caso: clave, fecha y ubicacion
+            opcion = 8;
+            texto_FP_estado.setText("Mostrando clave, fecha y ubicacion coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0 && !"".equals(jFormat_FP_fecha.getText()) && jBox_FP_ubicacion.getSelectedIndex() == 0){
             //caso: ubicacion y semana
+            opcion = 6;
+            texto_FP_estado.setText("Mostrando ubicacion y fecha coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && "".equals(TextField_FP_Clave.getText()) && jBox_FP_ubicacion.getSelectedIndex() == 0 && !"".equals(jFormat_FP_fecha.getText())){
+            //caso: fecha
+            opcion = 2;
+            texto_FP_estado.setText("Mostrando fecha coincidente");
+        }else if("".equals(TextField_FP_Folio.getText()) && "".equals(TextField_FP_Clave.getText()) && jBox_FP_ubicacion.getSelectedIndex() != 0 && "".equals(jFormat_FP_fecha.getText())){
+            //caso: ubicacion
+            opcion = 3;
+            texto_FP_estado.setText("Mostrando ubicacion coincidente");
         }
+        InventarioConsulta(opcion);
     }//GEN-LAST:event_Button_FP_BuscarActionPerformed
 
     private void Button_FP_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_FP_LimpiarActionPerformed
@@ -2301,6 +2325,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextField_FP_Clave.setText("");
         jBox_FP_ubicacion.setSelectedIndex(0);
         texto_FP_estado.setText("");
+        jFormat_FP_fecha.setText("");
         modelo.setRowCount(0);
         try {
             ListarFolios();
@@ -2316,10 +2341,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void Button_FP_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_FP_DetallesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Button_FP_DetallesActionPerformed
-
-    private void Button_FP_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_FP_ModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Button_FP_ModificarActionPerformed
 
     private void jButton_antesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_antesActionPerformed
         // TODO add your handling code here:
@@ -2346,6 +2367,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         System.out.println("pagina actual (interfaz): "+pagina_act);
     }//GEN-LAST:event_jButton_despuesActionPerformed
+
+    private void jButton_P_DetalleCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_DetalleCargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_P_DetalleCargaActionPerformed
 
     private void RegistrarVenta() throws ParseException{
         String cliente = (String) jCBox_NP_cliente.getSelectedItem();
@@ -2616,51 +2641,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Tabla_Folios.setModel(modelo);
     }
     
-    private void InvF(){
-        List<IngresoInventario> Folios = iid.InventarioF(TextField_FP_Folio.getText());
-        modelo = (DefaultTableModel) Tabla_Folios.getModel();
-        Object[] ob = new Object[6];
-        for (int i = 0; i <Folios.size(); i++){
-            if(!"".equals(Folios.get(i).getFolio())){
-                tipoA = tipoAd.BuscarPro(Folios.get(i).getCodigo_aro());
-                ob[0] = Folios.get(i).getFolio();
-                ob[1] = Folios.get(i).getCodigo_aro();
-                ob[2] = tipoA.getDescripcion_esp();
-                ob[3] = Folios.get(i).getCantidad();
-                ob[4] = Folios.get(i).getCantidad_exs();
-                ob[5] = Folios.get(i).getUbicacion();
-                modelo.addRow(ob);
+    private void InventarioConsulta(int opcion){
+        try {
+            String folio = TextField_FP_Folio.getText();
+            String clave = TextField_FP_Clave.getText();
+            String fecha = jFormat_FP_fecha.getText();
+            String ubicacion = (String) jBox_FP_ubicacion.getSelectedItem();
+            List<IngresoInventario> Folios = iid.InventarioConsulta(opcion, folio, clave, ubicacion, fecha);
+            modelo = (DefaultTableModel) Tabla_Folios.getModel();
+            Object[] ob = new Object[6];
+            for (int i = 0; i <Folios.size(); i++){
+                if(!"".equals(Folios.get(i).getFolio())){
+                    tipoA = tipoAd.BuscarPro(Folios.get(i).getCodigo_aro());
+                    ob[0] = Folios.get(i).getFolio();
+                    ob[1] = Folios.get(i).getCodigo_aro();
+                    ob[2] = tipoA.getDescripcion_esp();
+                    ob[3] = Folios.get(i).getCantidad();
+                    ob[4] = Folios.get(i).getCantidad_exs();
+                    ob[5] = Folios.get(i).getUbicacion();
+                    modelo.addRow(ob);
+                }
             }
+            Tabla_Folios.setModel(modelo);
+            //texto_FP_estado.setText("Mostrando solo folio coincidiente");
+        } catch (ParseException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Tabla_Folios.setModel(modelo);
-        texto_FP_estado.setText("Mostrando solo folio coincidiente");
-    }
-    
-    private void InvC(){
-        List<IngresoInventario> Folios = iid.InventarioF(TextField_FP_Folio.getText()); //cambiar a clave
-        modelo = (DefaultTableModel) Tabla_Folios.getModel();
-        Object[] ob = new Object[6];
-        for (int i = 0; i <Folios.size(); i++){
-            if(!"".equals(Folios.get(i).getFolio())){
-                tipoA = tipoAd.BuscarPro(Folios.get(i).getCodigo_aro());
-                ob[0] = Folios.get(i).getFolio();
-                ob[1] = Folios.get(i).getCodigo_aro();
-                ob[2] = tipoA.getDescripcion_esp();
-                ob[3] = Folios.get(i).getCantidad();
-                ob[4] = Folios.get(i).getCantidad_exs();
-                ob[5] = Folios.get(i).getUbicacion();
-                modelo.addRow(ob);
-            }
-        }
-        Tabla_Folios.setModel(modelo);
-        texto_FP_estado.setText("Mostrando solo folio coincidiente");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_FP_Buscar;
     private javax.swing.JButton Button_FP_Detalles;
     private javax.swing.JButton Button_FP_Limpiar;
-    private javax.swing.JButton Button_FP_Modificar;
     private javax.swing.JButton Button_II_Limpiar;
     private javax.swing.JButton Button_II_Terminar;
     private javax.swing.JButton Button_Inv_Buscar;
@@ -2676,7 +2688,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable Tabla_ResumenOrden;
     private javax.swing.JTextField TextField_FP_Clave;
     private javax.swing.JTextField TextField_FP_Folio;
-    private javax.swing.JTextField TextField_FP_Semana;
     private javax.swing.JFormattedTextField TextField_FechaFinal;
     private javax.swing.JFormattedTextField TextField_FechaInicial;
     private javax.swing.JTextField TextField_Inv_Ancho;
@@ -2700,7 +2711,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_NP_Ingresar;
     private javax.swing.JButton jButton_NP_Limpiar;
     private javax.swing.JButton jButton_P_Buscar;
-    private javax.swing.JButton jButton_P_Detalles;
+    private javax.swing.JButton jButton_P_DetalleCarga;
+    private javax.swing.JButton jButton_P_DetallePedido;
     private javax.swing.JButton jButton_P_Limpiar;
     private javax.swing.JButton jButton_TerminarOrden;
     private javax.swing.JButton jButton_antes;
@@ -2710,6 +2722,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox_Pintado;
     private javax.swing.JCheckBox jCheckBox_Reforzado;
     private javax.swing.JFormattedTextField jFormText_II_Fecha;
+    private javax.swing.JFormattedTextField jFormat_FP_fecha;
     private javax.swing.JFormattedTextField jFormattedText_II_HoraFin;
     private javax.swing.JFormattedTextField jFormattedText_II_HoraInicio;
     private javax.swing.JFormattedTextField jFormattedText_NP_FechaEntrega;

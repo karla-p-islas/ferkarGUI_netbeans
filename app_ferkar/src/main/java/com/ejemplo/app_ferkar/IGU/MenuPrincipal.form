@@ -705,7 +705,7 @@
                               <Font name="Roboto" size="18" style="0"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="4"/>
-                            <Property name="text" type="java.lang.String" value="Fecha de Pedido:"/>
+                            <Property name="text" type="java.lang.String" value="Fecha Entrega:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="jTextField_NP_CantidadAros">
@@ -984,9 +984,13 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                                      <Component id="jButton_P_Detalles" min="-2" pref="104" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jButton_P_DetalleCarga" pref="173" max="32767" attributes="0"/>
+                                          <Component id="jButton_P_DetallePedido" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1017,8 +1021,10 @@
                                   <Component id="jButton_P_Limpiar" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton_P_Detalles" min="-2" pref="39" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                              <Component id="jButton_P_DetallePedido" min="-2" pref="39" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButton_P_DetalleCarga" min="-2" pref="39" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1216,16 +1222,28 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_P_LimpiarActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton_P_Detalles">
+                    <Component class="javax.swing.JButton" name="jButton_P_DetallePedido">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Roboto Medium" size="18" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Detalles"/>
+                        <Property name="text" type="java.lang.String" value="Detalle Pedido"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_P_DetallesActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_P_DetallePedidoActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_P_DetalleCarga">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Roboto Medium" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Detalle O. Carga"/>
+                        <Property name="contentAreaFilled" type="boolean" value="false"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_P_DetalleCargaActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -2165,7 +2183,7 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="jLabel40" min="-2" pref="74" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="TextField_FP_Semana" min="-2" pref="140" max="-2" attributes="0"/>
+                                                          <Component id="jFormat_FP_fecha" max="32767" attributes="0"/>
                                                       </Group>
                                                       <Component id="label_PedidosActivos2" alignment="1" min="-2" pref="196" max="-2" attributes="0"/>
                                                       <Component id="texto_FP_estado" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
@@ -2173,11 +2191,8 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="Button_FP_Detalles" min="-2" pref="196" max="-2" attributes="0"/>
-                                                  <Component id="Button_FP_Modificar" min="-2" pref="196" max="-2" attributes="0"/>
-                                              </Group>
+                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Component id="Button_FP_Detalles" min="-2" pref="196" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2193,11 +2208,9 @@
                               <Component id="label_PedidosActivos1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                                       <Component id="Button_FP_Detalles" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="Button_FP_Modificar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                       <Component id="label_PedidosActivos2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -2216,10 +2229,10 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="TextField_FP_Semana" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="jFormat_FP_fecha" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                           <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="texto_FP_estado" min="-2" pref="41" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -2237,7 +2250,7 @@
                                   <Component id="jButton_antes" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton_despues" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="35" max="32767" attributes="0"/>
+                              <EmptySpace pref="38" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2411,28 +2424,14 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_FP_DetallesActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="Button_FP_Modificar">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Roboto Medium" size="18" style="0"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Modificar Folio"/>
-                        <Property name="contentAreaFilled" type="boolean" value="false"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_FP_ModificarActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel40">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Roboto" size="16" style="0"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="Semana:"/>
+                        <Property name="text" type="java.lang.String" value="Fecha:"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="TextField_FP_Semana">
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_despues">
                       <Properties>
@@ -2478,6 +2477,13 @@
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                           <Color id="Cursor de Texto"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="jFormat_FP_fecha">
+                      <Properties>
+                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                          <Format subtype="1" type="1"/>
                         </Property>
                       </Properties>
                     </Component>

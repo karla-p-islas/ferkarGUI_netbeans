@@ -60,6 +60,7 @@ com\ejemplo\app_ferkar\IGU\ActPedido$15.class
 com\ejemplo\app_ferkar\IGU\Nuevos$15.class
 com\ejemplo\app_ferkar\IGU\ActPedido$9.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$40.class
+com\ejemplo\app_ferkar\IGU\DetallePedido.class
 com\ejemplo\app_ferkar\persistencia\PedidoDAO.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$12.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$47.class
