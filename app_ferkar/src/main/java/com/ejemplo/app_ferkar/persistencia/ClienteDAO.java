@@ -88,6 +88,12 @@ public class ClienteDAO {
             }
         }catch(SQLException e2){
             System.out.println(e2.toString());
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e3){
+                System.out.println(e3.toString());
+            }
         }
         return Clientes;
     }
@@ -148,6 +154,12 @@ public class ClienteDAO {
         }catch(SQLException e7){
             System.out.println(e7.toString());
             return false;
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e6){
+                System.out.println(e6.toString());
+            }
         }
     }
 }

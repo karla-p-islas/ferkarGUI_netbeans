@@ -5,6 +5,7 @@
 package com.ejemplo.app_ferkar.IGU;
 import com.ejemplo.app_ferkar.IGU.ActPedido;
 import com.ejemplo.app_ferkar.IGU.Nuevos;
+import com.ejemplo.app_ferkar.IGU.DetPedido;
 import com.ejemplo.app_ferkar.persistencia.Cliente;
 import com.ejemplo.app_ferkar.persistencia.ClienteDAO;
 import com.ejemplo.app_ferkar.persistencia.DetallePedido;
@@ -2155,7 +2156,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_button_IngresoInventarioActionPerformed
 
     private void jButton_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DetallesActionPerformed
+        int fila = Tabla_PedidosActivos.getSelectedRow();
         
+        if (fila!= -1){
+            Pedido pd = new Pedido();
+            pd.setNum_pedido((String) Tabla_PedidosActivos.getValueAt(fila, 0));
+            pd.setCliente((String) Tabla_PedidosActivos.getValueAt(fila, 1));
+            pd.setFecha((String) Tabla_PedidosActivos.getValueAt(fila, 2));
+            pd.setEstado((String) Tabla_PedidosActivos.getValueAt(fila, 3));
+            
+            DetPedido update = new DetPedido(pd);
+            update.setVisible(true);
+            update.setLocationRelativeTo(null);
+        }else{
+           JOptionPane.showMessageDialog(null, "Seleccione un pedido primero");
+        } 
         
     }//GEN-LAST:event_jButton_DetallesActionPerformed
 
