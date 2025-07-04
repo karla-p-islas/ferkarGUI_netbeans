@@ -72,4 +72,6 @@ public class CargaDAO {
         return rowsAffected;
     }
     
+    //public 
+    
 }

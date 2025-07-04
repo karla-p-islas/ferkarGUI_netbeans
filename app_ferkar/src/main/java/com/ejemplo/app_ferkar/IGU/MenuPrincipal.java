@@ -2385,6 +2385,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton_P_DetalleCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_DetalleCargaActionPerformed
         // TODO add your handling code here:
+        int fila = Tabla_HistorialPedidos.getSelectedRow();
+        
+        if (fila!= -1){
+            Pedido pd = new Pedido();
+            pd.setNum_pedido((String) Tabla_HistorialPedidos.getValueAt(fila, 0));
+            pd.setCliente((String) Tabla_HistorialPedidos.getValueAt(fila, 1));
+            pd.setFecha((String) Tabla_HistorialPedidos.getValueAt(fila, 2));
+            pd.setEstado((String) Tabla_HistorialPedidos.getValueAt(fila, 3));
+            
+            DetOrdCarga update = new DetOrdCarga(pd);
+            update.setVisible(true);
+            update.setLocationRelativeTo(null);
+        }else{
+           JOptionPane.showMessageDialog(null, "Seleccione un pedido primero");
+        }
     }//GEN-LAST:event_jButton_P_DetalleCargaActionPerformed
 
     private void RegistrarVenta() throws ParseException{

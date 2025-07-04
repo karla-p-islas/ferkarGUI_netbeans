@@ -9,14 +9,14 @@ public class DetalleCarga {
     private String num_serial;
     private String folio_orden;
     private String folio_aro;
-    private int clave;
+    private String clave;
     private String tratamiento_adicional;
     private int cantidad;
 
     public DetalleCarga() {
     }
 
-    public DetalleCarga(String num_serial, String folio_orden, String folio_aro, int clave, String tratamiento_adicional, int cantidad) {
+    public DetalleCarga(String num_serial, String folio_orden, String folio_aro, String clave, String tratamiento_adicional, int cantidad) {
         this.num_serial = num_serial;
         this.folio_orden = folio_orden;
         this.folio_aro = folio_aro;
@@ -49,11 +49,11 @@ public class DetalleCarga {
         this.folio_aro = folio_aro;
     }
 
-    public int getClave() {
+    public String getClave() {
         return clave;
     }
 
-    public void setClave(int clave) {
+    public void setClave(String clave) {
         this.clave = clave;
     }
 

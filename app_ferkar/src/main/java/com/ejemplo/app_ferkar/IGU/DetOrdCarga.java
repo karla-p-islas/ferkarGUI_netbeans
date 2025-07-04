@@ -41,14 +41,14 @@ public class DetOrdCarga extends javax.swing.JFrame {
             modelo.removeRow(i);
             i = i-1;
         }
-        Object[] ob1 = new Object[4];
+        Object[] ob1 = new Object[5];
         for(int i = 0; i < ListaDet.size(); i++){
             String clave = ListaDet.get(i).getCodigo_aro();
             tipoA = tipoAd.BuscarPro(clave);
             ob1[0] = clave;
             ob1[1] = tipoA.getDescripcion_gen();
             ob1[2] = ListaDet.get(i).getTratamiento_adicional();
-            ob1[3] = ListaDet.get(i).getCantidad();
+            ob1[4] = ListaDet.get(i).getCantidad();
             modelo.addRow(ob1);
         }
         jTableDetalles.setModel(modelo);
@@ -88,7 +88,6 @@ public class DetOrdCarga extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(740, 650));
-        setPreferredSize(new java.awt.Dimension(740, 650));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(760, 700));
@@ -151,7 +150,7 @@ public class DetOrdCarga extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableDetalles);
         if (jTableDetalles.getColumnModel().getColumnCount() > 0) {
             jTableDetalles.getColumnModel().getColumn(0).setResizable(false);
-            jTableDetalles.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTableDetalles.getColumnModel().getColumn(0).setPreferredWidth(30);
             jTableDetalles.getColumnModel().getColumn(1).setResizable(false);
             jTableDetalles.getColumnModel().getColumn(1).setPreferredWidth(150);
             jTableDetalles.getColumnModel().getColumn(2).setResizable(false);
@@ -359,10 +358,6 @@ public class DetOrdCarga extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_button_SalirActionPerformed
 
-    private void TextField_FolioOrdCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_FolioOrdCargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_FolioOrdCargaActionPerformed
-
     private void TextField_ModoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_ModoPagoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_ModoPagoActionPerformed
@@ -378,6 +373,10 @@ public class DetOrdCarga extends javax.swing.JFrame {
     private void TextField_TransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_TransporteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_TransporteActionPerformed
+
+    private void TextField_FolioOrdCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_FolioOrdCargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_FolioOrdCargaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TextField_Cliente;

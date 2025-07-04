@@ -103,7 +103,7 @@ public class ActPedido extends javax.swing.JFrame {
             for(int i = 0; i<Tabla_Cargas.getRowCount(); i++){
                 String serial = textField_OrdenCarga.getText() + "-" + i;
                 String folio_orden = textField_OrdenCarga.getText();
-                int clave = Integer.parseInt(Tabla_Cargas.getValueAt(i, 0).toString());
+                String clave = Tabla_Cargas.getValueAt(i, 0).toString();
                 String folio_aro = Tabla_Cargas.getValueAt(i, 3).toString();
                 String trato_ad = Tabla_Cargas.getValueAt(i, 2).toString();
                 int cantidad = Integer.parseInt(Tabla_Cargas.getValueAt(i, 4).toString());
@@ -515,7 +515,7 @@ public class ActPedido extends javax.swing.JFrame {
                 ActEstado(folio,estado);
                 fin = true;
                 break;
-            case "Cargado":
+            case "Enviado":
                 ActEstado(folio,estado);
             {
                 try {
@@ -527,14 +527,8 @@ public class ActPedido extends javax.swing.JFrame {
             }
                 fin = true;
                 break;
-
-            case "Enviado":
-                ActEstado(folio,estado);
-                fin = true;
-                break;
             case "Envio incompleto":
                 ActEstado(folio,estado);
-                //agregar ArosCargados
                 {
                 try {
                     InfoCarga();
@@ -630,20 +624,21 @@ public class ActPedido extends javax.swing.JFrame {
             int cantidad = Integer.parseInt(textF_Cantidad.getText());
             int aros = CantidadAros(Integer.parseInt(clave),cantidad);
                       
-            if(estado==true && aros <= stock_disponible){
+            if(estado==true && cantidad <= stock_disponible){
                 try {
                     Inventario inv = new Inventario();
                     inv.setCodigo_aros(clave);
                     inv.setTrato_adicional(trato);
                     inv.setAtados(cantidad);
                     
-                    System.out.println("Cantidad de aros: " + aros);
+                    System.out.println("Entro al if (estado==true && aros <= stock_disponible)");
                     
                     inv.setAros(aros);
-                    invd.ReducirStock(folio, aros);
+                    invd.ReducirStock(folio, cantidad);
                     
                     boolean exito = invd.ReducirExistencias(inv);
-                    
+                    System.out.println("Tab: ActPedido");
+                    System.out.println("Estado de 'exito': "+exito);
                     if (!exito) {
                         // Ya incluye mensaje interno si no hay stock suficiente
                         System.out.println("No se ha podido llevar a cabo la reducción de existencias efectivamente");
