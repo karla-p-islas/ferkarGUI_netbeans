@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -72,6 +74,60 @@ public class CargaDAO {
         return rowsAffected;
     }
     
-    //public 
+    public List ListarDetCarga(String folio_orden) throws SQLException{
+        List<DetalleCarga> DetCarga = new ArrayList();
+        String sql = "SELECT * FROM detalle_carga WHERE folio_orden = ? ORDER BY num_serial ASC";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio_orden);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                DetalleCarga dc = new DetalleCarga();
+                dc.setNum_serial(rs.getString("num_serial"));
+                dc.setFolio_orden(rs.getString("folio_orden"));
+                dc.setFolio_aro(rs.getString("folio_aro"));
+                dc.setClave(rs.getString("clave"));
+                dc.setTratamiento_adicional(rs.getString("tratamiento_adicional"));
+                dc.setCantidad(rs.getInt("cantidad"));
+                DetCarga.add(dc);
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e3){
+                System.out.println(e3.toString());
+            }
+        }
+        return DetCarga;
+    }
+    
+    public Carga ConsultInfoCarga(String folio_orden){
+        String sql = "SELECT * FROM orden_carga WHERE folio_orden = ?";
+        Carga cg = null;
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio_orden);
+            rs = ps.executeQuery();
+            //contar la cantidad de folios encontrados, en caso de que sean más de uno, guardarlo en un array
+            if(rs.next()){
+                cg = new Carga(
+                    rs.getString("folio_orden"),
+                    rs.getString("num_pedido"),
+                    rs.getString("fecha_entrega"),
+                    rs.getString("modo_pago"),
+                    rs.getString("num_factura"),
+                    rs.getInt("id_conductor"),
+                    rs.getString("transporte")
+                );
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        return cg;
+    }
     
 }

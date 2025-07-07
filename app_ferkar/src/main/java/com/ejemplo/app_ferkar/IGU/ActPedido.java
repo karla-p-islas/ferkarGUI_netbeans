@@ -354,7 +354,7 @@ public class ActPedido extends javax.swing.JFrame {
             Tabla_Cargas.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 820, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 820, 300));
 
         jButton_Agregar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton_Agregar.setText("Agregar");
@@ -513,7 +513,7 @@ public class ActPedido extends javax.swing.JFrame {
                 break;
             case "En producción":
                 ActEstado(folio,estado);
-                fin = true;
+                fin = false;
                 break;
             case "Enviado":
                 ActEstado(folio,estado);
@@ -549,7 +549,7 @@ public class ActPedido extends javax.swing.JFrame {
                 break;
         }
         
-        if (fin = true){
+        if (fin == true){
             JOptionPane.showMessageDialog(null, "Pedido actualizado");
             dispose();
         }

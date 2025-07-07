@@ -31,6 +31,12 @@ public class ClienteDAO {
            }
         }catch(SQLException e){
            System.out.println(e.toString());
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e3){
+                System.out.println(e3.toString());
+            }
         }
     }
     
