@@ -2355,6 +2355,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void Button_FP_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_FP_DetallesActionPerformed
         // TODO add your handling code here:
+        int fila = Tabla_HistorialPedidos.getSelectedRow();
+        
+        if (fila!= -1){
+            String folio = String.valueOf(Tabla_Folios.getValueAt(fila, 0));
+            DetFolio pag = new DetFolio(folio);
+            pag.setVisible(true);
+            pag.setLocationRelativeTo(null);
+        }else{
+           JOptionPane.showMessageDialog(null, "Seleccione un pedido primero");
+        }
     }//GEN-LAST:event_Button_FP_DetallesActionPerformed
 
     private void jButton_antesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_antesActionPerformed

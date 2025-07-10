@@ -39,11 +39,12 @@ public class DetOrdCarga extends javax.swing.JFrame {
         TextField_Cliente.setText(pd.getCliente());
         TextField_FolioPedido.setText(pd.getNum_pedido());
         TextField_FechaEnt.setText(pd.getFecha());
-        ListarDetalles(TextField_FolioPedido.getText());
+        
+        detPd.ListarOrdenes(TextField_FolioPedido.getText(), jComboBox_FolioOrdCarga);
     }
     
     public void ListarDetalles(String folio){
-        JOptionPane.showMessageDialog(null, "En caso de múltiples ordenes de carga, recuerde seleccionar la deseada y hacer click en el botón 'Actualizar'");
+        //JOptionPane.showMessageDialog(null, "En caso de múltiples ordenes de carga, recuerde seleccionar la deseada y hacer click en el botón 'Actualizar'");
 
         List<DetallePedido> ListaDet = detPd.ListarDetalles(folio);
         modelo = (DefaultTableModel) jTableDetalles.getModel();
@@ -70,15 +71,12 @@ public class DetOrdCarga extends javax.swing.JFrame {
         TextField_Factura.setText(InfoCarga.getNum_factura());
         TextField_Transporte.setText(InfoCarga.getTransporte());
         
-        String id_s = String toString(InfoCarga.getId_conductor());
-        id = idd.BuscarPro(InfoCarga.getId_conductor());
+        String id_s = String.valueOf(InfoCarga.getId_conductor());
+        id = idd.BuscarPro(id_s);
+        
+        TextField_Conductor.setText(id.getNombre_completo());
     }
     
-    public void ListarFolios(String folio){
-        
-    }
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -226,7 +224,7 @@ public class DetOrdCarga extends javax.swing.JFrame {
         jLabel14.setText("Conductor:");
 
         TextField_Conductor.setEditable(false);
-        TextField_Conductor.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        TextField_Conductor.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         TextField_Conductor.setBorder(null);
         TextField_Conductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +255,6 @@ public class DetOrdCarga extends javax.swing.JFrame {
         });
 
         jComboBox_FolioOrdCarga.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jComboBox_FolioOrdCarga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item" }));
         jComboBox_FolioOrdCarga.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -289,8 +286,8 @@ public class DetOrdCarga extends javax.swing.JFrame {
                                     .addComponent(TextField_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TextField_Conductor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(TextField_Conductor))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,11 +324,12 @@ public class DetOrdCarga extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextField_FolioPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel11)
-                    .addComponent(jComboBox_FolioOrdCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox_FolioOrdCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TextField_FolioPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextField_FechaEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,7 +349,7 @@ public class DetOrdCarga extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(TextField_Conductor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,6 +402,9 @@ public class DetOrdCarga extends javax.swing.JFrame {
 
     private void button_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ActualizarActionPerformed
         // TODO add your handling code here:
+        String num_carga = (String) jComboBox_FolioOrdCarga.getSelectedItem();
+        ObtenerInfo(num_carga);
+        ListarDetalles(TextField_FolioPedido.getText());
     }//GEN-LAST:event_button_ActualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

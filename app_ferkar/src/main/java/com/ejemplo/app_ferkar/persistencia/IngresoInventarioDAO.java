@@ -208,6 +208,35 @@ public class IngresoInventarioDAO {
 
         return inventario;
     }
+    
+    public List InfoFolio(String folio){
+        IngresoInventario inv = new IngresoInventario();
+        String sql = "SELECT * FROM produccion_diaria WHERE folio = ?";
+        
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                inv.setFolio(rs.getString("folio"));
+                inv.setFecha(rs.getString("fecha"));
+                inv.setId_soldador(rs.getInt("id_soldador"));
+                inv.setCaseta(rs.getInt("caseta"));
+                inv.setHora_inicio(rs.getString("hora_inicio"));
+                inv.setHora_fin(rs.getString("hora_fin"));
+                inv.setCodigo_aro(rs.getString("codigo_aro"));
+                inv.setTratamiento_adicional(rs.getString("tratamiento_adicional"));
+                inv.setCantidad(rs.getInt("cantidad"));
+                inv.setCantidad_atados(rs.getInt("cantidad_atados"));
+                inv.setCantidad_exs(rs.getInt("cantidad_disp"));
+                inv.setUbicacion(rs.getString("ubicacion"));
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        
+    }
 
               
 }
