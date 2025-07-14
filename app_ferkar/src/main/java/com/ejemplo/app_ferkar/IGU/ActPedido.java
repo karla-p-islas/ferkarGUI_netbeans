@@ -345,6 +345,7 @@ public class ActPedido extends javax.swing.JFrame {
                 "Clave", "Detalle", "Tratamiento Adicional", "Folio Enviado", "Cantidad Atados"
             }
         ));
+        Tabla_Cargas.setRowHeight(30);
         jScrollPane1.setViewportView(Tabla_Cargas);
         if (Tabla_Cargas.getColumnModel().getColumnCount() > 0) {
             Tabla_Cargas.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -582,7 +583,7 @@ public class ActPedido extends javax.swing.JFrame {
             String clave = textField_Clave.getText();
             String detalle = "";
             tipoA = tipoAd.BuscarPro(clave);
-            if (tipoA.getCodigo_aro() != 0){
+            if (Integer.parseInt(tipoA.getCodigo_aro()) != 0){
                 detalle = tipoA.getDescripcion_esp();
             }else{
                 textField_Clave.setText("");

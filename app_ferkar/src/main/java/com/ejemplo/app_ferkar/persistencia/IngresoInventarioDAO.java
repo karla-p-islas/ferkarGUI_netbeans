@@ -209,33 +209,57 @@ public class IngresoInventarioDAO {
         return inventario;
     }
     
-    public List InfoFolio(String folio){
-        IngresoInventario inv = new IngresoInventario();
+    public IngresoInventario InfoFolio(String folio){
         String sql = "SELECT * FROM produccion_diaria WHERE folio = ?";
-        
+        IngresoInventario inv = null;
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, folio);
             rs = ps.executeQuery();
-            while(rs.next()){
-                inv.setFolio(rs.getString("folio"));
-                inv.setFecha(rs.getString("fecha"));
-                inv.setId_soldador(rs.getInt("id_soldador"));
-                inv.setCaseta(rs.getInt("caseta"));
-                inv.setHora_inicio(rs.getString("hora_inicio"));
-                inv.setHora_fin(rs.getString("hora_fin"));
-                inv.setCodigo_aro(rs.getString("codigo_aro"));
-                inv.setTratamiento_adicional(rs.getString("tratamiento_adicional"));
-                inv.setCantidad(rs.getInt("cantidad"));
-                inv.setCantidad_atados(rs.getInt("cantidad_atados"));
-                inv.setCantidad_exs(rs.getInt("cantidad_disp"));
-                inv.setUbicacion(rs.getString("ubicacion"));
+            if(rs.next()){
+                inv = new IngresoInventario(
+                    rs.getString("folio"),
+                    rs.getString("fecha"),
+                    rs.getInt("id_soldador"),
+                    rs.getInt("caseta"),
+                    rs.getString("hora_inicio"),
+                    rs.getString("hora_fin"),
+                    rs.getString("codigo_aro"),
+                    rs.getString("tratamiento_adicional"),
+                    rs.getInt("cantidad"),
+                    rs.getInt("cantidad_atados"),
+                    rs.getInt("cantidad_disp"),
+                    rs.getString("ubicacion")
+                );
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontró el folio solicitado");
             }
         }catch(SQLException e){
             System.out.println(e.toString());
         }
-        
+        return inv;
+    }
+    
+    public boolean ModificarFolio(String ubi, String folio){
+        String sql = "UPDATE produccion_diaria SET ubicacion = ? WHERE folio = ?";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ubi);
+            ps.setString(2, folio);
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }finally{
+            try{
+                con.close();
+            } catch (SQLException ex){
+                System.out.println(ex.toString());
+            }
+        }
     }
 
               

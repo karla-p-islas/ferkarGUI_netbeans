@@ -23,10 +23,6 @@ public class TipoAroDAO {
         TipoAro aro = new TipoAro();
         String sql = "SELECT * FROM db_aros WHERE codigo = ?";
 
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
         try {
             con = cn.getConnection();
             if (con == null) {
@@ -37,7 +33,7 @@ public class TipoAroDAO {
             ps.setString(1, clave);
             rs = ps.executeQuery();
             if (rs.next()) {
-                aro.setCodigo_aro(rs.getInt("codigo"));
+                aro.setCodigo_aro(rs.getString("codigo"));
                 aro.setMedida(rs.getString("medida"));
                 aro.setCalibre(rs.getInt("calibre"));
                 aro.setAncho(rs.getInt("ancho"));
@@ -101,7 +97,7 @@ public class TipoAroDAO {
             rs = ps.executeQuery();
             while(rs.next()){
                 TipoAro aro = new TipoAro();
-                aro.setCodigo_aro(rs.getInt("codigo"));
+                aro.setCodigo_aro(rs.getString("codigo"));
                 aro.setMedida(rs.getString("medida"));
                 aro.setCalibre(rs.getInt("calibre"));
                 aro.setAncho(rs.getInt("ancho"));

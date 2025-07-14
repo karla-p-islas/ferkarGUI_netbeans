@@ -6,7 +6,7 @@ package com.ejemplo.app_ferkar.persistencia;
  * @author kpaor
  */
 public class TipoAro {
-    private int codigo_aro;
+    private String codigo_aro;
     private String medida;
     private int calibre;
     private int ancho;
@@ -16,7 +16,7 @@ public class TipoAro {
     public TipoAro() {
     }
 
-    public TipoAro(int codigo_aro, String medida, int calibre, int ancho, String descripcion_esp, String descripcion_gen) {
+    public TipoAro(String codigo_aro, String medida, int calibre, int ancho, String descripcion_esp, String descripcion_gen) {
         this.codigo_aro = codigo_aro;
         this.medida = medida;
         this.calibre = calibre;
@@ -25,11 +25,11 @@ public class TipoAro {
         this.descripcion_gen = descripcion_gen;
     }
 
-    public int getCodigo_aro() {
+    public String getCodigo_aro() {
         return codigo_aro;
     }
 
-    public void setCodigo_aro(int codigo_aro) {
+    public void setCodigo_aro(String codigo_aro) {
         this.codigo_aro = codigo_aro;
     }
 

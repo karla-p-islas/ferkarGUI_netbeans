@@ -4,22 +4,62 @@
  */
 package com.ejemplo.app_ferkar.IGU;
 
+import com.ejemplo.app_ferkar.persistencia.IngresoInventario;
+import com.ejemplo.app_ferkar.persistencia.IngresoInventarioDAO;
+import com.ejemplo.app_ferkar.persistencia.Soldador;
+import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
+import com.ejemplo.app_ferkar.persistencia.TipoAro;
+import com.ejemplo.app_ferkar.persistencia.TipoAroDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kpaor
  */
 public class DetFolio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DetFolio
-     */
+    IngresoInventario ii = new IngresoInventario();
+    IngresoInventarioDAO iid = new IngresoInventarioDAO();
+    TipoAro tipoA = new TipoAro();
+    TipoAroDAO tipoAd = new TipoAroDAO();
+    Soldador id = new Soldador();
+    SoldadorDAO idd = new SoldadorDAO();
+    
     public DetFolio(String folio) {
         initComponents();
+        TextField_Folio.setText(folio);
+
+        LlenarDetalles(folio);
     }
     
     public void LlenarDetalles(String folio){
+        ii = iid.InfoFolio(folio);
+        String ubi = ii.getUbicacion();
+        id = idd.BuscarPro(String.valueOf(ii.getId_soldador()));
+        tipoA = tipoAd.BuscarPro(ii.getCodigo_aro());
         
+        switch(ii.getUbicacion()){
+            case "-" -> jComboBox1.setSelectedIndex(0);
+            case "Cuarto1" -> jComboBox1.setSelectedIndex(1);
+            case "Cuarto 2" -> jComboBox1.setSelectedIndex(2);
+            case "Azotea" -> jComboBox1.setSelectedIndex(3);
+            case "Accesoria 1" -> jComboBox1.setSelectedIndex(4);
+            case "Accesoria 2" -> jComboBox1.setSelectedIndex(5);
+            case "A. Producción" -> jComboBox1.setSelectedIndex(6);
+        }
+        
+        TextField_Fecha.setText(ii.getFecha());
+        TextField_Caseta.setText(String.valueOf(ii.getCaseta()));
+        TextField_codigo.setText(ii.getCodigo_aro());
+        TextField_TratoAdi.setText(ii.getTratamiento_adicional());
+        TextField_CantidadAros.setText(String.valueOf(ii.getCantidad()));
+        TextField_CantidadAtados.setText(String.valueOf(ii.getCantidad_atados()));
+        TextField_CantidadAtados1.setText(String.valueOf(ii.getCantidad_exs()));
+        TextField_soldador.setText(id.getNombre_completo());
+        TextField_tipoAro.setText(tipoA.getDescripcion_esp());
     }
+    
+    
 
 
     @SuppressWarnings("unchecked")
@@ -34,34 +74,36 @@ public class DetFolio extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         TextField_Fecha = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        TextField_Folio1 = new javax.swing.JTextField();
+        TextField_codigo = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        TextField_Folio2 = new javax.swing.JTextField();
+        TextField_tipoAro = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        TextField_Caseta1 = new javax.swing.JTextField();
+        TextField_TratoAdi = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        TextField_Folio3 = new javax.swing.JTextField();
+        TextField_soldador = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         TextField_Caseta = new javax.swing.JTextField();
-        TextField_Folio6 = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         button_Atras = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        TextField_Folio4 = new javax.swing.JTextField();
+        TextField_CantidadAros = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        TextField_Folio5 = new javax.swing.JTextField();
+        TextField_CantidadAtados = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        TextField_CantidadAtados1 = new javax.swing.JTextField();
+        button_Modificar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(670, 450));
-        setMinimumSize(new java.awt.Dimension(670, 450));
-        setPreferredSize(new java.awt.Dimension(660, 450));
+        setMaximumSize(new java.awt.Dimension(690, 450));
+        setMinimumSize(new java.awt.Dimension(690, 450));
+        setPreferredSize(new java.awt.Dimension(690, 450));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -102,12 +144,12 @@ public class DetFolio extends javax.swing.JFrame {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Código:");
 
-        TextField_Folio1.setEditable(false);
-        TextField_Folio1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Folio1.setBorder(null);
-        TextField_Folio1.addActionListener(new java.awt.event.ActionListener() {
+        TextField_codigo.setEditable(false);
+        TextField_codigo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_codigo.setBorder(null);
+        TextField_codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Folio1ActionPerformed(evt);
+                TextField_codigoActionPerformed(evt);
             }
         });
 
@@ -115,12 +157,12 @@ public class DetFolio extends javax.swing.JFrame {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Tipo Aro:");
 
-        TextField_Folio2.setEditable(false);
-        TextField_Folio2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Folio2.setBorder(null);
-        TextField_Folio2.addActionListener(new java.awt.event.ActionListener() {
+        TextField_tipoAro.setEditable(false);
+        TextField_tipoAro.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_tipoAro.setBorder(null);
+        TextField_tipoAro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Folio2ActionPerformed(evt);
+                TextField_tipoAroActionPerformed(evt);
             }
         });
 
@@ -134,12 +176,12 @@ public class DetFolio extends javax.swing.JFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("Trato");
 
-        TextField_Caseta1.setEditable(false);
-        TextField_Caseta1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Caseta1.setBorder(null);
-        TextField_Caseta1.addActionListener(new java.awt.event.ActionListener() {
+        TextField_TratoAdi.setEditable(false);
+        TextField_TratoAdi.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_TratoAdi.setBorder(null);
+        TextField_TratoAdi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Caseta1ActionPerformed(evt);
+                TextField_TratoAdiActionPerformed(evt);
             }
         });
 
@@ -154,15 +196,15 @@ public class DetFolio extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel17)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextField_Caseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(TextField_TratoAdi, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextField_Caseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TextField_TratoAdi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,18 +216,19 @@ public class DetFolio extends javax.swing.JFrame {
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("Soldador:");
 
-        TextField_Folio3.setEditable(false);
-        TextField_Folio3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Folio3.setBorder(null);
-        TextField_Folio3.addActionListener(new java.awt.event.ActionListener() {
+        TextField_soldador.setEditable(false);
+        TextField_soldador.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        TextField_soldador.setBorder(null);
+        TextField_soldador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Folio3ActionPerformed(evt);
+                TextField_soldadorActionPerformed(evt);
             }
         });
 
         jLabel13.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Caseta:");
+        jLabel13.setAlignmentY(0.0F);
 
         TextField_Caseta.setEditable(false);
         TextField_Caseta.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -193,15 +236,6 @@ public class DetFolio extends javax.swing.JFrame {
         TextField_Caseta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextField_CasetaActionPerformed(evt);
-            }
-        });
-
-        TextField_Folio6.setEditable(false);
-        TextField_Folio6.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Folio6.setBorder(null);
-        TextField_Folio6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Folio6ActionPerformed(evt);
             }
         });
 
@@ -228,150 +262,185 @@ public class DetFolio extends javax.swing.JFrame {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel23.setText("Aros:");
 
-        TextField_Folio4.setEditable(false);
-        TextField_Folio4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Folio4.setBorder(null);
-        TextField_Folio4.addActionListener(new java.awt.event.ActionListener() {
+        TextField_CantidadAros.setEditable(false);
+        TextField_CantidadAros.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_CantidadAros.setBorder(null);
+        TextField_CantidadAros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Folio4ActionPerformed(evt);
+                TextField_CantidadArosActionPerformed(evt);
             }
         });
 
         jLabel24.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel24.setText("Cantidad");
+        jLabel24.setText("Atados");
 
         jLabel25.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel25.setText("Atados:");
+        jLabel25.setText("Producidos:");
 
-        TextField_Folio5.setEditable(false);
-        TextField_Folio5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        TextField_Folio5.setAlignmentX(0.0F);
-        TextField_Folio5.setAlignmentY(0.0F);
-        TextField_Folio5.setBorder(null);
-        TextField_Folio5.addActionListener(new java.awt.event.ActionListener() {
+        TextField_CantidadAtados.setEditable(false);
+        TextField_CantidadAtados.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_CantidadAtados.setAlignmentX(0.0F);
+        TextField_CantidadAtados.setAlignmentY(0.0F);
+        TextField_CantidadAtados.setBorder(null);
+        TextField_CantidadAtados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_Folio5ActionPerformed(evt);
+                TextField_CantidadAtadosActionPerformed(evt);
             }
         });
 
         jLabel26.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel26.setText("Cantidad");
+        jLabel26.setText("Atados en");
 
         jLabel27.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel27.setText("Atados:");
+        jLabel27.setText("Existencia:");
+
+        TextField_CantidadAtados1.setEditable(false);
+        TextField_CantidadAtados1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_CantidadAtados1.setAlignmentX(0.0F);
+        TextField_CantidadAtados1.setAlignmentY(0.0F);
+        TextField_CantidadAtados1.setBorder(null);
+        TextField_CantidadAtados1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextField_CantidadAtados1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextField_Folio4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(TextField_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextField_Folio5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(TextField_CantidadAtados, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(157, Short.MAX_VALUE))
+                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TextField_CantidadAtados1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel27))
-                    .addComponent(TextField_Folio5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextField_CantidadAtados, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25))
-                    .addComponent(TextField_Folio4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextField_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23))))
+                        .addComponent(jLabel23))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel26)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel27))
+                        .addComponent(TextField_CantidadAtados1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
+
+        button_Modificar.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        button_Modificar.setText("Modificar");
+        button_Modificar.setContentAreaFilled(false);
+        button_Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_ModificarActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Cuarto1", "Cuarto 2", "Azotea", "Accesoria 1", "Accesoria 2", "A. Producción" }));
+        jComboBox1.setAlignmentX(0.0F);
+        jComboBox1.setAlignmentY(0.0F);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addComponent(label_title)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TextField_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextField_Folio1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(TextField_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(90, 90, 90))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextField_Folio2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TextField_Folio3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextField_Caseta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(button_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TextField_Folio6, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TextField_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextField_codigo)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(60, 60, 60)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextField_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextField_Caseta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextField_tipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(TextField_soldador, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(button_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(button_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(69, 69, 69)))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel1)
-                        .addGap(23, 23, 23)
-                        .addComponent(label_title))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,33 +465,32 @@ public class DetFolio extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(TextField_Folio1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextField_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)
-                            .addComponent(TextField_Folio2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TextField_tipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(button_Atras))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(TextField_Folio3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21)
-                            .addComponent(TextField_Folio6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(TextField_soldador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(jComboBox1))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_Atras)
+                    .addComponent(button_Modificar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,53 +512,76 @@ public class DetFolio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_CasetaActionPerformed
 
-    private void TextField_Folio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Folio1ActionPerformed
+    private void TextField_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_codigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Folio1ActionPerformed
+    }//GEN-LAST:event_TextField_codigoActionPerformed
 
-    private void TextField_Folio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Folio2ActionPerformed
+    private void TextField_tipoAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_tipoAroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Folio2ActionPerformed
+    }//GEN-LAST:event_TextField_tipoAroActionPerformed
 
-    private void TextField_Caseta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Caseta1ActionPerformed
+    private void TextField_TratoAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_TratoAdiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Caseta1ActionPerformed
+    }//GEN-LAST:event_TextField_TratoAdiActionPerformed
 
-    private void TextField_Folio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Folio3ActionPerformed
+    private void TextField_soldadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_soldadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Folio3ActionPerformed
+    }//GEN-LAST:event_TextField_soldadorActionPerformed
 
-    private void TextField_Folio4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Folio4ActionPerformed
+    private void TextField_CantidadArosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_CantidadArosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Folio4ActionPerformed
+    }//GEN-LAST:event_TextField_CantidadArosActionPerformed
 
-    private void TextField_Folio5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Folio5ActionPerformed
+    private void TextField_CantidadAtadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_CantidadAtadosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Folio5ActionPerformed
-
-    private void TextField_Folio6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_Folio6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_Folio6ActionPerformed
+    }//GEN-LAST:event_TextField_CantidadAtadosActionPerformed
 
     private void button_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AtrasActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_button_AtrasActionPerformed
 
+    private void button_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ModificarActionPerformed
+        // TODO add your handling code here:
+        String folio = TextField_Folio.getText();
+        ii = iid.InfoFolio(folio);
+        String ubi = String.valueOf(jComboBox1.getSelectedItem());
+        if(ii.getUbicacion() != ubi){
+            boolean mod_f = iid.ModificarFolio(ubi, folio);
+            if(mod_f){
+                JOptionPane.showMessageDialog(null, "Folio modificado correctamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Solo se modifica el espacio de almacen");
+        }
+    }//GEN-LAST:event_button_ModificarActionPerformed
+
+    private void TextField_CantidadAtados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_CantidadAtados1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_CantidadAtados1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TextField_CantidadAros;
+    private javax.swing.JTextField TextField_CantidadAtados;
+    private javax.swing.JTextField TextField_CantidadAtados1;
     private javax.swing.JTextField TextField_Caseta;
-    private javax.swing.JTextField TextField_Caseta1;
     private javax.swing.JTextField TextField_Fecha;
     private javax.swing.JTextField TextField_Folio;
-    private javax.swing.JTextField TextField_Folio1;
-    private javax.swing.JTextField TextField_Folio2;
-    private javax.swing.JTextField TextField_Folio3;
-    private javax.swing.JTextField TextField_Folio4;
-    private javax.swing.JTextField TextField_Folio5;
-    private javax.swing.JTextField TextField_Folio6;
+    private javax.swing.JTextField TextField_TratoAdi;
+    private javax.swing.JTextField TextField_codigo;
+    private javax.swing.JTextField TextField_soldador;
+    private javax.swing.JTextField TextField_tipoAro;
     private javax.swing.JButton button_Atras;
+    private javax.swing.JButton button_Modificar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

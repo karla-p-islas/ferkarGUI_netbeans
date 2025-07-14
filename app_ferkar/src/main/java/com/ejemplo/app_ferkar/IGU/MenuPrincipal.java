@@ -60,7 +60,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         texto_estado.setLineWrap(true);
         texto_estado.setWrapStyleWord(true);
         cld.ConsultarCliente(jCBox_NP_cliente);
-        
+        modelo.setRowCount(0); //limpieza de tabla
+        ListarPedidos();
     }
 
     /**
@@ -292,6 +293,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel_PedidosActivos.setBackground(new java.awt.Color(255, 255, 255));
 
+        Tabla_PedidosActivos.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Tabla_PedidosActivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -299,7 +301,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             new String [] {
                 "Folio Pedido", "Cliente", "Fecha Entrega", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla_PedidosActivos.setRowHeight(30);
         Tabla_PedidosActivos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Tabla_PedidosActivosMouseClicked(evt);
@@ -307,9 +318,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabla_PedidosActivos);
         if (Tabla_PedidosActivos.getColumnModel().getColumnCount() > 0) {
+            Tabla_PedidosActivos.getColumnModel().getColumn(0).setResizable(false);
             Tabla_PedidosActivos.getColumnModel().getColumn(0).setPreferredWidth(30);
+            Tabla_PedidosActivos.getColumnModel().getColumn(1).setResizable(false);
             Tabla_PedidosActivos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            Tabla_PedidosActivos.getColumnModel().getColumn(2).setResizable(false);
             Tabla_PedidosActivos.getColumnModel().getColumn(2).setPreferredWidth(50);
+            Tabla_PedidosActivos.getColumnModel().getColumn(3).setResizable(false);
             Tabla_PedidosActivos.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
@@ -393,6 +408,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla_ResumenOrden.setRowHeight(25);
         jScrollPane2.setViewportView(Tabla_ResumenOrden);
         if (Tabla_ResumenOrden.getColumnModel().getColumnCount() > 0) {
             Tabla_ResumenOrden.getColumnModel().getColumn(0).setResizable(false);
@@ -631,7 +647,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel35)
                                     .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(22, 22, 22)
+                                .addGap(25, 25, 25)
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -679,8 +695,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jButton_NP_EliminarLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(258, 258, 258)
                         .addComponent(jButton_TerminarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(680, 680, 680))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(720, 720, 720))
         );
 
         jLabel14.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
@@ -715,6 +731,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        Tabla_HistorialPedidos.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Tabla_HistorialPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -731,6 +748,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla_HistorialPedidos.setRowHeight(30);
         jScrollPane4.setViewportView(Tabla_HistorialPedidos);
         if (Tabla_HistorialPedidos.getColumnModel().getColumnCount() > 0) {
             Tabla_HistorialPedidos.getColumnModel().getColumn(0).setResizable(false);
@@ -1241,14 +1259,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel27.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setText("Inventario");
+        jLabel27.setText("Inventario Disponible");
 
+        Tabla_Inventario.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Tabla_Inventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Clave", "Descripción Aro", "Descripción Estandar", "Tratamiento Adicional", "Cantidad Atados", "Cantiad Total"
+                "Clave", "Descripción Aro", "Descripción Estandar", "Tratamiento Adicional", "Cantidad Atados", "Cantidad Aros"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1259,6 +1278,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla_Inventario.setRowHeight(30);
         jScrollPane6.setViewportView(Tabla_Inventario);
         if (Tabla_Inventario.getColumnModel().getColumnCount() > 0) {
             Tabla_Inventario.getColumnModel().getColumn(0).setResizable(false);
@@ -1266,9 +1286,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             Tabla_Inventario.getColumnModel().getColumn(1).setResizable(false);
             Tabla_Inventario.getColumnModel().getColumn(1).setPreferredWidth(150);
             Tabla_Inventario.getColumnModel().getColumn(2).setResizable(false);
-            Tabla_Inventario.getColumnModel().getColumn(2).setPreferredWidth(150);
+            Tabla_Inventario.getColumnModel().getColumn(2).setPreferredWidth(120);
             Tabla_Inventario.getColumnModel().getColumn(3).setResizable(false);
-            Tabla_Inventario.getColumnModel().getColumn(3).setPreferredWidth(50);
+            Tabla_Inventario.getColumnModel().getColumn(3).setPreferredWidth(75);
             Tabla_Inventario.getColumnModel().getColumn(4).setResizable(false);
             Tabla_Inventario.getColumnModel().getColumn(4).setPreferredWidth(50);
             Tabla_Inventario.getColumnModel().getColumn(5).setResizable(false);
@@ -1442,6 +1462,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         label_PedidosActivos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_PedidosActivos1.setText("Folios Producidos");
 
+        Tabla_Folios.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Tabla_Folios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1458,6 +1479,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla_Folios.setRowHeight(30);
         jScrollPane5.setViewportView(Tabla_Folios);
         if (Tabla_Folios.getColumnModel().getColumnCount() > 0) {
             Tabla_Folios.getColumnModel().getColumn(0).setResizable(false);
@@ -2083,7 +2105,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             if (!"".equals(jText_II_ClaveAro.getText())){
                 String clave = jText_II_ClaveAro.getText();
                 tipoA = tipoAd.BuscarPro(clave);
-                if (tipoA.getCodigo_aro() != 0){
+                if (Integer.parseInt(tipoA.getCodigo_aro()) != 0){
                     jText_II_TipoAro.setText(""+tipoA.getDescripcion_esp());
                     jText_II_IDSoldador.requestFocus();
                 }else{
@@ -2104,7 +2126,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             if (!"".equals(TextField_NP_ClaveAro.getText())){
                 String clave = TextField_NP_ClaveAro.getText();
                 tipoA = tipoAd.BuscarPro(clave);
-                if (tipoA.getCodigo_aro() != 0){
+                if (Integer.parseInt(tipoA.getCodigo_aro()) != 0){
                     jTextArea_NP_TipoAro.setText(""+tipoA.getDescripcion_esp());
                     jTextField_NP_CantidadAros.requestFocus();
                 }else{
@@ -2355,10 +2377,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void Button_FP_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_FP_DetallesActionPerformed
         // TODO add your handling code here:
-        int fila = Tabla_HistorialPedidos.getSelectedRow();
+        int fila = Tabla_Folios.getSelectedRow();
         
         if (fila!= -1){
             String folio = String.valueOf(Tabla_Folios.getValueAt(fila, 0));
+            System.out.println(folio);
             DetFolio pag = new DetFolio(folio);
             pag.setVisible(true);
             pag.setLocationRelativeTo(null);
