@@ -66,9 +66,12 @@
                                   <Component id="button_PedidosActivos" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="button_Salir" alignment="1" min="-2" pref="162" max="-2" attributes="0"/>
                               <Component id="button_Folios" alignment="1" min="-2" pref="181" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="button_Salir" min="-2" pref="162" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -99,7 +102,6 @@
                           <Component id="label_title" min="-2" pref="37" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="Pane" min="-2" pref="689" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -118,11 +120,11 @@
                           <Component id="button_Folios" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="button_Nuevos" min="-2" pref="41" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                           <Component id="button_Salir" min="-2" pref="40" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -232,6 +234,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="tabPlacement" type="int" value="3"/>
           </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -454,6 +457,12 @@
                                               <Component id="jLabel7" min="-2" pref="418" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabel42" min="-2" pref="110" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextField_totalAtados" min="-2" pref="140" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jButton_NP_EliminarLinea" min="-2" max="-2" attributes="0"/>
@@ -462,7 +471,7 @@
                                   </Group>
                                   <Component id="jPanel10" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="62" max="32767" attributes="0"/>
+                              <EmptySpace pref="68" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -471,18 +480,32 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="283" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="jButton_NP_EliminarLinea" min="-2" pref="39" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jButton_NP_EliminarLinea" min="-2" pref="39" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="jButton_TerminarOrden" min="-2" pref="39" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane2" min="-2" pref="315" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jTextField_totalAtados" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="jLabel42" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="720" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="704" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -505,6 +528,8 @@
                                 <Column editable="true" title="Tratamiento Adicional" type="java.lang.Object"/>
                               </Table>
                             </Property>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="false">
@@ -543,6 +568,7 @@
                           <Font name="Roboto Medium" size="18" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Eliminar L&#xed;nea"/>
+                        <Property name="alignmentY" type="float" value="0.0"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -555,6 +581,7 @@
                           <Font name="Roboto Medium" size="16" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Terminar Orden"/>
+                        <Property name="alignmentY" type="float" value="0.0"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -569,6 +596,7 @@
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="Resumen de la Orden"/>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
+                        <Property name="alignmentY" type="float" value="0.0"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel10">
@@ -593,7 +621,10 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jTextArea_NP_TipoAro" min="-2" pref="218" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel6" min="-2" pref="93" max="-2" attributes="0"/>
+                                              <Component id="jLabel41" min="-2" pref="93" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -620,10 +651,7 @@
                                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                           <Component id="jTextField_NP_CantidadAros" min="-2" pref="84" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabel24" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -666,26 +694,31 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="3" attributes="0">
                                                       <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jTextField_Solicitante" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabel4" min="-2" pref="41" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="32767" attributes="0"/>
+                                                          <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                          <Component id="jLabel4" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                                          <Component id="jTextArea_NP_TipoAro" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                                      </Group>
                                                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                                           <Component id="TextField_NP_ClaveAro" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Group type="103" groupAlignment="3" attributes="0">
-                                                          <Component id="jLabel6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                                          <Component id="jTextField_NP_CantidadAros" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="jTextArea_NP_TipoAro" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                                      <Component id="jTextField_NP_CantidadAros" min="-2" pref="40" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -718,6 +751,8 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Roboto" size="14" style="0"/>
                             </Property>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -727,6 +762,7 @@
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="Clave de Aro:"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="TextField_NP_ClaveAro">
@@ -734,6 +770,8 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Roboto" size="14" style="0"/>
                             </Property>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TextField_NP_ClaveAroKeyPressed"/>
@@ -746,6 +784,7 @@
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="Tipo de Aro:"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextArea" name="jTextArea_NP_TipoAro">
@@ -756,16 +795,19 @@
                             </Property>
                             <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="1"/>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                             <Property name="doubleBuffered" type="boolean" value="true"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel6">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Roboto" size="18" style="0"/>
+                              <Font name="Roboto" size="16" style="0"/>
                             </Property>
-                            <Property name="horizontalAlignment" type="int" value="0"/>
-                            <Property name="text" type="java.lang.String" value="Cantidad:"/>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Cantidad"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -773,6 +815,8 @@
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
 
                           <Layout>
@@ -859,6 +903,8 @@
                             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                               <Format subtype="1" type="1"/>
                             </Property>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedText_NP_FechaEntregaActionPerformed"/>
@@ -871,9 +917,14 @@
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="# de Pedido:"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="jTextField_NumPedido">
+                          <Properties>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton_NP_Limpiar">
                           <Properties>
@@ -913,10 +964,45 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Roboto" size="14" style="0"/>
                             </Property>
+                            <Property name="alignmentX" type="float" value="0.0"/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel41">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Roboto" size="16" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="4"/>
+                            <Property name="text" type="java.lang.String" value="Aros:"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="alignmentY" type="float" value="0.0"/>
                           </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JTextField" name="jTextField_totalAtados">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Roboto" size="14" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="text" type="java.lang.String" value="--"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel42">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Roboto" size="16" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="text" type="java.lang.String" value="Total Aros:"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel14">
@@ -2252,13 +2338,14 @@
                                           <Component id="Button_FP_Limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="Button_FP_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane5" min="-2" pref="471" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane5" min="-2" pref="475" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jButton_antes" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton_despues" min="-2" max="-2" attributes="0"/>

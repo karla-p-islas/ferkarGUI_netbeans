@@ -52,6 +52,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     InventarioDAO invd = new InventarioDAO();
     DefaultTableModel modelo = new DefaultTableModel();
     int item;
+    int totalAtados;
     int pagina_act = 1;
     int xMouse, yMouse;
     
@@ -118,6 +119,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton_NP_Ingresar = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
         jTextField_Solicitante = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        jTextField_totalAtados = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jPanel_HistorialPedidos = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -290,6 +294,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         Pane.setBackground(new java.awt.Color(255, 255, 255));
+        Pane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
         jPanel_PedidosActivos.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -408,6 +413,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla_ResumenOrden.setAlignmentX(0.0F);
+        Tabla_ResumenOrden.setAlignmentY(0.0F);
         Tabla_ResumenOrden.setRowHeight(25);
         jScrollPane2.setViewportView(Tabla_ResumenOrden);
         if (Tabla_ResumenOrden.getColumnModel().getColumnCount() > 0) {
@@ -423,6 +430,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jButton_NP_EliminarLinea.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton_NP_EliminarLinea.setText("Eliminar Línea");
+        jButton_NP_EliminarLinea.setAlignmentY(0.0F);
         jButton_NP_EliminarLinea.setContentAreaFilled(false);
         jButton_NP_EliminarLinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,6 +440,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jButton_TerminarOrden.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         jButton_TerminarOrden.setText("Terminar Orden");
+        jButton_TerminarOrden.setAlignmentY(0.0F);
         jButton_TerminarOrden.setContentAreaFilled(false);
         jButton_TerminarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,6 +452,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Resumen de la Orden");
         jLabel7.setToolTipText("");
+        jLabel7.setAlignmentY(0.0F);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -455,12 +465,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel3.setText("Fecha Entrega:");
 
         jTextField_NP_CantidadAros.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_NP_CantidadAros.setAlignmentX(0.0F);
+        jTextField_NP_CantidadAros.setAlignmentY(0.0F);
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Clave de Aro:");
+        jLabel5.setAlignmentY(0.0F);
 
         TextField_NP_ClaveAro.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        TextField_NP_ClaveAro.setAlignmentX(0.0F);
+        TextField_NP_ClaveAro.setAlignmentY(0.0F);
         TextField_NP_ClaveAro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TextField_NP_ClaveAroKeyPressed(evt);
@@ -470,18 +485,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Tipo de Aro:");
+        jLabel4.setAlignmentY(0.0F);
 
         jTextArea_NP_TipoAro.setColumns(20);
         jTextArea_NP_TipoAro.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextArea_NP_TipoAro.setLineWrap(true);
         jTextArea_NP_TipoAro.setRows(1);
+        jTextArea_NP_TipoAro.setAlignmentX(0.0F);
+        jTextArea_NP_TipoAro.setAlignmentY(0.0F);
         jTextArea_NP_TipoAro.setDoubleBuffered(true);
 
-        jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Cantidad:");
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Cantidad");
+        jLabel6.setAlignmentY(0.0F);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setAlignmentX(0.0F);
+        jPanel2.setAlignmentY(0.0F);
 
         jCheckBox_Reforzado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jCheckBox_Reforzado.setText("Reforzado");
@@ -537,6 +558,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jCBox_NP_cliente.setToolTipText("");
 
         jFormattedText_NP_FechaEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        jFormattedText_NP_FechaEntrega.setAlignmentX(0.0F);
+        jFormattedText_NP_FechaEntrega.setAlignmentY(0.0F);
         jFormattedText_NP_FechaEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedText_NP_FechaEntregaActionPerformed(evt);
@@ -546,6 +569,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("# de Pedido:");
+        jLabel24.setAlignmentY(0.0F);
+
+        jTextField_NumPedido.setAlignmentX(0.0F);
+        jTextField_NumPedido.setAlignmentY(0.0F);
 
         jButton_NP_Limpiar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton_NP_Limpiar.setText("Limpiar");
@@ -570,6 +597,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel35.setText("Solicitante:");
 
         jTextField_Solicitante.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Solicitante.setAlignmentX(0.0F);
+        jTextField_Solicitante.setAlignmentY(0.0F);
+
+        jLabel41.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel41.setText("Aros:");
+        jLabel41.setToolTipText("");
+        jLabel41.setAlignmentY(0.0F);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -587,7 +622,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -607,9 +644,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel24)))
+                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -643,23 +678,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel35)
                                     .addComponent(jTextField_Solicitante, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(25, 25, 25)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel41)
+                                        .addGap(3, 3, 3))
+                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(TextField_NP_ClaveAro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel5))
-                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextArea_NP_TipoAro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jTextField_NP_CantidadAros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
+
+        jTextField_totalAtados.setEditable(false);
+        jTextField_totalAtados.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_totalAtados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_totalAtados.setText("--");
+        jTextField_totalAtados.setBorder(null);
+
+        jLabel42.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("Total Aros:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -675,28 +724,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(44, 44, 44))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(274, 274, 274)))
+                                .addGap(274, 274, 274))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_totalAtados, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(270, 270, 270)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_NP_EliminarLinea)
                             .addComponent(jButton_TerminarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton_NP_EliminarLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(258, 258, 258)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton_NP_EliminarLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(jButton_TerminarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(720, 720, 720))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_totalAtados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(704, 704, 704))
         );
 
         jLabel14.setFont(new java.awt.Font("Nirmala Text", 1, 20)); // NOI18N
@@ -1661,11 +1724,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Button_FP_Limpiar)
-                            .addComponent(Button_FP_Buscar)))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Button_FP_Buscar))
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_antes)
                     .addComponent(jButton_despues))
@@ -1765,8 +1829,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(button_IngresoInventario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(button_PedidosActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(button_Salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button_Folios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(button_Folios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(button_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(264, 264, 264)
@@ -1788,8 +1854,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(label_title, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
-                        .addComponent(Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1)
@@ -1807,9 +1872,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(button_Folios, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(button_Nuevos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))))
+                        .addGap(82, 82, 82)
+                        .addComponent(button_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 860));
@@ -2145,6 +2210,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jButton_NP_EliminarLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NP_EliminarLineaActionPerformed
         modelo = (DefaultTableModel) Tabla_ResumenOrden.getModel();
         modelo.removeRow(Tabla_ResumenOrden.getSelectedRow());
+        
         TextField_NP_ClaveAro.requestFocus();
     }//GEN-LAST:event_jButton_NP_EliminarLineaActionPerformed
 
@@ -2288,6 +2354,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton_P_DetallePedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_P_DetallePedidoActionPerformed
         // TODO add your handling code here:
+        int fila = Tabla_HistorialPedidos.getSelectedRow();
+        
+        if (fila!= -1){
+            Pedido pd = new Pedido();
+            pd.setNum_pedido((String) Tabla_HistorialPedidos.getValueAt(fila, 0));
+            pd.setCliente((String) Tabla_HistorialPedidos.getValueAt(fila, 1));
+            pd.setFecha((String) Tabla_HistorialPedidos.getValueAt(fila, 2));
+            pd.setEstado((String) Tabla_HistorialPedidos.getValueAt(fila, 3));
+            
+            DetPedido update = new DetPedido(pd);
+            update.setVisible(true);
+            update.setLocationRelativeTo(null);
+        }else{
+           JOptionPane.showMessageDialog(null, "Seleccione un pedido primero");
+        }
     }//GEN-LAST:event_jButton_P_DetallePedidoActionPerformed
 
     private void button_FoliosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_FoliosActionPerformed
@@ -2732,6 +2813,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }
     
+    //private void 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_FP_Buscar;
     private javax.swing.JButton Button_FP_Detalles;
@@ -2824,6 +2907,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2858,6 +2943,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_NP_CantidadAros;
     private javax.swing.JTextField jTextField_NumPedido;
     private javax.swing.JTextField jTextField_Solicitante;
+    private javax.swing.JTextField jTextField_totalAtados;
     private javax.swing.JTextField jText_II_Cantidad;
     private javax.swing.JTextField jText_II_ClaveAro;
     private javax.swing.JTextField jText_II_Folio;

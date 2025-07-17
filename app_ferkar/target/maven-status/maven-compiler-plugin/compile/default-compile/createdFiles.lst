@@ -97,6 +97,7 @@ com\ejemplo\app_ferkar\IGU\MenuPrincipal$5.class
 com\ejemplo\app_ferkar\IGU\ActPedido$10.class
 com\ejemplo\app_ferkar\IGU\DetOrdCarga$9.class
 com\ejemplo\app_ferkar\IGU\DetPedido$4.class
+com\ejemplo\app_ferkar\IGU\ActPedido$18.class
 com\ejemplo\app_ferkar\persistencia\DetallePedido.class
 com\ejemplo\app_ferkar\IGU\Nuevos$1.class
 com\ejemplo\app_ferkar\IGU\Nuevos$9.class

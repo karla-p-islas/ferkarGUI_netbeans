@@ -38,8 +38,9 @@ public class ActPedido extends javax.swing.JFrame {
     Inventario inv = new Inventario();
     InventarioDAO invd = new InventarioDAO();
     DefaultTableModel modelo = new DefaultTableModel();
-    
+    int xMouse, yMouse;
     int item;
+    int TotalAtados;
     
     public static int CantidadAros(int clave, int cantidad){
         int ultimoNum = clave %10;
@@ -120,6 +121,16 @@ public class ActPedido extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void TotalAtados(){
+        TotalAtados = 0;
+        int numFila = Tabla_Cargas.getRowCount();
+        for(int i = 0; i < numFila ; i++){
+            int cal = Integer.parseInt(String.valueOf(Tabla_Cargas.getValueAt(i, 4)));
+            TotalAtados = TotalAtados + cal;
+        }
+        jTextField_totalAtados.setText(""+TotalAtados);
+    }
               
     /**
      * This method is called from within the constructor to initialize the form.
@@ -173,9 +184,13 @@ public class ActPedido extends javax.swing.JFrame {
         OC_Reforzado = new javax.swing.JCheckBox();
         OC_Galvanizado = new javax.swing.JCheckBox();
         OC_Pintado = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField_totalAtados = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1050, 800));
         setMinimumSize(new java.awt.Dimension(1050, 800));
+        setPreferredSize(new java.awt.Dimension(1043, 750));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -247,7 +262,7 @@ public class ActPedido extends javax.swing.JFrame {
                 button_FinishActionPerformed(evt);
             }
         });
-        jPanel1.add(button_Finish, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 660, 110, 30));
+        jPanel1.add(button_Finish, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 610, 110, 30));
 
         button_Atras.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         button_Atras.setText("Atrás");
@@ -257,7 +272,7 @@ public class ActPedido extends javax.swing.JFrame {
                 button_AtrasActionPerformed(evt);
             }
         });
-        jPanel1.add(button_Atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 700, 110, -1));
+        jPanel1.add(button_Atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 670, 110, -1));
 
         label_pedido.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         label_pedido.setText("Estado: ");
@@ -327,8 +342,8 @@ public class ActPedido extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Folio Enviado:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 110, 30));
+        jLabel3.setText("Total Atados:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 690, 110, 30));
 
         jTextField_Folio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,7 +370,7 @@ public class ActPedido extends javax.swing.JFrame {
             Tabla_Cargas.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 820, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 820, 270));
 
         jButton_Agregar.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jButton_Agregar.setText("Agregar");
@@ -400,7 +415,12 @@ public class ActPedido extends javax.swing.JFrame {
 
         jTextField_nombreConductor.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTextField_nombreConductor.setBorder(null);
-        jPanel1.add(jTextField_nombreConductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 260, 30));
+        jTextField_nombreConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_nombreConductorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField_nombreConductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 280, 30));
 
         textF_dateDelivery.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         jPanel1.add(textF_dateDelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, 30));
@@ -453,7 +473,7 @@ public class ActPedido extends javax.swing.JFrame {
                     .addComponent(OC_Reforzado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(OC_Galvanizado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(OC_Pintado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,15 +489,29 @@ public class ActPedido extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
 
+        jLabel9.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Folio Enviado:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 110, 30));
+
+        jTextField_totalAtados.setEditable(false);
+        jTextField_totalAtados.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_totalAtados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_totalAtados.setText("--");
+        jTextField_totalAtados.setBorder(null);
+        jPanel1.add(jTextField_totalAtados, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 690, 140, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
         pack();
@@ -632,17 +666,17 @@ public class ActPedido extends javax.swing.JFrame {
                     inv.setTrato_adicional(trato);
                     inv.setAtados(cantidad);
                     
-                    System.out.println("Entro al if (estado==true && aros <= stock_disponible)");
+                    inv.setAros(aros);  
                     
-                    inv.setAros(aros);
-                    invd.ReducirStock(folio, cantidad);
+                    //cambiar desde aqui
+                    invd.ReducirStock(folio, cantidad); //cambiar de lugar para que el cambio se realice al final
                     
-                    boolean exito = invd.ReducirExistencias(inv);
-                    System.out.println("Tab: ActPedido");
-                    System.out.println("Estado de 'exito': "+exito);
+                    boolean exito = invd.ReducirExistencias(inv); //cambiar de lugar para que el cambio se realice al final
+
                     if (!exito) {
                         // Ya incluye mensaje interno si no hay stock suficiente
                         System.out.println("No se ha podido llevar a cabo la reducción de existencias efectivamente");
+                        //hasta aquí
                     }else{
                         item ++;
                         modelo = (DefaultTableModel) Tabla_Cargas.getModel();
@@ -663,6 +697,7 @@ public class ActPedido extends javax.swing.JFrame {
                         
                         modelo.addRow(O);
                         Tabla_Cargas.setModel(modelo);
+                        TotalAtados();
                         
                         textField_Clave.setText("");
                         jTextField_Folio.setText("");
@@ -730,8 +765,13 @@ public class ActPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         modelo = (DefaultTableModel) Tabla_Cargas.getModel();
         modelo.removeRow(Tabla_Cargas.getSelectedRow());
+        TotalAtados();
         textField_Clave.requestFocus();
     }//GEN-LAST:event_jButton_EliminarActionPerformed
+
+    private void jTextField_nombreConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_nombreConductorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_nombreConductorActionPerformed
 
 
 
@@ -756,12 +796,14 @@ public class ActPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField_Factura;
     private javax.swing.JTextField jTextField_Folio;
     private javax.swing.JTextField jTextField_nombreConductor;
+    private javax.swing.JTextField jTextField_totalAtados;
     private javax.swing.JLabel label_Cliente;
     private javax.swing.JLabel label_IDConductor;
     private javax.swing.JLabel label_IDConductor1;

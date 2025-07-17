@@ -77,6 +77,19 @@ public class DetOrdCarga extends javax.swing.JFrame {
         TextField_Conductor.setText(id.getNombre_completo());
     }
     
+    public void Limpiar(){
+        TextField_Conductor.setText("");
+        TextField_Transporte.setText("");
+        TextField_Factura.setText("");
+        TextField_ModoPago.setText("");
+        
+        modelo = (DefaultTableModel) jTableDetalles.getModel();
+        //limpiar tabla
+        for(int i = 0; i<modelo.getRowCount(); i++){
+            modelo.removeRow(i);    
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -402,6 +415,7 @@ public class DetOrdCarga extends javax.swing.JFrame {
 
     private void button_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ActualizarActionPerformed
         // TODO add your handling code here:
+        Limpiar();
         String num_carga = (String) jComboBox_FolioOrdCarga.getSelectedItem();
         ObtenerInfo(num_carga);
         ListarDetalles(TextField_FolioPedido.getText());

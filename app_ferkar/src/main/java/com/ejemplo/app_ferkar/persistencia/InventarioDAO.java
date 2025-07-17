@@ -289,7 +289,7 @@ public class InventarioDAO {
                     JOptionPane.showMessageDialog(null, "No hay suficiente stock. Favor de revisar las existencias");
                     return false;
                 }else{
-                    JOptionPane.showMessageDialog(null, "Si hay existencias");
+                    //JOptionPane.showMessageDialog(null, "Si hay existencias");
                     ps = con.prepareStatement(actualizar);
                     ps.setInt(1, nuevosAros);
                     ps.setInt(2, nuevosAtados);
@@ -323,8 +323,8 @@ public class InventarioDAO {
                     int aros_disp = rs.getInt("cantidad_disp");
                     int nueva_cant = aros_disp - cantidad;
 
-                    System.out.println("Tab: inventarioDAO");
-                    System.out.println("Folio: " + folio + ", aros disponibles: " + aros_disp + ", nueva cantidad: " + nueva_cant);
+                    //System.out.println("Tab: inventarioDAO");
+                    //System.out.println("Folio: " + folio + ", aros disponibles: " + aros_disp + ", nueva cantidad: " + nueva_cant);
 
                     if (nueva_cant < 0) {
                         JOptionPane.showMessageDialog(null, "No hay atados disponibles del folio " + folio);

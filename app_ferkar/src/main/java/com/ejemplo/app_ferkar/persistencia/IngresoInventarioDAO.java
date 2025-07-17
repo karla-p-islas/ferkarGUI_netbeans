@@ -74,9 +74,9 @@ public class IngresoInventarioDAO {
     
     public List<IngresoInventario> InventarioActual(int pagina) {
         List<IngresoInventario> Inv = new ArrayList<>();
-        int offset = (pagina - 1) * 28;
+        int offset = (pagina - 1) * 15;
 
-        String sql = "SELECT * FROM produccion_diaria ORDER BY folio DESC LIMIT 28 OFFSET ?";
+        String sql = "SELECT * FROM produccion_diaria ORDER BY folio DESC LIMIT 15 OFFSET ?";
 
         Connection con = null;
         PreparedStatement ps = null;
