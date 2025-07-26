@@ -57,7 +57,7 @@ public class CargaDAO {
             ps.setString(1, dc.getNum_serial());
             ps.setString(2, dc.getFolio_orden());
             ps.setString(3, dc.getFolio_aro());
-            ps.setString(4,String.format("%04d",dc.getClave()));
+            ps.setString(4, dc.getClave());
             ps.setString(5, dc.getTratamiento_adicional());
             ps.setInt(6, dc.getCantidad());
                 
@@ -129,5 +129,7 @@ public class CargaDAO {
         }
         return cg;
     }
+    
+    
     
 }

@@ -41,6 +41,7 @@ com\ejemplo\app_ferkar\persistencia\Inventario.class
 com\ejemplo\app_ferkar\IGU\Nuevos$22.class
 com\ejemplo\app_ferkar\IGU\ActPedido$7.class
 com\ejemplo\app_ferkar\persistencia\ClienteDAO.class
+com\ejemplo\app_ferkar\persistencia\Stock.class
 com\ejemplo\app_ferkar\IGU\Principal$5.class
 com\ejemplo\app_ferkar\IGU\MenuPrincipal$24.class
 com\ejemplo\app_ferkar\IGU\Nuevos$26.class

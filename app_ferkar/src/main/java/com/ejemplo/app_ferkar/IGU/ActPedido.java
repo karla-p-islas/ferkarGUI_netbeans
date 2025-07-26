@@ -9,12 +9,14 @@ import com.ejemplo.app_ferkar.persistencia.Pedido;
 import com.ejemplo.app_ferkar.persistencia.PedidoDAO;
 import com.ejemplo.app_ferkar.persistencia.Soldador;
 import com.ejemplo.app_ferkar.persistencia.SoldadorDAO;
+import com.ejemplo.app_ferkar.persistencia.Stock;
 import com.ejemplo.app_ferkar.persistencia.TipoAro;
 import com.ejemplo.app_ferkar.persistencia.TipoAroDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -41,6 +43,9 @@ public class ActPedido extends javax.swing.JFrame {
     int xMouse, yMouse;
     int item;
     int TotalAtados;
+    ArrayList<Stock> listaStock = new ArrayList<>();
+    ArrayList<Inventario> listaExistencias = new ArrayList<>();
+
     
     public static int CantidadAros(int clave, int cantidad){
         int ultimoNum = clave %10;
@@ -131,7 +136,41 @@ public class ActPedido extends javax.swing.JFrame {
         }
         jTextField_totalAtados.setText(""+TotalAtados);
     }
-              
+    
+    private int ConsultarStock(String folio){   //produccion diaria
+        int atados = 0;
+        atados = invd.ConsultarStock(folio);
+        return atados;
+    }
+    
+    private int ConsultarExistenciaAtado(String clave, String trato){    //existencias aros
+        List<Inventario> lista = invd.ExistenciaAroClaveTrato(clave, trato);
+        if(lista.isEmpty()){
+            return 0;
+        }else{
+            Inventario inv = lista.get(0);
+            return inv.getAtados();
+        }
+    }
+    
+    private int ConsultarExistenciaAros(String clave, String trato){    //existencias aros
+        List<Inventario> lista = invd.ExistenciaAroClaveTrato(clave, trato);
+        if(lista.isEmpty()){
+            return 0;
+        }else{
+            Inventario inv = lista.get(0);
+            return inv.getAros();
+        }
+    }
+    
+    private void ReducirStock(Stock st) throws SQLException{
+        invd.ReducirStock(st);
+    }
+    
+    private void ReducirExistencias(Inventario inv){
+        invd.ReducirExistencias(inv);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -557,7 +596,7 @@ public class ActPedido extends javax.swing.JFrame {
                     InfoCarga();
                     ArosCargados();
                 } catch (ParseException ex) {
-                    Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.toString());
                 }
             }
                 fin = true;
@@ -609,12 +648,18 @@ public class ActPedido extends javax.swing.JFrame {
 
     private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
         // TODO add your handling code here:
-        boolean estado = false;
-        int stock_disponible = 0;
+        boolean estado = false; //estado para pasar al siguiente punto (posible descarte)
+        boolean agregar_ex = true; //estado para agregar o no la línea con la informacion a la tabla de existencia
+        boolean agregar_st = true; //estado para agregar o no la línea con la informacion a la tabla de stock
+        int stock_atados_disp = 0;
+        int existencia_atados_disp = 0;
+        int existencia_aros_disp = 0;
         if (!"".equals(textField_Clave.getText()) && !"".equals(jTextField_Folio.getText()) && !"".equals(textF_Cantidad.getText())){
             
             //Obtener descripcion de la clave de aro
             String clave = textField_Clave.getText();
+            int atados_requeridos = Integer.parseInt(textF_Cantidad.getText());
+            int aros_requeridos = CantidadAros(Integer.parseInt(clave),atados_requeridos);
             String detalle = "";
             tipoA = tipoAd.BuscarPro(clave);
             if (Integer.parseInt(tipoA.getCodigo_aro()) != 0){
@@ -642,7 +687,7 @@ public class ActPedido extends javax.swing.JFrame {
             }
             String trato = TratamientoA;
             
-            //folios
+            //obtener folios, en caso de que no sea correcto aparece el formato
             String folio = jTextField_Folio.getText();
             if(folio.length() != 8){
                 ImageIcon imagen = new ImageIcon("C:/Users/kpaor/OneDrive/Escritorio/RASTREABILIDAD/Formato folio.png");
@@ -651,68 +696,77 @@ public class ActPedido extends javax.swing.JFrame {
                 jTextField_Folio.requestFocus();
                 return;
             }else{
-                estado = true;
-                stock_disponible = invd.ConsultarStock(folio);
-                JOptionPane.showMessageDialog(null, "Existencia: "+stock_disponible);
-            }
-            //Cantidad
-            int cantidad = Integer.parseInt(textF_Cantidad.getText());
-            int aros = CantidadAros(Integer.parseInt(clave),cantidad);
-                      
-            if(estado==true && cantidad <= stock_disponible){
-                try {
-                    Inventario inv = new Inventario();
-                    inv.setCodigo_aros(clave);
-                    inv.setTrato_adicional(trato);
-                    inv.setAtados(cantidad);
-                    
-                    inv.setAros(aros);  
-                    
-                    //cambiar desde aqui
-                    invd.ReducirStock(folio, cantidad); //cambiar de lugar para que el cambio se realice al final
-                    
-                    boolean exito = invd.ReducirExistencias(inv); //cambiar de lugar para que el cambio se realice al final
-
-                    if (!exito) {
-                        // Ya incluye mensaje interno si no hay stock suficiente
-                        System.out.println("No se ha podido llevar a cabo la reducción de existencias efectivamente");
-                        //hasta aquí
-                    }else{
-                        item ++;
-                        modelo = (DefaultTableModel) Tabla_Cargas.getModel();
-                        
-                        ArrayList lista = new ArrayList();
-                        lista.add(item);
-                        lista.add(clave);
-                        lista.add(detalle);
-                        lista.add(trato);
-                        lista.add(folio);
-                        lista.add(cantidad);
-                        Object[] O = new Object[5];
-                        O[0] = lista.get(1);
-                        O[1] = lista.get(2);
-                        O[2] = lista.get(3);
-                        O[3] = lista.get(4);
-                        O[4] = lista.get(5);
-                        
-                        modelo.addRow(O);
-                        Tabla_Cargas.setModel(modelo);
-                        TotalAtados();
-                        
-                        textField_Clave.setText("");
-                        jTextField_Folio.setText("");
-                        textF_Cantidad.setText("");
-                        OC_Reforzado.setSelected(false);
-                        OC_Galvanizado.setSelected(false);
-                        OC_Pintado.setSelected(false);
-                        textField_Clave.requestFocus();
+                estado = true;  //si es correcto, se cambia a true
+                
+                //revisar la tabla de stock disponible 
+                stock_atados_disp = ConsultarStock(folio);  //en caso de que no se encuentre (caso default)
+                for(Stock e :listaStock){
+                    if(e.getFolio().equals(folio)){
+                        //si lo encuentra actualiza la cantidad
+                        stock_atados_disp = e.getCantidad();
+                        int stock_nuevos_disp = stock_atados_disp - atados_requeridos;
+                        e.setCantidad(stock_nuevos_disp);
+                        agregar_st = false;
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(ActPedido.class.getName()).log(Level.SEVERE, null, ex);
-                }      
-            }else{
-                JOptionPane.showMessageDialog(null, "Favor de revisar el stock disponible");
-            }
+                }
+                int stock_nuevos_disp = stock_atados_disp - atados_requeridos; //reduce la cantidad de requeridos
+                //agregar a tabla de stock
+                if(agregar_st){
+                    listaStock.add(new Stock(folio,stock_nuevos_disp));
+                }                
+                //revisar la tabla de existencias disponibles
+                existencia_atados_disp = ConsultarExistenciaAtado(clave,trato);
+                existencia_aros_disp = ConsultarExistenciaAros(clave,trato);
+                for(Inventario e :listaExistencias){
+                    if(e.getCodigo_aros().equals(clave) && e.getTrato_adicional().equals(trato)){
+                        //si lo encuentra actualiza la cantidad
+                        existencia_atados_disp = e.getAtados();
+                        existencia_aros_disp = e.getAros();
+                        int ex_nuevos_at_disp = existencia_atados_disp - atados_requeridos;
+                        int ex_nuevos_ar_diso = existencia_aros_disp - aros_requeridos;
+                        e.setAtados(ex_nuevos_at_disp);
+                        e.setAros(ex_nuevos_ar_diso);
+                        agregar_ex = false;
+                    }
+                }
+                int ex_nuevos_at_disp = existencia_atados_disp - atados_requeridos;
+                int ex_nuevos_ar_diso = existencia_aros_disp - aros_requeridos;
+                //agregar a tabla de existencias
+                if(agregar_ex){
+                    listaExistencias.add(new Inventario(clave,trato,ex_nuevos_ar_diso,ex_nuevos_at_disp));
+                }
+                
+                JOptionPane.showMessageDialog(null, "Folio: " + folio + " Existencias: "+stock_atados_disp + 
+                        " "+ " Clave: " + clave + " trato: " + trato + " cantidad: "+ existencia_atados_disp);
+                item ++;
+                modelo = (DefaultTableModel) Tabla_Cargas.getModel();
+
+                ArrayList lista = new ArrayList();  
+                lista.add(item);
+                lista.add(clave);
+                lista.add(detalle);
+                lista.add(trato);
+                lista.add(folio);
+                lista.add(atados_requeridos);
+                Object[] O = new Object[5];
+                O[0] = lista.get(1);
+                O[1] = lista.get(2);
+                O[2] = lista.get(3);
+                O[3] = lista.get(4);
+                O[4] = lista.get(5);
+
+                modelo.addRow(O);
+                Tabla_Cargas.setModel(modelo);
+                TotalAtados();
+
+                textField_Clave.setText("");
+                jTextField_Folio.setText("");
+                textF_Cantidad.setText("");
+                OC_Reforzado.setSelected(false);
+                OC_Galvanizado.setSelected(false);
+                OC_Pintado.setSelected(false);
+                textField_Clave.requestFocus();
+            }                  
         }else{
             JOptionPane.showMessageDialog(null, "Información Incompleta");
         }
@@ -764,8 +818,35 @@ public class ActPedido extends javax.swing.JFrame {
     private void jButton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EliminarActionPerformed
         // TODO add your handling code here:
         modelo = (DefaultTableModel) Tabla_Cargas.getModel();
+        
+        //regresar los valores al inventario
+        int fila = Tabla_Cargas.getSelectedRow();
+        //obtener valores
+        String clave = (String) Tabla_Cargas.getValueAt(fila, 0);
+        String trato = (String) Tabla_Cargas.getValueAt(fila, 2);
+        String folio = (String) Tabla_Cargas.getValueAt(fila, 3);
+        int atados = Integer.parseInt(Tabla_Cargas.getValueAt(fila, 4).toString());
+        
+        for(Stock e :listaStock){
+            if(e.getFolio().equals(folio)){
+                //si lo encuentra actualiza la cantidad
+                int stock_nuevos_disp = e.getCantidad() + atados;
+                e.setCantidad(stock_nuevos_disp);
+            }
+        }
+        
+        for(Inventario e :listaExistencias){
+            if(e.getCodigo_aros().equals(clave) && e.getTrato_adicional().equals(trato)){
+                //si lo encuentra actualiza la cantidad
+                int ex_nuevos_at_disp = e.getAtados() + atados;
+                int aros_requeridos = CantidadAros(Integer.parseInt(clave),atados);
+                int ex_nuevos_ar_diso = e.getAros() + aros_requeridos;
+                e.setAtados(ex_nuevos_at_disp);
+                e.setAros(ex_nuevos_ar_diso);
+            }
+        }
         modelo.removeRow(Tabla_Cargas.getSelectedRow());
-        TotalAtados();
+        TotalAtados();  
         textField_Clave.requestFocus();
     }//GEN-LAST:event_jButton_EliminarActionPerformed
 

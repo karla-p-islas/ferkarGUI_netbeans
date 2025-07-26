@@ -5,18 +5,16 @@ package com.ejemplo.app_ferkar.persistencia;
  *
  * @author kpaor
  */
-public class Reduccion {
-    private String folio;
-    private int cantidad;
-    Inventario inv;
+public class Stock {
+    public String folio;
+    public int cantidad;
 
-    public Reduccion() {
+    public Stock() {
     }
 
-    public Reduccion(String folio, int cantidad, Inventario inv) {
+    public Stock(String folio, int cantidad) {
         this.folio = folio;
         this.cantidad = cantidad;
-        this.inv = inv;
     }
 
     public String getFolio() {
@@ -34,14 +32,5 @@ public class Reduccion {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
-    public Inventario getInv() {
-        return inv;
-    }
-
-    public void setInv(Inventario inv) {
-        this.inv = inv;
-    }
-    
     
 }
